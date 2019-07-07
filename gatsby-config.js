@@ -19,7 +19,8 @@ module.exports = {
         apiURL: `https://nnyapi.iciclize.net`,
         contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           `article`,
-          `user`
+          `user`,
+          `tag`
         ],
         queryLimit: 1000,
       },
@@ -45,6 +46,7 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    `gatsby-plugin-twitter`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

@@ -8,21 +8,31 @@ import { rhythm } from "../utils/typography"
 import mq from "../utils/emotion"
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
+import SEO from '../components/seo'
 
 const PostContainer = styled.li`
   margin: 0 ${rhythm(8/12)} ${rhythm(12/12)};
   border-left: 3px solid hsl(204, 100%, 72%);
   padding: 0 0 0 ${rhythm(8/12)};
+  ${mq[1]} {
+    margin: 0 ${rhythm(8/12)} ${rhythm(14/12)};
+    flex: 1 1 30%;
+    &:first-child {
+      flex: 1 1 100%;
+    }
+  }
 `
-
 const PostTitle = styled.h1`
-  font-weight: 700;
+  font-weight: 450;
   font-size: ${rhythm(10/12)};
   letter-spacing: ${rhythm(1/24)};
   margin: ${rhythm(4/12)} 0 ${rhythm(3/12)};
   & > a {
     text-decoration: none;
     color: #191919;
+  }
+  ${mq[1]} {
+    font-size: ${rhythm(1)};
   }
 `
 const PostTags = styled.ul`
@@ -38,19 +48,25 @@ const PostTag = styled.li`
     color: hsl(208, 100%, 60%);
     padding: ${rhythm(1/12)} ${rhythm(1/12)};
   }
+  ${mq[1]} {
+    & > a {
+      font-size: ${rhythm(10/16)};
+    }
+  }
 `
-
 const postSummaryStyle = `
   font-size: ${rhythm(9/16)};
   margin: ${rhythm(4/12)} 0 ${rhythm(2/12)};
   line-height: ${rhythm(14/16)};
+  ${mq[1]} {
+    font-size: ${rhythm(8/12)};
+  }
 `
-
 const Post = ({ entry }) => (
   <PostContainer key={entry.id}>
-    { entry.image && <Link to={`/${entry.id}`}><Img fluid={entry.image.childImageSharp.fluid} /></Link>}
+    { entry.image && <Link to={`/posts/${entry.slug}`}><Img fluid={entry.image.childImageSharp.fluid} /></Link>}
     <PostTitle>
-      <Link to={`/${entry.id}`}>
+      <Link to={`/posts/${entry.slug}`}>
         { entry.title }
       </Link>
     </PostTitle>
@@ -69,12 +85,15 @@ const Post = ({ entry }) => (
     }
   </PostContainer>
 )
-
 const Posts = styled.ul`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 840px;
 `
-
 const IndexPage = ({ data }) => (
   <Layout>
     <Posts>
@@ -82,21 +101,25 @@ const IndexPage = ({ data }) => (
         <Post entry={document.node} />
       ))}
     </Posts>
-    <Link to="/page-2/">Go to page 2</Link>
   </Layout>
 )
+
+export { Post, Posts }
 
 export default IndexPage
 
 export const pageQuery = graphql`  
   query IndexQuery {
-    allStrapiArticle(filter: {published: {eq: 1}}) {
+    allStrapiArticle(
+      filter: {published: {eq: 1}},
+      sort: {order: DESC, fields: publish_date},
+    ) {
       edges {
         node {
           id
           image {
             childImageSharp {
-              fluid(maxWidth: 200, maxHeight: 60) {
+              fluid(maxWidth: 870, maxHeight: 160) {
                 ...GatsbyImageSharpFluid
               }
             }

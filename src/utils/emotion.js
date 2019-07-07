@@ -7,3 +7,4 @@ const mq = breakpoints.map(
 )
 
 export default mq
+export { breakpoints }

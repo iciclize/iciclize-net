@@ -199,7 +199,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
+  color: hsl(0, 0%, 25%);
   /* font-family: georgia, serif; */
   font-weight: normal;
   word-wrap: break-word;
@@ -240,7 +240,7 @@ h1 {
 h2 {
   margin-left: 0;
   margin-right: 0;
-  margin-top: 0;
+  margin-top: 1.8rem;
   padding-bottom: 0.6rem;
   padding-left: 0;
   padding-right: 0;
@@ -256,16 +256,7 @@ h2 {
   font-size: 1.25rem;
   line-height: 1.1;
   position: relative;
-  border-bottom: 2px solid hsl(204,100%,72%);
-}
-h2::after {
-  content: "";
-  width: 4rem;
-  position: absolute;
-  bottom: 0;
-  left: 0; 
-  margin-bottom: -2px;
-  border-bottom: 2px solid hsl(156,100%,72%);
+  border-bottom: 2px solid hsl(204,100%,82%);
 }
 h3 {
   margin-left: 0;
@@ -353,7 +344,7 @@ ul {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.45rem;
   list-style-position: outside;
   list-style-image: none;
 }
@@ -417,8 +408,7 @@ pre {
   font-size: 0.85rem;
   line-height: 1.42;
   color: white;
-  background: hsl(220, 40%, 14%);
-  border-radius: 3px;
+  background: hsl(220, 55%, 15%);
   overflow: auto;
   word-wrap: normal;
   padding: 0.8rem;
@@ -456,7 +446,7 @@ blockquote {
   padding-right: 0.4rem;
   padding-top: 0;
   margin-bottom: 0.8rem;
-  border-left: 3px solid hsl(204,100%,82%);
+  border-left: 3px solid hsl(204,100%,72%);
   background: hsl(204,50%,97%);
 }
 form {
@@ -606,7 +596,7 @@ td:last-child {
 }
 tt,
 code {
-  background-color: hsla(0, 0%, 0%, 0.04);
+  background-color: hsl(0, 0%, 90%);
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
     "Liberation Mono", Menlo, Courier, monospace;

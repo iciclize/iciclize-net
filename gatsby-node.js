@@ -33,6 +33,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         edges {
           node {
             id
+            slug
           }
         }
       }
@@ -41,7 +42,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     // Create pages for each article.
     result.data.allStrapiArticle.edges.forEach(({ node }) => {
       createPage({
-        path: `/${node.id}`,
+        path: `/posts/${node.slug}`,
         component: path.resolve(`src/templates/article.js`),
         context: {
           id: node.id,
@@ -50,32 +51,31 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     })
   });
 
-  const getAuthors = makeRequest(graphql, `
+  const getTags = makeRequest(graphql, `
     {
-      allStrapiArticle(filter: {published: 1}) {
-        edges {
-          node {
-            id
-          }
+      allStrapiTag {
+        nodes {
+          slug
+          tagname
         }
       }
     }
-    `).then(result => {
-    // Create pages for each user.
-    result.data.allStrapiArticle.edges.forEach(({ node }) => {
+  `).then(result => {
+    result.data.allStrapiTag.nodes.forEach( tag => {
       createPage({
-        path: `/tag/${node.slug}`,
+        path: `/tag/${tag.slug}`,
         component: path.resolve(`src/templates/tag.js`),
         context: {
-          slug: node.slug,
+          slug: tag.slug,
+          tagname: tag.tagname,
         },
       })
     })
-  });
+  })
 
   // Queries for articles and authors nodes to use in creating pages.
   return Promise.all([
     getArticles,
-    getAuthors,
+    getTags,
   ])
 };
