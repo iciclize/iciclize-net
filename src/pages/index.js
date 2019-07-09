@@ -14,6 +14,7 @@ const PostContainer = styled.li`
   margin: 0 ${rhythm(8/12)} ${rhythm(12/12)};
   border-left: 3px solid hsl(204, 100%, 72%);
   padding: 0 0 0 ${rhythm(8/12)};
+  min-width: 30%;
   ${mq[1]} {
     margin: 0 ${rhythm(8/12)} ${rhythm(14/12)};
     flex: 1 1 30%;
@@ -26,7 +27,7 @@ const PostTitle = styled.h1`
   font-weight: 450;
   font-size: ${rhythm(10/12)};
   letter-spacing: ${rhythm(1/24)};
-  margin: ${rhythm(4/12)} 0 ${rhythm(3/12)};
+  margin: 0 0 ${rhythm(3/12)};
   & > a {
     text-decoration: none;
     color: #191919;
@@ -60,11 +61,19 @@ const postSummaryStyle = `
   line-height: ${rhythm(14/16)};
   ${mq[1]} {
     font-size: ${rhythm(8/12)};
+    line-height: ${rhythm(16/16)};
   }
 `
 const Post = ({ entry }) => (
   <PostContainer key={entry.id}>
-    { entry.image && <Link to={`/posts/${entry.slug}`}><Img fluid={entry.image.childImageSharp.fluid} /></Link>}
+    { entry.image &&
+      <Link to={`/posts/${entry.slug}`}>
+        <Img fluid={entry.image.childImageSharp.fluid}
+             css={css`&.gatsby-image-wrapper {
+               margin-bottom: ${rhythm(6/12)};
+             }`} />
+      </Link>
+    }
     <PostTitle>
       <Link to={`/posts/${entry.slug}`}>
         { entry.title }

@@ -10,7 +10,6 @@ import mq from '../utils/emotion';
 
 const PostContainer = styled.div`
   margin: 0 ${rhythm(8/12)} ${rhythm(8/12)};
-  min-height: 100%;
 `
 const PostInner = styled.div`
   margin: 0 auto;

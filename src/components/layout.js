@@ -80,7 +80,7 @@ const Layout = ({ children }) => (
               <Link to="/">Posts</Link>
               <a href="https://twitter.com/iciclize">Twitter</a>
               <Link to="/profile">Profile</Link>
-              <Link to="/">Portfolio</Link>
+              <Link to="/works">Works</Link>
             </nav>
           </div>
         </footer>

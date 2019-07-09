@@ -138,7 +138,7 @@ const Header = ({ siteTitle, description }) => (
       <List>
         <Item text="HOME" link="/" />
         <Item text="自己紹介" link="/profile" />
-        <Item text="作品集" link="/portfolio" />
+        <Item text="作品集" link="/works" />
         <Item text="日記系" link="/tag/life" />
       </List>
     </div>
