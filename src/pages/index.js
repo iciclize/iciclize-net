@@ -18,7 +18,7 @@ const PostContainer = styled.li`
   ${mq[1]} {
     margin: 0 ${rhythm(8/12)} ${rhythm(14/12)};
     flex: 1 1 30%;
-    &:first-child {
+    &:first-of-type {
       flex: 1 1 100%;
     }
   }
@@ -65,7 +65,7 @@ const postSummaryStyle = `
   }
 `
 const Post = ({ entry }) => (
-  <PostContainer key={entry.id}>
+  <PostContainer>
     { entry.image &&
       <Link to={`/posts/${entry.slug}`}>
         <Img fluid={entry.image.childImageSharp.fluid}
@@ -107,7 +107,7 @@ const IndexPage = ({ data }) => (
   <Layout>
     <Posts>
       {data.allStrapiArticle.edges.map(document => (
-        <Post entry={document.node} />
+        <Post entry={document.node} key={document.node.id} />
       ))}
     </Posts>
   </Layout>
