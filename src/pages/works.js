@@ -1,12 +1,10 @@
-import React, { createElement } from "react"
+import React from 'react'
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import { rhythm } from "../utils/typography"
 import styled from "@emotion/styled"
 import SEO from "../components/seo"
-import ReactMarkdown from "react-markdown"
-import Helmet from "react-helmet"
 import { css } from "@emotion/core"
 import mq from "../utils/emotion";
 
@@ -78,6 +76,7 @@ const WorksListItem = ({ image, title, description, date, link }) => {
       font-size: ${rhythm(13/24)};
     }
   `
+
   const inv = !image
 
   return (
@@ -97,30 +96,79 @@ const WorksListItem = ({ image, title, description, date, link }) => {
   )
 }
 
-const SecondPage = ({ pageContext }) => {
-  const { data } = pageContext
+const SecondPage = ({ data }) => {
+  const images = data.allImageSharp.edges
+  
   return (
     <Layout>
       <SEO title="作品集" />
       <WorksContainer>
         <WorksList>
           {
-            data.allMarkdownRemark.edges.map( ({ node }) => (
-              <WorksListItem
-                title={node.frontmatter.title}
-                date={node.frontmatter.date}
-                image={ node.frontmatter.imagename
-                    && data[`${node.frontmatter.imagename}`]
-                    && data[`${node.frontmatter.imagename}`].childImageSharp.fluid }
-                description={node.frontmatter.description}
-                link={`/works/${node.frontmatter.slug}`}
-                key={node.id} />
-            ))
+            data.allMarkdownRemark.edges.map( ({ node }) => {
+              const image = (() => {
+                if (!node.frontmatter.imagename)
+                  return null
+
+                const im = images.find(img => img.node.fluid.originalName === node.frontmatter.imagename)
+                return (im) ? im.node.fluid : null
+              })()
+
+              return (
+                <WorksListItem
+                  title={node.frontmatter.title}
+                  date={node.frontmatter.date}
+                  image={image}
+                  description={node.frontmatter.description}
+                  link={`/works/${node.frontmatter.slug}`}
+                  key={node.id} />
+              )
+            })
           }
         </WorksList>
       </WorksContainer>
     </Layout>
-)
+  )
 }
 
 export default SecondPage
+
+export const pageQuery = graphql`
+query WorksQuery {
+  allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
+    edges {
+      node {
+        frontmatter {
+          title
+          slug
+          date(formatString: "YYYY年M月")
+          description
+          imagename
+          images
+        }
+        id
+        rawMarkdownBody
+      }
+    }
+  }
+  allImageSharp(sort: {fields: fluid___originalName, order: ASC}) {
+    edges {
+      node {
+        id
+        fluid {
+          aspectRatio
+          src
+          srcSet
+          srcWebp
+          srcSetWebp
+          sizes
+          originalImg
+          originalName
+          presentationWidth
+          presentationHeight
+        }
+      }
+    }
+  }
+}
+`

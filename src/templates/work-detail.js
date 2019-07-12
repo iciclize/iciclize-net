@@ -86,6 +86,4 @@ const ArticleTemplate = ({ pageContext }) => {
   )
 }
 
-// <p>by <Link to={`/authors/User_${data.strapiArticle.author.id}`}>{data.strapiArticle.author.username}</Link></p>
-
 export default ArticleTemplate
