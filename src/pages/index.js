@@ -11,7 +11,7 @@ import styled from "@emotion/styled"
 import SEO from '../components/seo'
 
 const PostContainer = styled.li`
-  flex: 0 1 auto;
+  flex: 0 1 100%;
   margin: 0 ${rhythm(8/12)} ${rhythm(12/12)};
   border-left: 3px solid hsl(204, 100%, 72%);
   padding: 0 0 0 ${rhythm(8/12)};
@@ -104,7 +104,7 @@ const Post = ({ entry }) => {
 const SideContainer = styled.aside`
   flex: 1 1;
   margin: ${rhythm(10/12)} auto 0;
-  max-width: 820px;
+  max-width: 740px;
   ${mq[3]} {
     margin: 0 0 0 1.5rem;
   }
@@ -153,7 +153,7 @@ const Features = ({ features }) => {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-width: 820px;
+    max-width: 740px;
     ${mq[3]} { flex-direction: column; }
   `
   const Item = styled.li`
@@ -221,7 +221,7 @@ const AllTag = ({ tags }) => {
   const TagList = styled.ul`
     list-style: none;
     margin-left: ${rhythm(4/12)};
-    max-width: 820px;
+    max-width: 740px;
   `
   const Tag = styled.li`
     font-weight: normal;
@@ -257,7 +257,7 @@ const Posts = styled.ul`
   justify-content: space-between;
   list-style: none;
   margin: 0 auto;
-  max-width: 820px;
+  max-width: 740px;
 `
 const TwoColumn = styled.div`
   display: flex;
@@ -265,7 +265,7 @@ const TwoColumn = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
-  max-width: 1140px;
+  max-width: 1080px;
   ${mq[3]} {
     flex-direction: row;
   }
@@ -329,6 +329,7 @@ export const pageQuery = graphql`
         tags: {elemMatch: {slug: {in: "life"}}}
       },
       sort: {order: DESC, fields: publish_date},
+      limit: 6
     ) {
       edges {
         node {

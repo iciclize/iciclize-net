@@ -8,6 +8,8 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import mq from '../utils/emotion';
 
+import NextPrevNav from '../components/NextPrevNav'
+
 const PostContainer = styled.div`
   margin: 0 ${rhythm(8/12)} ${rhythm(8/12)};
 `
@@ -84,6 +86,8 @@ const ArticleTemplate = ({ data }) => {
   }
   
   const entry = data.strapiArticle
+  const next = data.next
+  const prev = data.prev
 
   return (
     <Layout>
@@ -112,21 +116,22 @@ const ArticleTemplate = ({ data }) => {
               ))}
             </PostTags>
           }
+          <NextPrevNav basePath={`/posts`} nextLabel={next && `次 `.concat(next.publish_date)} next={next}
+                       prevLabel={prev && `前 `.concat(prev.publish_date)} prev={prev} />
         </PostInner>
       </PostContainer>
     </Layout>
   )
 }
 
-// <p>by <Link to={`/authors/User_${data.strapiArticle.author.id}`}>{data.strapiArticle.author.username}</Link></p>
-
 export default ArticleTemplate
 export { PostContainer, PostInner, mdStyle }
 
 export const q = graphql`
-  query ArticleTemplate($id: String!) {
+  query ArticleTemplate($id: String!, $nextId: String, $prevId: String) {
     strapiArticle(id: {eq: $id}) {
       title
+      slug
       publish_date(formatString: "YYYY-MM-DD")
       update_date(formatString: "YYYY-MM-DD")
       content
@@ -146,6 +151,16 @@ export const q = graphql`
         slug
         tagname
       }
+    }
+    next: strapiArticle(id: {eq: $nextId}) {
+      title
+      slug
+      publish_date(formatString: "YYYY-MM-DD")
+    }
+    prev: strapiArticle(id: {eq: $prevId}) {
+      title
+      slug
+      publish_date(formatString: "YYYY-MM-DD")
     }
   }
 `

@@ -29,23 +29,39 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   const getArticles = makeRequest(graphql, `
     {
-      allStrapiArticle(filter: {published: {eq: 1}}) {
+      allStrapiArticle(sort: {fields: publish_date, order: ASC}, filter: {published: {eq: 1}}) {
         edges {
           node {
             id
             slug
+            tags {
+              slug
+            }
           }
         }
       }
-    }
+    }  
     `).then(result => {
-    // Create pages for each article.
-    result.data.allStrapiArticle.edges.forEach(({ node }) => {
+    result.data.allStrapiArticle.edges.forEach(({ node }, index, edges) => {
+      function searchPrevNextId(start, dir, arr) {
+        if (!arr[start].node.tags ||
+            arr[start].node.tags.length == 0) return null
+        const category = arr[start].node.tags[0].slug
+        const num = dir ? arr.length - start - 1 : start
+        for (let i = 1; i <= num; i++) {
+          let cur = dir ? arr[start + i] : arr[start - i]
+          if (cur.node.tags && cur.node.tags.length > 0 &&
+              cur.node.tags[0].slug === category )
+            return cur.node.id
+        }
+      }
       createPage({
         path: `/posts/${node.slug}`,
         component: path.resolve(`src/templates/article.js`),
         context: {
           id: node.id,
+          nextId: searchPrevNextId(index, true, edges),
+          prevId: searchPrevNextId(index, false, edges),
         },
       })
     })
