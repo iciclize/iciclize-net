@@ -49,7 +49,7 @@ const PostTag = styled.li`
   & > a {
     font-size: ${rhythm(9/16)};
     text-decoration: none;
-    color: hsl(208, 100%, 60%);
+    color: hsl(208, 100%, 66%);
     padding: ${rhythm(1/12)} ${rhythm(1/12)};
   }
   ${mq[1]} {
@@ -67,7 +67,8 @@ const postSummaryStyle = `
     line-height: ${rhythm(16/16)};
   }
 `
-const Post = ({ entry }) => (
+const Post = ({ entry }) => {
+  return (
   <PostContainer>
     { entry.image &&
       <Link to={`/posts/${entry.slug}`}>
@@ -86,7 +87,9 @@ const Post = ({ entry }) => (
       <PostTags>
         { entry.tags.map(tag => (
           <PostTag key={tag.id}>
-            <Link to={`/tag/${tag.slug}`}>#{ tag.tagname }</Link>
+            <Link to={`/tag/${tag.slug}`}>
+              <span css={css`margin-right: 0.1rem;`}>#</span>{ tag.tagname }
+            </Link>
           </PostTag>
         ))}
       </PostTags>
@@ -96,41 +99,36 @@ const Post = ({ entry }) => (
         css={css`${postSummaryStyle}`} escapeHtml={ false }
         source={entry.summary} />
     }
-  </PostContainer>
-)
-const Posts = styled.ul`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  list-style: none;
-  margin: 0 auto;
-  max-width: 840px;
-`
-const TwoColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 1140px;
+  </PostContainer> )
+}
+const SideContainer = styled.aside`
+  flex: 1 1;
+  margin: ${rhythm(10/12)} auto 0;
+  max-width: 820px;
   ${mq[3]} {
-    flex-direction: row;
+    margin: 0 0 0 1.5rem;
   }
 `
+const Side = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${mq[1]} {
+    flex-direction: row;
+  }
+  ${mq[3]} {
+    flex-direction: column;
+  } 
+`
+const SideInner = styled.div`
+  flex: 1 1 auto; 
+  min-width: 25%;
+  margin: 0 ${rhythm(8/12)} ${rhythm(12/12)};
+`
 const Features = ({ features }) => {
-  const Container = styled.aside`
-    padding: ${rhythm(8/12)};
-    flex: 1 1;
-    margin: 0 auto;
-    max-width: 840px;
-    ${mq[3]} { margin-left: 1rem; }
-  `
   const HeaderContainer = styled.div`
     display: flex;
     padding-bottom: ${rhythm(6/12)};
     border-bottom: 1px solid #ddd;
-    ${mq[2]} { border-bottom-width: 2px; }
   `
   const Square = styled.div`
     &::before {
@@ -155,7 +153,7 @@ const Features = ({ features }) => {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-width: 840px;
+    max-width: 820px;
     ${mq[3]} { flex-direction: column; }
   `
   const Item = styled.li`
@@ -164,10 +162,12 @@ const Features = ({ features }) => {
     border-left: 3px solid hsl(150, 72%, 72%);
     padding: 0 0 0 ${rhythm(8/12)};
     min-width: 30%;
+    /*
     ${mq[1]} {
       margin: 0 ${rhythm(8/12)} ${rhythm(14/12)};
       flex: 1 1 30%;
     }
+    */
   `
   const Title = styled.h1`
     font-weight: normal;
@@ -190,7 +190,7 @@ const Features = ({ features }) => {
   `
 
   return (
-    <Container>
+    <SideInner>
       <HeaderContainer>
         <Square />
         <Header>ポエム系エントリ新着</Header>
@@ -206,9 +206,70 @@ const Features = ({ features }) => {
           </Item>
         )) }
       </FeatureList>
-    </Container>
+    </SideInner>
   )
 }
+
+const AllTag = ({ tags }) => {
+  const Header = styled.h1`
+    font-size: ${rhythm(17/24)};
+    line-height: calc(1.5rem + 4px);
+    padding-bottom: ${rhythm(6/12)};
+    border-bottom: 1px solid #ddd;
+    margin-bottom: ${rhythm(8/12)};
+  `
+  const TagList = styled.ul`
+    list-style: none;
+    margin-left: ${rhythm(4/12)};
+    max-width: 820px;
+  `
+  const Tag = styled.li`
+    font-weight: normal;
+    font-size: ${rhythm(8/12)};
+    line-height: ${rhythm(10/12)};
+    letter-spacing: ${rhythm(1/24)};
+    margin: 0 0 ${rhythm(3/12)};
+    & > a {
+      text-decoration: none;
+      color: hsl(208, 100%, 66%);
+    }
+  `
+  return (
+    <SideInner>
+      <Header>タグ一覧</Header>
+      <TagList>
+        { tags.edges.map(({ node }) => (
+          <Tag>
+            <Link to={`/tag/${node.slug}`}>
+              <span css={css`margin-right: 0.2rem;`}>#</span>{ node.tagname }
+            </Link>
+          </Tag>
+        )) }
+      </TagList>
+    </SideInner>
+  )
+}
+
+const Posts = styled.ul`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0 auto;
+  max-width: 820px;
+`
+const TwoColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1140px;
+  ${mq[3]} {
+    flex-direction: row;
+  }
+`
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -220,7 +281,12 @@ const IndexPage = ({ data }) => (
           return (<Post entry={document.node} key={document.node.id} />)
         })}
       </Posts>
-      <Features features={data.life} />
+      <SideContainer>
+        <Side>
+          <Features features={data.life} />
+          <AllTag tags={data.allStrapiTag} />
+        </Side>
+      </SideContainer>
     </TwoColumn>
   </Layout>
 )
@@ -275,6 +341,14 @@ export const pageQuery = graphql`
             }
           }
           title
+          slug
+        }
+      }
+    }
+    allStrapiTag {
+      edges {
+        node {
+          tagname
           slug
         }
       }

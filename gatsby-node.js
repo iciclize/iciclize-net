@@ -29,7 +29,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   const getArticles = makeRequest(graphql, `
     {
-      allStrapiArticle {
+      allStrapiArticle(filter: {published: {eq: 1}}) {
         edges {
           node {
             id

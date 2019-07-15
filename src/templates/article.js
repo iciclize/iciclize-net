@@ -58,7 +58,7 @@ const PostTag = styled.li`
   & > a {
     font-size: ${rhythm(10/16)};
     text-decoration: none;
-    color: hsl(208, 100%, 60%);
+    color: hsl(208, 100%, 66%);
     padding: ${rhythm(1/12)} ${rhythm(1/12)};
   }
   ${mq[1]} {
@@ -94,11 +94,13 @@ const ArticleTemplate = ({ data }) => {
       <PostContainer>
         <PostInner>
           <PostTitle>{entry.title}</PostTitle>
-          <PostedDate>
-            { myDateString(new Date(entry.publish_date)) }
-            { entry.update_date && entry.update_date != `Invalid date`
-              && `(更新: ${entry.update_date})` }
-          </PostedDate>
+          { entry.publish_date &&
+            <PostedDate>
+              { entry.publish_date }
+              { entry.update_date && entry.update_date != `Invalid date`
+                && `(更新: ${entry.update_date})` }
+            </PostedDate>
+          }
           <ReactMarkdown
             css={mdStyle}
             source={entry.content}

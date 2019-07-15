@@ -36,9 +36,14 @@ const UserTemplate = ({ pageContext, data }) => {
         #{tagname}
       </QueryDescription>
       <Posts css={ slug === `life` ? css`& > li { border-left-color: hsl(150, 72%, 72%); }` : null }>
-      {articles.edges.map(document => (
-        <Post entry={document.node} key={document.id} />
-      ))}
+        { articles.edges.length !== 0 &&
+          articles.edges.map(document => (
+          <Post entry={document.node} key={document.id} />
+        ))}
+        {
+          articles.edges.length === 0 &&
+          (<p css={css`text-align: center; flex-basis: 100%;`}>(該当する記事が)ないです。</p>)
+        }
     </Posts>
     </Layout>
   )
@@ -51,7 +56,7 @@ export const pageQuery = graphql`
     allStrapiArticle(
       filter: {
         published: {eq: 1},
-        tags: {elemMatch: {slug: {eq: $slug}}}
+        tags: {elemMatch: {slug: {in: [$slug]}}}
       },
       sort: {order: DESC, fields: publish_date},
     ) {
