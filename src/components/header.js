@@ -11,7 +11,7 @@ import styled from "@emotion/styled"
 import bgimage from "../images/crystal.gif"
 
 const Container = styled.header`
-  margin-bottom: ${rhythm(8/12)};
+  margin-bottom: ${rhythm(12/12)};
   ${mq[1]} {
     margin-bottom: ${rhythm(16/12)};
   }
@@ -80,7 +80,7 @@ const ListItem = styled.li`
   & > a {
     display: block;
     margin: ${rhythm(1/12)};
-    padding: ${rhythm(4/12)};
+    padding: ${rhythm(6/12)} ${rhythm(4/12)};
     text-decoration: none;
     font-size: ${rhythm(7/12)};
     color: #454545;
@@ -139,7 +139,7 @@ const Header = ({ siteTitle, description }) => (
         <Item text="HOME" link="/" />
         <Item text="自己紹介" link="/profile" />
         <Item text="作品集" link="/works" />
-        <Item text="日記系" link="/tag/life" />
+        <Item text="ポエム系" link="/tag/life" />
       </List>
     </div>
   </Container>

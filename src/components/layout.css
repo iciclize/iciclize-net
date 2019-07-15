@@ -441,10 +441,10 @@ blockquote {
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
-  padding-bottom: 0;
+  padding-bottom: 0.8rem;
   padding-left: 0.8rem;
   padding-right: 0.4rem;
-  padding-top: 0;
+  padding-top: 0.8rem;
   margin-bottom: 0.8rem;
   border-left: 3px solid hsl(204,100%,72%);
   background: hsl(204,50%,97%);

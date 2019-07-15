@@ -4,9 +4,10 @@ import Layout from '../components/layout'
 import ReactMarkdown from 'react-markdown'
 
 import { Posts, Post } from '../pages/index'
-import styled from '@emotion/styled';
-import { rhythm } from '../utils/typography';
-import mq from '../utils/emotion';
+import styled from '@emotion/styled'
+import { rhythm } from '../utils/typography'
+import mq from '../utils/emotion'
+import { css } from '@emotion/core'
 
 const QueryDescription = styled.div`
   font-size: ${rhythm(10/12)};
@@ -26,15 +27,15 @@ const QueryDescription = styled.div`
 `
 
 const UserTemplate = ({ pageContext, data }) => {
-  const { tagname } = pageContext
+  const { tagname, slug } = pageContext
   const articles = data.allStrapiArticle
 
   return (
     <Layout>
-      <QueryDescription>
+      <QueryDescription css={ slug === `life` ? css`background: hsl(150,72%,72%);` : null }>
         #{tagname}
       </QueryDescription>
-      <Posts>
+      <Posts css={ slug === `life` ? css`& > li { border-left-color: hsl(150, 72%, 72%); }` : null }>
       {articles.edges.map(document => (
         <Post entry={document.node} key={document.id} />
       ))}

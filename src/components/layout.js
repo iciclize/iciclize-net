@@ -9,7 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql, Link } from "gatsby"
 
-import {css} from "@emotion/core"
+import { css } from "@emotion/core"
 
 import Header from "./header"
 import "./layout.css"
@@ -29,7 +29,7 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <>
+      <div css={css`display: flex; min-height: 100vh; flex-direction: column;`}>
         <Header
           siteTitle={data.site.siteMetadata.title}
           description={data.site.siteMetadata.description} />
@@ -54,10 +54,13 @@ const Layout = ({ children }) => (
             ${mq[2]} { padding: 20px ${rhythm(10/12)} 60px; }
             ${mq[1]} { flex-direction: row; }
           `}>
-            <section>
+            <section css={css`
+              margin-top: 0.4rem;
+            `}>
               {data.site.siteMetadata.title} © {new Date().getFullYear()}
             </section>
             <nav css={css`
+              margin-top: 0.4rem;
               display: flex;
               & a {
                 position: relative;
@@ -78,13 +81,13 @@ const Layout = ({ children }) => (
               }
             `}>
               <Link to="/">Posts</Link>
-              <a href="https://twitter.com/iciclize">Twitter</a>
+              <Link to="/">About</Link>
               <Link to="/profile">Profile</Link>
               <Link to="/works">Works</Link>
             </nav>
           </div>
         </footer>
-      </>
+      </div>
     )}
   />
 )

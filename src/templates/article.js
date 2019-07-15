@@ -54,7 +54,7 @@ const PostTags = styled.ul`
 `
 const PostTag = styled.li`
   display: inline-block;
-  margin: 0 ${rhythm(2/12)} ${rhythm(1/12)} 0;
+  margin: 0 ${rhythm(4/12)} ${rhythm(1/12)} 0;
   & > a {
     font-size: ${rhythm(10/16)};
     text-decoration: none;
@@ -96,9 +96,8 @@ const ArticleTemplate = ({ data }) => {
           <PostTitle>{entry.title}</PostTitle>
           <PostedDate>
             { myDateString(new Date(entry.publish_date)) }
-            { entry.update_date
-              && new Date(entry.update_date).getTime() - new Date(entry.publish_date).getTime() > 0
-              && `(更新: ${myDateString(new Date(entry.update_date))})` }
+            { entry.update_date && entry.update_date != `Invalid date`
+              && `(更新: ${entry.update_date})` }
           </PostedDate>
           <ReactMarkdown
             css={mdStyle}
@@ -126,8 +125,8 @@ export const q = graphql`
   query ArticleTemplate($id: String!) {
     strapiArticle(id: {eq: $id}) {
       title
-      publish_date
-      update_date
+      publish_date(formatString: "YYYY-MM-DD")
+      update_date(formatString: "YYYY-MM-DD")
       content
       image {
         childImageSharp {

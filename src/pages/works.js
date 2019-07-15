@@ -6,7 +6,7 @@ import { rhythm } from "../utils/typography"
 import styled from "@emotion/styled"
 import SEO from "../components/seo"
 import { css } from "@emotion/core"
-import mq from "../utils/emotion";
+import mq from "../utils/emotion"
 
 const WorksContainer = styled.div`
   margin: 0 auto;
@@ -18,15 +18,19 @@ const WorksList = styled.ul`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: -${rhythm(6/12)} ${rhythm(3/12)} 0;
+  margin: -${rhythm(6/12)} ${rhythm(3/12)} 60px;
+  &::after {
+    content: "";
+    flex: auto;
+  }
   ${mq[0]} {
-    margin: -${rhythm(6/12)} ${rhythm(6/12)} 0;
+    margin: 0 ${rhythm(6/12)} 60px;
   }
 `
 const WorksListItem = ({ image, title, description, date, link }) => {
   const Item = styled.li`
     margin: 0;
-    padding: ${rhythm(8/12)} ${rhythm(3/12)} ${rhythm(8/12)};
+    padding: ${rhythm(12/12)} 6% ${rhythm(8/12)};
     flex: 0 1 100%;
     display: flex;
     flex-direction: column;
@@ -40,35 +44,31 @@ const WorksListItem = ({ image, title, description, date, link }) => {
     }
     ${mq[2]} {
       flex-basis: 32%;
+      margin: 0;
     }
   `
   const ImageArea = styled.div`
-    background: silver;
+    background: transparent;
     padding-bottom: ${100 * 16 / (16 + 10)}%; /* 16:10 */
   `
   const titleStyle = css`
-    margin: ${rhythm(6/12)} 0 ${rhythm(4/12)};
+    margin: ${rhythm(6/12)} 0 ${rhythm(2/12)};
     & h3 {
-      font-size: ${rhythm(7/12)};
+      font-size: ${rhythm(17/24)};
       font-weight: bold;
-      line-height: ${rhythm(11/12)};
-    }
-    ${mq[1]} {
-      & h3 {
-        font-size: ${rhythm(8/12)};
-      }
+      line-height: ${rhythm(22/24)};
     }
   `
   const Description = styled.div`
-    font-size: ${rhythm(13/24)};
-    line-height: ${rhythm(20/24)};
+    font-size: ${rhythm(14/24)};
+    line-height: ${rhythm(23/24)};
     ${mq[1]} {
-      font-size: ${rhythm(15/24)};
-      line-height: ${rhythm(24/24)};
+      font-size: ${rhythm(14/24)};
+      line-height: ${rhythm(23/24)};
     }
   `
   const Time = styled.div`
-    font-size: ${rhythm(12/24)};
+    font-size: ${rhythm(13/24)};
     padding: 0 0 ${rhythm(4/12)} 0;
     text-align: right;
     position: relative;
@@ -103,6 +103,11 @@ const SecondPage = ({ data }) => {
     <Layout>
       <SEO title="作品集" />
       <WorksContainer>
+      <h1 css={css`
+        text-align: center;
+        font-size: ${rhythm(12/12)};
+        font-weight: 450;
+      `}>作品集</h1>
         <WorksList>
           {
             data.allMarkdownRemark.edges.map( ({ node }) => {
@@ -144,7 +149,7 @@ query WorksQuery {
           date(formatString: "YYYY年M月")
           description
           imagename
-          images
+          
         }
         id
         rawMarkdownBody

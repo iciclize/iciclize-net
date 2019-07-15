@@ -72,7 +72,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       })
     })
   })
-/*
+
   const getWorks = makeRequest(graphql, `
     {
       allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
@@ -84,7 +84,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               date(formatString: "YYYY年M月")
               description
               imagename
-              images
+              
             }
             id
             rawMarkdownBody
@@ -112,31 +112,28 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       }
     }    
   `).then(result => {
-    result.data.allMarkdownRemark.edges.forEach( ({ node }) => {
-      const image = (() => {
-        if (!node.frontmatter.imagename)
-          return null
-        const im = result.data.allImageSharp.edges.find(img => img.node.fluid.originalName === node.frontmatter.imagename)
-        return (im) ? im.node.fluid : null
-      })()
+    result.data.allMarkdownRemark.edges.forEach( ({ node }, i, arr) => {
+      const prev = (i < arr.length - 1) ? arr[i + 1].node : null
+      const next = (i > 0) ? arr[i - 1].node : null
       createPage({
         path: `/works/${node.frontmatter.slug}`,
         component: path.resolve(`src/templates/work-detail.js`),
         context: {
           id: node.id,
-          title: node.frontmatter.title,
-          timing: node.frontmatter.date,
-          image: image,
-          content: node.rawMarkdownBody,
+          imagename: node.frontmatter.imagename,
+          next: next && next.id,
+          nextimg: next && next.frontmatter.imagename,
+          prev: prev && prev.id,
+          previmg: prev && prev.frontmatter.imagename,
         }
       })
     })
-  })*/
+  })
 
   // Queries for articles and authors nodes to use in creating pages.
   return Promise.all([
     getArticles,
     getTags,
-    //getWorks,
+    getWorks,
   ])
 };
