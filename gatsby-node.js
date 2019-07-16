@@ -50,7 +50,10 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   const getArticles = makeRequest(graphql, `
     {
-      allPost(sort: {fields: publish_date, order: ASC}, filter: {published: {eq: 1}}) {
+      allPost(
+        sort: {fields: publish_date, order: ASC},
+        filter: {published: {eq: 1}, slug: {ne: "dummy-post"}}
+      ) {
         edges {
           node {
             id
@@ -90,7 +93,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   const getTags = makeRequest(graphql, `
     {
-      allStrapiTag {
+      allStrapiTag(filter: {slug: {ne: "dummy-tag"}}) {
         nodes {
           slug
           tagname

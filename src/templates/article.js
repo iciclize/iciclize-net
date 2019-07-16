@@ -107,8 +107,10 @@ const ArticleTemplate = ({ data }) => {
                 && `(更新: ${entry.update_date})` }
             </PostedDate>
           }
-          <div css={mdStyle}
-               dangerouslySetInnerHTML={{__html: entry.childMarkdownRemark.html}} />
+          <ReactMarkdown css={mdStyle} source={entry.content} escapeHtml={false}
+                         transformImageUri={uri => uri.startsWith('http')
+                           ? uri
+                           : `${process.env.IMAGE_BASE_URL}${uri}`} />
           { entry.tags.length > 0 &&
             <PostTags>
               { entry.tags.map(tag => (

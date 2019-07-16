@@ -299,7 +299,7 @@ export default IndexPage
 export const pageQuery = graphql`  
   query IndexQuery {
     allPost(
-      filter: {published: {eq: 1}},
+      filter: {published: {eq: 1}, slug: {ne: "dummy-post"}},
       sort: {order: DESC, fields: publish_date},
     ) {
       edges {
@@ -347,7 +347,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiTag {
+    allStrapiTag(filter: {slug: {ne: "dummy-tag"}}) {
       edges {
         node {
           tagname
