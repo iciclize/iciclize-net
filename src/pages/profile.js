@@ -1,16 +1,14 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import { rhythm } from "../utils/typography"
-import mq from "../utils/emotion"
 import styled from "@emotion/styled"
 import SEO from "../components/seo"
 import ReactMarkdown from "react-markdown"
 import { css } from "@emotion/core"
 
 const PostContainer = styled.div`
-  padding: 0 ${rhythm(8/12)} ${rhythm(8/12)};
+  padding: 0 ${rhythm(8 / 12)} ${rhythm(8 / 12)};
   min-height: 100%;
 `
 const PostInner = styled.div`
@@ -22,15 +20,24 @@ const SecondPage = () => (
   <Layout>
     <SEO title="自己紹介" />
     <PostContainer>
-      <h1 css={css`
-        text-align: center;
-        font-size: ${rhythm(12/12)};
-        font-weight: 450;
-      `}>自己紹介</h1>
+      <h1
+        css={css`
+          text-align: center;
+          font-size: ${rhythm(12 / 12)};
+          font-weight: 450;
+        `}
+      >
+        自己紹介
+      </h1>
       <PostInner>
-        <ReactMarkdown escapeHtml={false} css={css`
-          td { line-height: 1.4rem; }
-        `} source={`
+        <ReactMarkdown
+          escapeHtml={false}
+          css={css`
+            td {
+              line-height: 1.4rem;
+            }
+          `}
+          source={`
 <div style="text-align: center">
   <img width="96px" src="https://www.gravatar.com/avatar/e5ef3698ccb90ecd2a50b1440dd7ee37?s=128" />
   <p>猪野湧斗 / Yuto Ino</p>
@@ -73,7 +80,8 @@ const SecondPage = () => (
 
 冬休みの間に数学I・Aを完了したので夏休みの間に数学IIIまでできるようにならないといけません。
 
-`} />
+`}
+        />
       </PostInner>
     </PostContainer>
   </Layout>
