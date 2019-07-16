@@ -273,9 +273,10 @@ const TwoColumn = styled.div`
 
 const IndexPage = ({ data }) => (
   <Layout>
+    <SEO title="HOME" />
     <TwoColumn>
       <Posts>
-        {data.allStrapiArticle.edges.map(document => {
+        {data.allPost.edges.map(document => {
           if (document.node.tags && document.node.tags.find(t => t.slug === 'life') )
             return;
           return (<Post entry={document.node} key={document.node.id} />)
@@ -297,7 +298,7 @@ export default IndexPage
 
 export const pageQuery = graphql`  
   query IndexQuery {
-    allStrapiArticle(
+    allPost(
       filter: {published: {eq: 1}},
       sort: {order: DESC, fields: publish_date},
     ) {
@@ -323,7 +324,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    life: allStrapiArticle(
+    life: allPost(
       filter: {
         published: {eq: 1},
         tags: {elemMatch: {slug: {in: "life"}}}

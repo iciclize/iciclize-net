@@ -9,6 +9,7 @@ import { css } from "@emotion/core"
 import mq from '../utils/emotion';
 
 import NextPrevNav from '../components/NextPrevNav'
+import SEO from '../components/seo';
 
 const PostContainer = styled.div`
   margin: 0 ${rhythm(8/12)} ${rhythm(8/12)};
@@ -85,12 +86,13 @@ const ArticleTemplate = ({ data }) => {
       //.concat(`${P(date.getHours())}:${P(date.getMinutes())}`)
   }
   
-  const entry = data.strapiArticle
+  const entry = data.post
   const next = data.next
   const prev = data.prev
 
   return (
     <Layout>
+      <SEO title={entry.title} description={entry.summary || ``} />
       { entry.image && <Img fluid={entry.image.childImageSharp.fluid}
                             css={css`
                               max-width: 620px;
@@ -105,10 +107,8 @@ const ArticleTemplate = ({ data }) => {
                 && `(更新: ${entry.update_date})` }
             </PostedDate>
           }
-          <ReactMarkdown
-            css={mdStyle}
-            source={entry.content}
-            escapeHtml={false} />
+          <div css={mdStyle}
+               dangerouslySetInnerHTML={{__html: entry.childMarkdownRemark.html}} />
           { entry.tags.length > 0 &&
             <PostTags>
               { entry.tags.map(tag => (
@@ -129,12 +129,16 @@ export { PostContainer, PostInner, mdStyle }
 
 export const q = graphql`
   query ArticleTemplate($id: String!, $nextId: String, $prevId: String) {
-    strapiArticle(id: {eq: $id}) {
+    post(id: {eq: $id}) {
       title
       slug
       publish_date(formatString: "YYYY-MM-DD")
       update_date(formatString: "YYYY-MM-DD")
-      content
+      childMarkdownRemark {
+        excerpt(truncate: true)
+        html
+      }
+      summary
       image {
         childImageSharp {
           fluid(maxWidth: 500) {
@@ -142,22 +146,18 @@ export const q = graphql`
           }
         }
       }
-      author {
-        id
-        username
-      }
       tags {
         id
         slug
         tagname
       }
     }
-    next: strapiArticle(id: {eq: $nextId}) {
+    next: post(id: {eq: $nextId}) {
       title
       slug
       publish_date(formatString: "YYYY-MM-DD")
     }
-    prev: strapiArticle(id: {eq: $prevId}) {
+    prev: post(id: {eq: $prevId}) {
       title
       slug
       publish_date(formatString: "YYYY-MM-DD")

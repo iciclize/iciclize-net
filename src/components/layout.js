@@ -23,7 +23,7 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             title
-            description
+            phrase
           }
         }
       }
@@ -32,7 +32,7 @@ const Layout = ({ children }) => (
       <div css={css`display: flex; min-height: 100vh; flex-direction: column;`}>
         <Header
           siteTitle={data.site.siteMetadata.title}
-          description={data.site.siteMetadata.description} />
+          phrase={data.site.siteMetadata.phrase} />
         <main>{children}</main>
         <footer css={css`
           margin-top: auto;

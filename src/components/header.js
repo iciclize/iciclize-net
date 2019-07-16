@@ -103,7 +103,7 @@ const Item = ({ text, link }) => (
   <ListItem><Link to={ link }>{ text }</Link></ListItem>
 )
 
-const Header = ({ siteTitle, description }) => (
+const Header = ({ siteTitle, phrase }) => (
   <Container>
     <Inner>
       <Title>
@@ -116,7 +116,7 @@ const Header = ({ siteTitle, description }) => (
             {siteTitle}
           </Link>
         </SiteTitle>
-        <Subtitle>{ description }</Subtitle>
+        <Subtitle>{ phrase }</Subtitle>
       </Title>
     </Inner>
     <Background />
@@ -147,12 +147,12 @@ const Header = ({ siteTitle, description }) => (
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-  description: PropTypes.string,
+  phrase: PropTypes.string,
 }
 
 Header.defaultProps = {
   siteTitle: ``,
-  description: ``,
+  phrase: ``,
 }
 
 export default Header

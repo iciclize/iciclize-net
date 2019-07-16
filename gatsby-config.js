@@ -1,7 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `迫真の氷結晶`,
-    description: `初投稿です。`,
+    phrase: `初投稿です。`,
+    description: ``,
     author: `@iciclize`,
   },
   plugins: [

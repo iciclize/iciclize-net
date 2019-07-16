@@ -8,6 +8,7 @@ import styled from '@emotion/styled'
 import { rhythm } from '../utils/typography'
 import mq from '../utils/emotion'
 import { css } from '@emotion/core'
+import SEO from '../components/seo';
 
 const QueryDescription = styled.div`
   font-size: ${rhythm(10/12)};
@@ -28,10 +29,11 @@ const QueryDescription = styled.div`
 
 const UserTemplate = ({ pageContext, data }) => {
   const { tagname, slug } = pageContext
-  const articles = data.allStrapiArticle
+  const articles = data.allPost
 
   return (
     <Layout>
+      <SEO title={`#${tagname}`} />
       <QueryDescription css={ slug === `life` ? css`background: hsl(150,72%,72%);` : null }>
         #{tagname}
       </QueryDescription>
@@ -53,7 +55,7 @@ export default UserTemplate
 
 export const pageQuery = graphql`
   query Article($slug: String!) {
-    allStrapiArticle(
+    allPost(
       filter: {
         published: {eq: 1},
         tags: {elemMatch: {slug: {in: [$slug]}}}

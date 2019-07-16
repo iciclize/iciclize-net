@@ -4,9 +4,30 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
-
+const crypto = require('crypto');
 const path = require(`path`);
+
+exports.onCreateNode = async ({ node, actions }) => {
+  const { createNode } = actions;
+  if (node.internal.type === 'StrapiArticle') {
+    createNode({
+      ...node,
+      id: node.id + '-markdown',
+      parent: node.id,
+      children: [],
+      internal: {
+        type: 'Post',
+        mediaType: 'text/markdown',
+        content: node.content,
+        contentDigest: crypto
+          .createHash(`md5`)
+          .update(JSON.stringify(node))
+          .digest(`hex`)
+      }
+    });
+  }
+};
+
 
 const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
   // Query for article nodes to use in creating pages.
@@ -29,7 +50,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   const getArticles = makeRequest(graphql, `
     {
-      allStrapiArticle(sort: {fields: publish_date, order: ASC}, filter: {published: {eq: 1}}) {
+      allPost(sort: {fields: publish_date, order: ASC}, filter: {published: {eq: 1}}) {
         edges {
           node {
             id
@@ -42,7 +63,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       }
     }  
     `).then(result => {
-    result.data.allStrapiArticle.edges.forEach(({ node }, index, edges) => {
+    result.data.allPost.edges.forEach(({ node }, index, edges) => {
       function searchPrevNextId(start, dir, arr) {
         if (!arr[start].node.tags ||
             arr[start].node.tags.length == 0) return null
@@ -91,7 +112,10 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   const getWorks = makeRequest(graphql, `
     {
-      allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
+      allMarkdownRemark(
+        sort: {fields: frontmatter___date, order: DESC},
+        filter: {fileAbsolutePath: {regex: "/.*\/src\/pages\/works\/.*/"}}
+      ) {
         edges {
           node {
             frontmatter {

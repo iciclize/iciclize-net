@@ -6,7 +6,8 @@ import ReactMarkdown from 'react-markdown'
 import { rhythm } from "../utils/typography"
 import styled from "@emotion/styled"
 import { css } from "@emotion/core"
-import mq from '../utils/emotion';
+import mq from '../utils/emotion'
+import SEO from '../components/seo'
 
 import NextPrevNav from '../components/NextPrevNav'
 
@@ -81,7 +82,8 @@ const ArticleTemplate = ({ data }) => {
   const prevImage = data.prevImage && data.prevImage.fluid
   
   return (
-    <Layout>  
+    <Layout>
+      <SEO title={title} />
       <PostContainer>
         <PostInner>
           <TimingOfWork>{ timing }</TimingOfWork>

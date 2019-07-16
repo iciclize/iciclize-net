@@ -140,7 +140,10 @@ export default SecondPage
 
 export const pageQuery = graphql`
 query WorksQuery {
-  allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
+  allMarkdownRemark(
+    sort: {fields: frontmatter___date, order: DESC},
+    filter: {fileAbsolutePath: {regex: "/.*\/pages\/works\/.*.md/"}}  
+  ) {
     edges {
       node {
         frontmatter {
