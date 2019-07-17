@@ -249,8 +249,7 @@ h2 {
   color: inherit;
   /*font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;*/
-  /*font-weight: bold;*/
-  font-weight: normal;
+  font-weight: bold;
   text-rendering: optimizeLegibility;
   /*font-size: 1.62671rem;*/
   font-size: 1.25rem;
@@ -272,7 +271,7 @@ h3 {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;*/
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1.38316rem;
+  font-size: 1.1rem;
   line-height: 1.1;
 }
 h4 {
@@ -344,7 +343,7 @@ ul {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 0.8rem;
   list-style-position: outside;
   list-style-image: none;
 }
@@ -596,13 +595,14 @@ td:last-child {
 }
 tt,
 code {
-  background-color: hsl(0, 0%, 90%);
+  background-color: hsl(0, 0%, 96%);
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
     "Liberation Mono", Menlo, Courier, monospace;
-  padding: 0;
+  padding: 0.4em;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
+  margin: 0 0.2em;
 }
 pre code {
   background: none;
@@ -613,7 +613,7 @@ code:after,
 tt:before,
 tt:after {
   letter-spacing: -0.2em;
-  content: " ";
+  content: "";
 }
 pre code:before,
 pre code:after,

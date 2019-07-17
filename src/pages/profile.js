@@ -6,6 +6,7 @@ import styled from "@emotion/styled"
 import SEO from "../components/seo"
 import ReactMarkdown from "react-markdown"
 import { css } from "@emotion/core"
+import mq from "../utils/emotion"
 
 const PostContainer = styled.div`
   padding: 0 ${rhythm(8 / 12)} ${rhythm(8 / 12)};
@@ -36,13 +37,31 @@ const SecondPage = () => (
             td {
               line-height: 1.4rem;
             }
+            font-size: ${rhythm(10 / 16)};
+            line-height: 1.75;
+            margin: ${rhythm(8 / 12)} 0 0;
+            ${mq[1]} {
+              font-size: ${rhythm(8 / 12)};
+            }
           `}
           source={`
-<div style="text-align: center">
-  <img width="96px" src="https://www.gravatar.com/avatar/e5ef3698ccb90ecd2a50b1440dd7ee37?s=128" />
-  <p>猪野湧斗 / Yuto Ino</p>
-  <p>学生です。</p>
+<div style="display: table; margin: 1.5rem 0; ">
+  <img style="margin: 0;" width="64px" src="https://www.gravatar.com/avatar/e5ef3698ccb90ecd2a50b1440dd7ee37?s=128" />
+  <h2 style="display: table-cell; padding: 0 0.8rem; vertical-align: middle; border: none; font-weight: normal; font-size: 1.1rem;">
+  猪野湧斗 / Yuto Ino</h2>
 </div>
+
+FPGAと高校数学を勉強しています。趣味は忘れました。たぶんプログラミング好きです。
+
+最近は
+
+- ハリボテ3Dエンジン
+- 柴又を演奏する装置の制作
+- HTTP上に流れる画像を別のものにすり替える悪いルーター
+
+が作りたいです。
+
+実は4級アマチュア無線技士で、コールサインは\`JJ1QJI\`です。
 
 |             |      |
 | ----        | ---- |
@@ -50,29 +69,31 @@ const SecondPage = () => (
 | 2014 - 2017 | 横浜市立横浜サイエンスフロンティア高等学校 |
 | 2017 -      | 筑波大学 情報学群情報メディア創成学類 |
 
-## なんだこのサイト！？(驚愕)
+## 所属団体とかアルバイト
 
-このサイトは、猪野湧斗のブログ兼ポートフォリオサイトで、自己満足の権化です。
+### 高校2, 3年
 
-- 作品集をまとめておきたいな
-- 140字を超える記事を書きたいことがあるけどnoteとかはてなとかに頼るのはNG
+- \`情報工学部(部活)\` - 主に競技プログラミングやる部活でしたがWebばかり書いていました。
 
-という気持ちが衝突して爆発した結果できました(天地創造)
+### 大学1年
 
-## 趣味・興味
+- \`学園祭実行委員会 情報システム局 Web部門\` - 学園祭のホームページを作るところです。コーディングだけしました。
 
-プログラミングと、和音が気持ちいい音楽を聴くのが好きです。
+### 大学2年
 
-あと都会のビルの屋上が好きです。屋上の室外機やパイプを見かけると興奮します。
+- \`学園祭実行委員会 情報システム局 Web責任者\` - 学園祭Webページのデザインと、Web制作の指揮。あんまり仕事できてなかった。
+- \`松屋(外食チェーン)\` - 民度低い客に会えるかと思ったけど案外治安良かった。
+- \`筑波大学アマチュア無線クラブ\` - ハードウェアから攻めていきたかった。4アマをとりました。
 
-最近やりたいことはざっと以下の通りです。
+### 大学3年
 
-- ~~ブログ／ポートフォリオサイトの作成~~ (このサイト)
-- ハリボテ3Dエンジン製作
-- 音楽を演奏する装置の製作
-- HTTP上に流れる画像を別のものにすり替えてしまう悪いルーターの製作
-- 考えてるアプリ2本の製作
-- 音楽理論知りたい
+- \`筑波大学電気通信研究会(旧アマチュア無線クラブ)\` - 名前が変わりましたがすぐに廃部が決定しました。
+
+## 好きなもの・こと
+
+和音が気持ちいい音楽を聴くのが好きです。2号兄貴大好き。
+
+あと都会のビルの屋上が好きです。屋上の室外機やパイプを見かけると興奮します。だからミラーズエッジとか好きです。
 
 ## 事情
 

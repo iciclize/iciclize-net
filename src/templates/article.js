@@ -74,7 +74,7 @@ const PostTag = styled.li`
 `
 const mdStyle = css`
   font-size: ${rhythm(10 / 16)};
-  line-height: ${rhythm(20 / 16)};
+  line-height: 1.75;
   margin: ${rhythm(8 / 12)} 0 0;
   ${mq[1]} {
     font-size: ${rhythm(8 / 12)};

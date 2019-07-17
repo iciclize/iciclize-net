@@ -115,19 +115,20 @@ const Post = ({ entry }) => {
     </PostContainer>
   )
 }
-const SideContainer = styled.aside`
+
+const Side = styled.div`
   flex: 1 1;
-  margin: ${rhythm(10 / 12)} auto 0;
-  max-width: 740px;
+  margin: ${rhythm(10 / 12)} 0 0;
   ${mq[3]} {
     margin: 0 0 0 1.5rem;
   }
-`
-const Side = styled.div`
+
   display: flex;
   flex-direction: column;
   ${mq[1]} {
     flex-direction: row;
+    margin: ${rhythm(10 / 12)} auto 0;
+    width: 740px;
   }
   ${mq[3]} {
     flex-direction: column;
@@ -277,8 +278,14 @@ const Posts = styled.ul`
   flex-wrap: wrap;
   justify-content: space-between;
   list-style: none;
-  margin: 0 auto;
+  margin: 0;
   max-width: 740px;
+  ${mq[1]} {
+    margin: 0 auto;
+  }
+  ${mq[3]} {
+    flex: 4 1 auto;
+  }
 `
 const TwoColumn = styled.div`
   display: flex;
@@ -306,12 +313,10 @@ const IndexPage = ({ data }) => (
           else return null
         })}
       </Posts>
-      <SideContainer>
         <Side>
           <Features features={data.life} />
           <AllTag tags={data.allStrapiTag} />
         </Side>
-      </SideContainer>
     </TwoColumn>
   </Layout>
 )
