@@ -119,10 +119,6 @@ const Post = ({ entry }) => {
 const Side = styled.div`
   flex: 1 1;
   margin: ${rhythm(10 / 12)} 0 0;
-  ${mq[3]} {
-    margin: 0 0 0 1.5rem;
-  }
-
   display: flex;
   flex-direction: column;
   ${mq[1]} {
@@ -132,6 +128,7 @@ const Side = styled.div`
   }
   ${mq[3]} {
     flex-direction: column;
+    margin: 0 0 0 1.5rem;
   }
 `
 const SideInner = styled.div`
