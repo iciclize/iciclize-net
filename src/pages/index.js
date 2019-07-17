@@ -138,6 +138,9 @@ const SideInner = styled.div`
   flex: 1 1 auto;
   min-width: 25%;
   margin: 0 ${rhythm(8 / 12)} ${rhythm(12 / 12)};
+  ${mq[3]} {
+    flex: 0 1 auto;
+  }
 `
 const Features = ({ features }) => {
   const HeaderContainer = styled.div`
