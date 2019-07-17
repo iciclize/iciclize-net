@@ -47,8 +47,11 @@ const SecondPage = () => (
           source={`
 <div style="display: table; margin: 1.5rem 0; ">
   <img style="margin: 0;" width="64px" src="https://www.gravatar.com/avatar/e5ef3698ccb90ecd2a50b1440dd7ee37?s=128" />
-  <h2 style="display: table-cell; padding: 0 0.8rem; vertical-align: middle; border: none; font-weight: normal; font-size: 1.1rem;">
-  猪野湧斗 / Yuto Ino</h2>
+  <div style="display: table-cell; padding: 0 0.8rem; vertical-align: middle;">
+    <h2 style="border: none; font-weight: normal; font-size: 1.1rem; margin:0; padding: 0 0 0.6rem;">
+    猪野湧斗 / Yuto Ino</h2>
+    <div style="font-size: 0.9rem;">Twitter: <a href="https://twitter.com/iciclize">@iciclize</a></div>
+  </div>
 </div>
 
 FPGAと高校数学を勉強しています。趣味は忘れました。たぶんプログラミング好きです。
