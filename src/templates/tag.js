@@ -17,7 +17,7 @@ const QueryDescription = styled.div`
   color: white;
   /*text-shadow: rgba(0, 0, 0, 0.18) 1px 1px 4px;*/
   /*background: linear-gradient(to right, hsl(204,100%,82%), hsl(184,100%,82%));*/
-  background: hsl(199, 100%, 77%);
+  background: hsl(199, 100%, 84%);
   padding: ${rhythm(1)};
   margin: 0 0 ${rhythm(1)} 0;
   ${mq[1]} {
@@ -37,7 +37,7 @@ const UserTemplate = ({ pageContext, data }) => {
         css={
           slug === `life`
             ? css`
-                background: hsl(150, 72%, 72%);
+                background: hsl(150, 65%, 79%);
               `
             : null
         }
@@ -49,7 +49,7 @@ const UserTemplate = ({ pageContext, data }) => {
           slug === `life`
             ? css`
                 & > li {
-                  border-left-color: hsl(150, 72%, 72%);
+                  border-left-color: hsl(150, 65%, 79%);
                 }
               `
             : null

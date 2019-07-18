@@ -13,7 +13,7 @@ import SEO from "../components/seo"
 const PostContainer = styled.li`
   flex: 0 1 100%;
   margin: 0 ${rhythm(8 / 12)} ${rhythm(12 / 12)};
-  border-left: 3px solid hsl(204, 100%, 72%);
+  border-left: 3px solid hsl(204, 100%, 79%);
   padding: 0 0 0 ${rhythm(8 / 12)};
   min-width: 30%;
   ${mq[1]} {
@@ -151,7 +151,7 @@ const Features = ({ features }) => {
       vertical-align: middle;
       display: inline-block;
       padding: ${rhythm(4 / 12)};
-      border: 4px solid hsl(150, 72%, 72%);
+      border: 4px solid hsl(150, 65%, 79%);
       margin-right: ${rhythm(8 / 12)};
     }
   `
@@ -176,7 +176,7 @@ const Features = ({ features }) => {
   const Item = styled.li`
     flex: 0 1 auto;
     margin: 0 ${rhythm(8 / 12)} ${rhythm(12 / 12)};
-    border-left: 3px solid hsl(150, 72%, 72%);
+    border-left: 3px solid hsl(150, 65%, 79%);
     padding: 0 0 0 ${rhythm(8 / 12)};
     min-width: 30%;
     /*

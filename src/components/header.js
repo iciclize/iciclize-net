@@ -135,7 +135,7 @@ const Header = ({ siteTitle, phrase }) => (
     <div
       css={css`
         position: relative;
-        border-top: 3px solid hsl(204, 100%, 72%);
+        border-top: 3px solid hsl(204, 100%, 79%);
         background: white;
         &::before {
           content: "";
