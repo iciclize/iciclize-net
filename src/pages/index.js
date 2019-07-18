@@ -313,10 +313,10 @@ const IndexPage = ({ data }) => (
           else return null
         })}
       </Posts>
-        <Side>
-          <Features features={data.life} />
-          <AllTag tags={data.allStrapiTag} />
-        </Side>
+      <Side>
+        <Features features={data.life} />
+        <AllTag tags={data.allStrapiTag} />
+      </Side>
     </TwoColumn>
   </Layout>
 )
