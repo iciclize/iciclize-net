@@ -7,7 +7,7 @@ imagename: "work-YSFH_Watcher.jpg"
 ---
 高校のTwitterの目に余るタイムラインを全世界に晒し上げようと思って作りました。タイムラインはUserStreamsと接続していてリアルタイムで更新されるようにしていました。Meteor.jsによる検索機能もつけていました。
 
-倫理的問題により1年くらいで公開を停止しました。
+倫理的に問題があるので1年くらいで公開を停止しました。
 
 ![timeline feed page](../../images/work-YSFH_Watcher_Feed.png)
 

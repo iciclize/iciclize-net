@@ -8,9 +8,7 @@ imagename: "work-icicle_blog_system.png"
 
 Icicle Blog Systemは大学のデータベースの授業の課題で作ったブログシステムです。PHP + MySQL + Vue.js + Bulmaで作りました。
 
-完成までにやることが多すぎて数日ほど大学の計算機室にほとんど泊まり込むような形で製作しました。
-
-`Vue.jsもPHP初めて` && `締切最優先` のためセキュリティはガバガバですが授業の課題だしまあしょうがない(割切)。
+`Vue.jsもPHP初めて` && `締切最優先` のためセキュリティはガバガバです。授業の課題だし仕方ない(割切)。
 
 BulmaもVue Componentsも便利すぎて泣いた。
 
