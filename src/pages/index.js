@@ -58,7 +58,7 @@ const PostTag = styled.li`
     }
   }
 `
-const postSummaryStyle = `
+const postSummaryStyle = css`
   font-size: ${rhythm(9 / 16)};
   margin: ${rhythm(4 / 12)} 0 ${rhythm(2 / 12)};
   line-height: ${rhythm(14 / 16)};
@@ -103,7 +103,7 @@ const Post = ({ entry }) => {
           ))}
         </PostTags>
       )}
-      {entry.summary && <div>{entry.summary}</div>}
+      {entry.summary && <div css={postSummaryStyle}>{entry.summary}</div>}
     </PostContainer>
   )
 }

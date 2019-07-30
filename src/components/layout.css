@@ -343,7 +343,7 @@ ul {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 0.8rem;
   list-style-position: outside;
   list-style-image: none;
 }
@@ -355,7 +355,7 @@ ol {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 0.8rem;
   list-style-position: outside;
   list-style-image: none;
 }
@@ -387,7 +387,7 @@ p {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 0.75rem;
 }
 figure {
   margin-left: 0;
@@ -447,6 +447,7 @@ blockquote {
   margin-bottom: 0.8rem;
   border-left: 3px solid hsl(204,100%,72%);
   background: hsl(204,50%,97%);
+  color: hsl(0, 0, 50%);
 }
 form {
   margin-left: 0;

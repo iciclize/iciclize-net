@@ -44,7 +44,7 @@ const PostTitle = styled.h1`
   font-weight: 450;
   font-size: ${rhythm(12 / 12)};
   letter-spacing: ${rhythm(1 / 24)};
-  margin: ${rhythm(12 / 12)} 0 0;
+  margin: 0 0 0;
   ${mq[1]} {
     font-size: ${rhythm(13 / 12)};
   }
@@ -76,8 +76,18 @@ const mdStyle = css`
   font-size: ${rhythm(10 / 16)};
   line-height: 1.75;
   margin: ${rhythm(8 / 12)} 0 0;
+  p {
+    margin-bottom: ${rhythm(9 / 12)};
+  }
   ${mq[1]} {
     font-size: ${rhythm(8 / 12)};
+    p {
+      margin-bottom: ${rhythm(12 / 12)};
+    }
+    ol,
+    ul {
+      margin-bottom: ${rhythm(11 / 12)};
+    }
   }
 `
 const ArticleTemplate = ({ data }) => {
