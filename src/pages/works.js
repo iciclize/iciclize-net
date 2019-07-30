@@ -182,17 +182,9 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          fluid {
-            aspectRatio
-            src
-            srcSet
-            srcWebp
-            srcSetWebp
-            sizes
-            originalImg
+          fluid(maxWidth: 360) {
             originalName
-            presentationWidth
-            presentationHeight
+            ...GatsbyImageSharpFluid
           }
         }
       }

@@ -137,8 +137,8 @@ export const pageQuery = graphql`
       }
     }
     image: imageSharp(fluid: { originalName: { eq: $imagename } }) {
-      fluid(maxWidth: 600) {
-        ...img
+      fluid(maxWidth: 1400) {
+        ...GatsbyImageSharpFluid
       }
     }
     next: markdownRemark(id: { eq: $next }) {
@@ -150,7 +150,7 @@ export const pageQuery = graphql`
     }
     nextImage: imageSharp(fluid: { originalName: { eq: $nextimg } }) {
       fluid(maxWidth: 60) {
-        ...img
+        ...GatsbyImageSharpFluid
       }
     }
     prev: markdownRemark(id: { eq: $prev }) {
@@ -162,20 +162,8 @@ export const pageQuery = graphql`
     }
     prevImage: imageSharp(fluid: { originalName: { eq: $previmg } }) {
       fluid(maxWidth: 60) {
-        ...img
+        ...GatsbyImageSharpFluid
       }
     }
-  }
-
-  fragment img on ImageSharpFluid {
-    src
-    srcSet
-    srcSetWebp
-    srcWebp
-    sizes
-    presentationWidth
-    presentationHeight
-    originalName
-    aspectRatio
   }
 `
