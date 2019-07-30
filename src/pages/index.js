@@ -103,15 +103,7 @@ const Post = ({ entry }) => {
           ))}
         </PostTags>
       )}
-      {entry.summary && (
-        <ReactMarkdown
-          css={css`
-            ${postSummaryStyle}
-          `}
-          escapeHtml={false}
-          source={entry.summary}
-        />
-      )}
+      {entry.summary && <div>{entry.summary}</div>}
     </PostContainer>
   )
 }
