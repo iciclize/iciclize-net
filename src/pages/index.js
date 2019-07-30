@@ -296,6 +296,7 @@ const TwoColumn = styled.div`
   max-width: 1080px;
   ${mq[3]} {
     flex-direction: row;
+    align-items: start;
   }
 `
 
