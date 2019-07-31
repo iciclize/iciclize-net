@@ -78,6 +78,14 @@ const SecondPage = () => (
 
 あと都会のビルの屋上が好きです。屋上の室外機やパイプ、フェンスなどを見かけると興奮します。
 
+## アカウント・連絡先
+
+[Twitter - @iciclize](https://twitter.com/iciclize)
+
+[Github - iciclize](https://github.com/iciclize)
+
+(お仕事の依頼は受け付け)ないです。
+
 `}
         />
       </PostInner>
