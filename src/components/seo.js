@@ -51,7 +51,9 @@ function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
         },
         {
           name: `twitter:card`,
-          content: meta.every(m => m.name !== `twitter:card`) ? `summary` : meta.find(m => m.name === `twitter:card`).content ,
+          content: meta.every(m => m.name !== `twitter:card`)
+            ? `summary`
+            : meta.find(m => m.name === `twitter:card`).content,
         },
         {
           name: `twitter:title`,
@@ -89,7 +91,7 @@ function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
             (image && url.resolve(site.siteMetadata.siteUrl, image.src)) ||
             url.resolve(site.siteMetadata.siteUrl, defaultImage.fixed.src),
         },
-      ].filter(m => m.content) }
+      ].filter(m => m.content)}
     />
   )
 }

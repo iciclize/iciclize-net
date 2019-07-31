@@ -108,7 +108,7 @@ const ArticleTemplate = ({ data }) => {
           fluid={entry.image.childImageSharp.fluid}
           css={css`
             max-width: 620px;
-            margin: 0 auto;
+            margin: 0 auto ${rhythm(10 / 12)};
           `}
         />
       )}

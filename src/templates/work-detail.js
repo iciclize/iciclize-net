@@ -91,7 +91,7 @@ const ArticleTemplate = ({ data }) => {
           {
             name: `twitter:card`,
             content: `summary_large_image`,
-          }
+          },
         ]}
       />
       <PostContainer>
