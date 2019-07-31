@@ -9,9 +9,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+const url = require("url")
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
+function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
+  const { site, defaultImage } = useStaticQuery(
     graphql`
       query {
         site {
@@ -19,13 +20,22 @@ function SEO({ description, lang, meta, title }) {
             title
             description
             author
+            siteUrl
+          }
+        }
+        defaultImage: imageSharp(
+          fluid: { originalName: { regex: "/.*IceCircle.*/" } }
+        ) {
+          fixed(fit: CONTAIN, width: 512, height: 512) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const seoDescription = metaDescription || ``
+  const shareDescription = ogDescription
 
   return (
     <Helmet
@@ -37,7 +47,29 @@ function SEO({ description, lang, meta, title }) {
       meta={[
         {
           name: `description`,
-          content: metaDescription,
+          content: seoDescription,
+        },
+        {
+          name: `twitter:card`,
+          content: meta.every(m => m.name !== `twitter:card`) ? `summary` : meta.find(m => m.name === `twitter:card`).content ,
+        },
+        {
+          name: `twitter:title`,
+          content: title,
+        },
+        {
+          name: `twitter:image`,
+          content:
+            (image && url.resolve(site.siteMetadata.siteUrl, image.src)) ||
+            url.resolve(site.siteMetadata.siteUrl, defaultImage.fixed.src),
+        },
+        {
+          name: `twitter:creator`,
+          content: site.siteMetadata.author,
+        },
+        {
+          name: `twitter:description`,
+          content: shareDescription,
         },
         {
           property: `og:title`,
@@ -45,29 +77,19 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:description`,
-          content: metaDescription,
+          content: shareDescription,
         },
         {
           property: `og:type`,
           content: `website`,
         },
         {
-          name: `twitter:card`,
-          content: `summary`,
+          property: `og:image`,
+          content:
+            (image && url.resolve(site.siteMetadata.siteUrl, image.src)) ||
+            url.resolve(site.siteMetadata.siteUrl, defaultImage.fixed.src),
         },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
+      ].filter(m => m.content) }
     />
   )
 }

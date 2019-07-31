@@ -97,7 +97,12 @@ const ArticleTemplate = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={entry.title} description={entry.summary || ``} />
+      <SEO
+        title={entry.title}
+        metaDescription={entry.summary || ``}
+        ogDescription={entry.summary || entry.childMarkdownRemark.excerpt}
+        image={entry.image && entry.image.childImageSharp.fluid}
+      />
       {entry.image && (
         <Img
           fluid={entry.image.childImageSharp.fluid}
@@ -162,9 +167,12 @@ export const q = graphql`
       publish_date(formatString: "YYYY-MM-DD")
       update_date(formatString: "YYYY-MM-DD")
       summary
+      childMarkdownRemark {
+        excerpt(format: PLAIN, pruneLength: 100, truncate: true)
+      }
       image {
         childImageSharp {
-          fluid(maxWidth: 500) {
+          fluid(maxWidth: 840) {
             ...GatsbyImageSharpFluid
           }
         }

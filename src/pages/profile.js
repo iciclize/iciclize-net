@@ -19,7 +19,7 @@ const PostInner = styled.div`
 `
 const SecondPage = () => (
   <Layout>
-    <SEO title="自己紹介" />
+    <SEO title="自己紹介" ogDescription={`24歳、学生です。(大嘘)`} />
     <PostContainer>
       <h1
         css={css`

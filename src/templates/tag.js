@@ -32,7 +32,7 @@ const UserTemplate = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <SEO title={`#${tagname}`} />
+      <SEO title={`#${tagname}`} ogDescription={`#${tagname} のタグの付いた記事一覧`}/>
       <QueryDescription
         css={
           slug === `life`

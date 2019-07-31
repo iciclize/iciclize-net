@@ -72,6 +72,7 @@ const ArticleTemplate = ({ data }) => {
 
   const content = markdown.html
   const title = markdown.frontmatter.title
+  const description = markdown.frontmatter.description
   const timing = markdown.frontmatter.date
   const image = data.image.fluid
   const next = data.next && data.next.frontmatter
@@ -81,7 +82,18 @@ const ArticleTemplate = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={title} />
+      <SEO
+        title={title}
+        metaDescription={description}
+        ogDescription={description}
+        image={image}
+        meta={[
+          {
+            name: `twitter:card`,
+            content: `summary_large_image`,
+          }
+        ]}
+      />
       <PostContainer>
         <PostInner>
           <TimingOfWork>{timing}</TimingOfWork>

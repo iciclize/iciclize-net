@@ -116,7 +116,7 @@ const SecondPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="作品集" />
+      <SEO title="作品集" ogDescription={ data.allMarkdownRemark.edges.map( ({node}) => node.frontmatter.title).join(` | `) } />
       <WorksContainer>
         <h1
           css={css`

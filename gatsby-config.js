@@ -4,6 +4,7 @@ module.exports = {
     phrase: `初投稿です。`,
     description: ``,
     author: `@iciclize`,
+    siteUrl: `https://iciclize.net`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -68,6 +69,12 @@ module.exports = {
       },
     },
     `gatsby-plugin-twitter`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '*' }]
+      }
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
