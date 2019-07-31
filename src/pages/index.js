@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, StaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 
@@ -293,7 +293,7 @@ const TwoColumn = styled.div`
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO title="HOME" />
+    <SEO ogDescription={data.site.siteMetadata.description} />
     <TwoColumn>
       <Posts>
         {data.allPost.edges.map(document => {
@@ -319,6 +319,11 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
+    site {
+      siteMetadata {
+        description
+      }
+    }
     allPost(
       filter: { published: { eq: 1 }, slug: { ne: "dummy-post" } }
       sort: { order: DESC, fields: publish_date }
