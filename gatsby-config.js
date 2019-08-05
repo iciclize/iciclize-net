@@ -75,6 +75,42 @@ module.exports = {
         policy: [{ userAgent: '*', allow: '*' }]
       }
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          allSitePage {
+            edges {
+              node {
+                path
+              }
+            }
+          }
+        }`,
+        serialize: ({site, allSitePage}) =>
+          allSitePage.edges.map(edge => {
+            return {
+              url: site.siteMetadata.siteUrl + edge.node.path,
+              changefreq: (/\/works\/.*/.test(edge.node.path))
+                          ? `yearly`
+                          : (/\/posts\/.*/.test(edge.node.path))
+                            ? `monthly`
+                            : `weekly`,
+              priority: (/(\/works\/.*|\/profile\/)/.test(edge.node.path))
+                          ? 0.7
+                          : (/\/posts\/.*/.test(edge.node.path))
+                            ? 1.0
+                            : 0.0,
+            }
+          })
+      },
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
