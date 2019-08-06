@@ -79,6 +79,9 @@ const mdStyle = css`
   p {
     margin-bottom: ${rhythm(9 / 12)};
   }
+  img {
+    margin: ${rhythm(4/12)} 0;
+  }
   ${mq[1]} {
     font-size: ${rhythm(8 / 12)};
     p {
@@ -87,6 +90,12 @@ const mdStyle = css`
     ol,
     ul {
       margin-bottom: ${rhythm(11 / 12)};
+    }
+    h3 {
+      border-left: 5px solid hsl(204,100%,82%);
+      padding-left: 0.8rem;
+      font-weight: bold;
+      margin: ${rhythm(12/12)} 0 ${rhythm(10/12)};
     }
   }
 `
