@@ -42,8 +42,6 @@ imagename: "work-ishitan.jpg"
 
 地図を実装するために、屋外テント設置場所のほか、企画で使われるほとんどの建物を一部屋一部屋SVGにマッピングしています。
 
-(この画像では縮尺が大きすぎて(大学が広すぎて)個々のテントや部屋まで確認するのは難しいですが…)
-
 <div style="max-width: 360px;">
 
 ![Sohosai website map](../../images/work-ishitan-map.jpg)
