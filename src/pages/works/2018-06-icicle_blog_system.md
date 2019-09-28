@@ -2,15 +2,15 @@
 slug: "icicle_blog_system"
 date: "2018-06"
 title: "Icicle Blog System"
-description: "大学のデータベースの授業の課題で作ったブログシステムです。PHPで作りました。めちゃめちゃ面倒くさかったです。"
+description: "PHP製のブログエンジン。大学のデータベースの授業で製作しました。"
 imagename: "work-icicle_blog_system.png"
 ---
 
 Icicle Blog Systemは大学のデータベースの授業の課題で作ったブログシステムです。PHP + MySQL + Vue.js + Bulmaで作りました。
 
-`Vue.jsもPHP初めて` && `締切最優先` のためセキュリティはガバガバです。授業の課題だし仕方ない(割切)。
+あれ、今思えばPHPもMySQLもVue.jsもBulmaも全部これが初めてでした。
 
-BulmaもVue Componentsも便利すぎて泣いた。
+BulmaもVue Componentsも便利すぎて泣きました。
 
 ## トップ画面
 
@@ -18,7 +18,7 @@ BulmaもVue Componentsも便利すぎて泣いた。
 
 ## 記事編集画面
 
-タグも付けられる。
+タグも付けられる。そういえばプロフィール画像を除く画像の投稿は実装していない気がします。
 
 ![Icicle Blog System edit page](../../images/work-icicle_blog_system-edit.png)
 
@@ -34,4 +34,6 @@ BulmaもVue Componentsも便利すぎて泣いた。
 
 ![Icicle Blog System filtered articles](../../images/work-icicle_blog_system-filter.png)
 
-このときブログはもう二度と作りたくないと思いましたが変ですね、また作ってしまいました。
+提出期限に対して作業量が多くて数日間大学の計算機室にこもって作業してた記憶があります。
+
+「ブログの自作にはロマンがある」とかいって大変なテーマを選んでしまったのでした。

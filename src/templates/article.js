@@ -82,6 +82,14 @@ const mdStyle = css`
   img {
     margin: ${rhythm(4/12)} 0;
   }
+  h3 {
+    border-left: 5px solid hsl(204,100%,82%);
+    padding-left: 0.8rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    font-weight: bold;
+    margin: 1.5rem 0 1.25rem;
+  }
   ${mq[1]} {
     font-size: ${rhythm(8 / 12)};
     p {
@@ -90,12 +98,6 @@ const mdStyle = css`
     ol,
     ul {
       margin-bottom: ${rhythm(11 / 12)};
-    }
-    h3 {
-      border-left: 5px solid hsl(204,100%,82%);
-      padding-left: 0.8rem;
-      font-weight: bold;
-      margin: ${rhythm(12/12)} 0 ${rhythm(10/12)};
     }
   }
 `
