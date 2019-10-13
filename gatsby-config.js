@@ -96,7 +96,7 @@ module.exports = {
         serialize: ({site, allSitePage}) =>
           allSitePage.edges.map(edge => {
             return {
-              url: site.siteMetadata.siteUrl + edge.node.path + `/`,
+              url: site.siteMetadata.siteUrl + edge.node.path,
               changefreq: (/\/works\/.*/.test(edge.node.path))
                           ? `yearly`
                           : (/\/posts\/.*/.test(edge.node.path))

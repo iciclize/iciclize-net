@@ -80,7 +80,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         }
       }
       createPage({
-        path: `/posts/${node.slug}`,
+        path: `/posts/${node.slug}/`,
         component: path.resolve(`src/templates/article.js`),
         context: {
           id: node.id,
@@ -103,7 +103,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
   `).then(result => {
     result.data.allStrapiTag.nodes.forEach( tag => {
       createPage({
-        path: `/tag/${tag.slug}`,
+        path: `/tag/${tag.slug}/`,
         component: path.resolve(`src/templates/tag.js`),
         context: {
           slug: tag.slug,
@@ -159,7 +159,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       const prev = (i < arr.length - 1) ? arr[i + 1].node : null
       const next = (i > 0) ? arr[i - 1].node : null
       createPage({
-        path: `/works/${node.frontmatter.slug}`,
+        path: `/works/${node.frontmatter.slug}/`,
         component: path.resolve(`src/templates/work-detail.js`),
         context: {
           id: node.id,
