@@ -68,7 +68,6 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-twitter`,
     {
       resolve: 'gatsby-plugin-robots-txt',
@@ -97,7 +96,7 @@ module.exports = {
         serialize: ({site, allSitePage}) =>
           allSitePage.edges.map(edge => {
             return {
-              url: site.siteMetadata.siteUrl + edge.node.path,
+              url: site.siteMetadata.siteUrl + edge.node.path + `/`,
               changefreq: (/\/works\/.*/.test(edge.node.path))
                           ? `yearly`
                           : (/\/posts\/.*/.test(edge.node.path))
