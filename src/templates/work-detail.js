@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import { rhythm } from "../utils/typography"
 import styled from "@emotion/styled"
 import { css } from "@emotion/core"
+import { mdStyle } from "./article"
 import mq from "../utils/emotion"
 import SEO from "../components/seo"
 
@@ -55,15 +56,6 @@ const TimingOfWork = styled.div`
   color: hsl(0, 0%, 52%);
   ${mq[1]} {
     font-size: ${rhythm(13 / 20)};
-  }
-`
-const mdStyle = css`
-  font-size: ${rhythm(10 / 16)};
-  line-height: ${rhythm(18 / 16)};
-  margin: ${rhythm(8 / 12)} 0 0;
-  ${mq[1]} {
-    font-size: ${rhythm(8 / 12)};
-    line-height: ${rhythm(20 / 16)};
   }
 `
 

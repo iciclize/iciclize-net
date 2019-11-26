@@ -14,7 +14,7 @@ Splaturn(スプラターン)は、所属していた情報工学部(部活)の�
 
 今でいうPokemon GOみたいな感じですが当時はまだPokemon GOは登場していませんでした。
 
-アイデアを考えたのは友達で、僕はサーバーサイドを書きました。
+アイデアを考えたのは友達で、僕はNode.jsでサーバーサイドを書きました。
 
 <p style="max-width: 320px;">
     <img alt="Splaturn screen" src="../../images/work-Splaturn-screen.png" />
