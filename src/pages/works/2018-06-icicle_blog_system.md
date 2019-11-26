@@ -6,11 +6,13 @@ description: "PHP製のブログエンジン。大学のデータベースの授
 imagename: "work-icicle_blog_system.png"
 ---
 
-Icicle Blog Systemは大学のデータベースの授業の課題で作ったブログシステムです。PHP + MySQL + Vue.js + Bulmaで作りました。
+## なにこれ
 
-あれ、今思えばPHPもMySQLもVue.jsもBulmaも全部これが初めてでした。
+Icicle Blog Systemは大学のデータベースの授業の課題で作ったブログシステムです。
 
-BulmaもVue Componentsも便利すぎて泣きました。
+PHP + MySQL + Vue.js + Bulmaで作りました。
+
+あれ、今思えばPHPもMySQLもVue.jsもBulmaも全部これが初めてでした…！
 
 ## トップ画面
 
@@ -37,3 +39,6 @@ BulmaもVue Componentsも便利すぎて泣きました。
 提出期限に対して作業量が多くて数日間大学の計算機室にこもって作業してた記憶があります。
 
 「ブログの自作にはロマンがある」とかいって大変なテーマを選んでしまったのでした。
+
+でもBulmaもVue Componentsも便利すぎて泣きました。
+

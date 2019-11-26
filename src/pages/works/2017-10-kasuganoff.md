@@ -5,6 +5,9 @@ title: "迫真ガノフ部～春日エリアの裏技"
 description: "学園祭模擬店のプロモーション用のゲーム。自転車にビーフストロガノフをぶつけて高得点を狙う。Phina.js使用。"
 imagename: "work-kasuganoff.jpg"
 ---
+
+## なにこれ
+
 春日エリアクラス代表者会議による学園祭模擬店「春日ビーフストロガノフ」のプロモーション用のゲームを製作しました。
 
 [迫真ガノフ部〜春日エリアの裏技](https://iciclize.github.io/kasuganoff)
@@ -13,9 +16,13 @@ imagename: "work-kasuganoff.jpg"
 
 エンジンにはPhina.jsを使いました。
 
+### 爆発のエフェクト
+
 爆発のエフェクトは自前で実装しましたが、放射状に透明になる円を重ねていくだけでかなりそれっぽいものが作れて驚きました。
 
 ![playing screen](../../images/work-kasuganoff-playing.jpg)
+
+### 称号
 
 ![result screen](../../images/work-kasuganoff-result.png)
 

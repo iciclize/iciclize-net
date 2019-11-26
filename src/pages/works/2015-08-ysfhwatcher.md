@@ -5,20 +5,27 @@ title: "YSFH Watcher"
 description: "自分の高校の生徒のつぶやきを垂れ流すWebサイト。Node/express製。"
 imagename: "work-YSFH_Watcher.jpg"
 ---
-YSFH Watcherは自分の高校の生徒のつぶやきが垂れ流されるサイトでした。
 
-高校のTwitterの目に余るタイムラインを全世界に晒し上げようと思って作りました。
+## なにこれ
 
-タイムラインは複数のUserStreamsをソースとし、リアルタイムで更新されるようにしていました。また、Meteor.jsによる検索機能もつけていました。
+YSFH Watcherは横浜サイエンスフロンティア高校の生徒のつぶやきが垂れ流されるサイトでした。
 
-生徒のアカウントのリストは手動で管理していました。
-
-倫理的に問題ありだったので1年くらいで公開を停止しました。
+所属していた部活、情報工学部の夏の行事に「夏アプリ」というのがあって、これは夏休みに何か一つ制作物を作って発表する行事で、YSFH Watcherはこの夏アプリの制作物として作りました。表向きは。
 
 ![timeline feed page](../../images/work-YSFH_Watcher_Feed.png)
 
 ![search page](../../images/work-YSFH_Watcher_Search.png)
 
+実際のところは、自分の高校のTwitterの、目に余るタイムラインを全世界に晒し上げようと思って作りました。(ゲス顔)
+
+タイムラインはSocket.ioを使ってリアルタイムで更新されるようにしていて、Meteor.jsによる検索機能もつけていました。
+
+生徒のTwitterアカウントのリストは手動で管理していました。本当はTwitterユーザーのクラスタリングをして自動でYSFH生を判別出来たらいいなあとか思ってましたが、それは大学3年生になった今でも挑戦せずじまいです…。
+
+このYSFH Watcherは、倫理的に問題ありだったのでしばらくしてから公開を停止しました。
+
 ## 構成 
 
-<img alt="stream" src="../../images/work-YSFH_Watcher_stream.png" style="max-width:100%" />
+<img alt="The structure of YSFH Watcher" src="../../images/work-YSFH_Watcher_stream.png" style="max-width:100%" />
+
+実は構成はこんな感じになっていたのですが、なぜかソースとなるUserStreamがたくさんありますね…さあなぜでしょうか？
