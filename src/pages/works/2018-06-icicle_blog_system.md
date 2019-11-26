@@ -2,7 +2,7 @@
 slug: "icicle_blog_system"
 date: "2018-06"
 title: "Icicle Blog System"
-description: "PHP製のブログエンジン。大学のデータベースの授業で製作しました。"
+description: "PHP製のブログエンジン。大学のデータベースの授業で制作しました。"
 imagename: "work-icicle_blog_system.png"
 ---
 

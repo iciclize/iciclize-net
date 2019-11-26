@@ -2,7 +2,7 @@
 slug: "YSFH-Access"
 date: "2016-07"
 title: "YSFH Access"
-description: "Webプロキシサイト。高校のインターネットのフィルタリング回避のために製作。TwitterとかYouTubeとか見られました。"
+description: "Webプロキシサイト。高校のインターネットのフィルタリング回避のために制作。TwitterとかYouTubeとか見られました。"
 imagename: "work-YSFH_Access.jpg"
 ---
 
