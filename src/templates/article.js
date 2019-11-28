@@ -55,7 +55,7 @@ const PostedDate = styled.div`
 `
 const PostTags = styled.ul`
   list-style: none;
-  margin: ${rhythm(12 / 12)} 0;
+  margin: ${rhythm(8 / 12)} 0 ${rhythm(14 / 12)};
 `
 const PostTag = styled.li`
   display: inline-block;
@@ -134,6 +134,15 @@ const ArticleTemplate = ({ data }) => {
                 `(更新: ${entry.update_date})`}
             </PostedDate>
           )}
+          {entry.tags.length > 0 && (
+            <PostTags>
+              {entry.tags.map(tag => (
+                <PostTag key={tag.id}>
+                  <Link to={`/tag/${tag.slug}`}>#{tag.tagname}</Link>
+                </PostTag>
+              ))}
+            </PostTags>
+          )}
           <ReactMarkdown
             css={mdStyle}
             source={entry.content}
@@ -144,15 +153,6 @@ const ArticleTemplate = ({ data }) => {
                 : `${process.env.IMAGE_BASE_URL}${uri}`
             }
           />
-          {entry.tags.length > 0 && (
-            <PostTags>
-              {entry.tags.map(tag => (
-                <PostTag key={tag.id}>
-                  <Link to={`/tag/${tag.slug}`}>#{tag.tagname}</Link>
-                </PostTag>
-              ))}
-            </PostTags>
-          )}
           <NextPrevNav
             basePath={`/posts`}
             nextLabel={next && `次 `.concat(next.publish_date)}
