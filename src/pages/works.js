@@ -132,6 +132,13 @@ const SecondPage = ({ data }) => {
         >
           作品集
         </h1>
+        <p
+          css={css`
+            text-align: center;
+          `}
+        >
+          載せたいやつ載せてます
+        </p>
         <WorksList>
           {data.allMarkdownRemark.edges.map(({ node }) => {
             const image = (() => {
