@@ -2,7 +2,7 @@
 slug: "Splaturn"
 date: "2015-09"
 title: "Splaturn"
-description: "リアル陣取りゲーム。高校中の教室に貼り付けたQRコードを撮影してプレイします。文化祭の部活の出し物で、自分はサーバーサイドを書きました。"
+description: "リアル陣取りゲーム。スマホのブラウザを使って高校中の教室に貼り付けたQRコードを撮影してプレイします。文化祭の部活の出し物。"
 imagename: "work-Splaturn.jpg"
 ---
 
@@ -14,7 +14,7 @@ Splaturn(スプラターン)は、所属していた情報工学部(部活)の�
 
 今でいうPokemon GOみたいな感じですが当時はまだPokemon GOは登場していませんでした。
 
-アイデアを考えたのは友達で、僕はNode.jsでサーバーサイドを書きました。
+アイデアを考えたのは他の部員で、僕はNode.jsでサーバーサイドを書きました。
 
 <p style="max-width: 320px;">
     <img alt="Splaturn screen" src="../../images/work-Splaturn-screen.png" />
