@@ -2,7 +2,7 @@
 slug: "iot-express"
 date: "2018-02-09"
 title: "IoT Express組み立て"
-description: "トランジスタ技術2017年11月号の付録のIoT Expressをはんだ付けして組み立てて、ちょっとだけ遊んでみました。"
+description: "トランジスタ技術2017年11月号の付録のESP-WROOM-32マイコン評価ボードをはんだ付けして組み立てて、ちょっとだけ遊んでみました。"
 imagename: "work-IoT_Express.jpg"
 ---
 
