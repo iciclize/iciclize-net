@@ -16,6 +16,8 @@ imagename: "work-suzumebachi.jpg"
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr">素材作成とプログラミングに丸3日間かかってようやくできた…<br><br>本当は先に音楽から作ったのに、結局音楽を再生する処理の実装までには至りませんでした…悲しいなぁ… <a href="https://t.co/IirfZf8dFg">pic.twitter.com/IirfZf8dFg</a></p>&mdash; いの (@iciclize) <a href="https://twitter.com/iciclize/status/965337873103728640?ref_src=twsrc%5Etfw">February 18, 2018</a></blockquote>
 
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">プロ実 II の 2017 年度優秀作品集を公開しました！ <a href="https://t.co/Balr5T7Hjw">https://t.co/Balr5T7Hjw</a> 今年も力作揃いです。CG をやっている身からすると「スズメバチには気をつけよう」の視差付きのアニメーションが特に気に入りました。</p>&mdash; Yoshihiro KANAMORI (@yshhrknmr) <a href="https://twitter.com/yshhrknmr/status/966405492963557376?ref_src=twsrc%5Etfw">February 21, 2018</a></blockquote>
+
 [優秀作品](http://kanamori.cs.tsukuba.ac.jp/lecture/2018/prog2/yushu2017/)に選ばれました。嬉しいですね。
 
 ## 工夫
