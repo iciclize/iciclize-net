@@ -34,10 +34,6 @@ const PostInner = styled.div`
     & pre > code {
       font-size: ${rhythm(7 / 12)};
     }
-    & blockquote {
-      padding-top: ${rhythm(3 / 12)};
-      padding-bottom: ${rhythm(3 / 12)};
-    }
   }
 `
 const PostTitle = styled.h1`
@@ -78,6 +74,12 @@ const mdStyle = css`
   margin: ${rhythm(8 / 12)} 0 0;
   p {
     margin-bottom: ${rhythm(9 / 12)};
+  }
+  blockquote p {
+    margin: 0;
+    & + p {
+      margin: ${rhythm(3/12)} auto 0;
+    }
   }
   img {
     margin: ${rhythm(4/12)} 0;
