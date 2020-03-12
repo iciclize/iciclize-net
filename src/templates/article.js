@@ -73,7 +73,7 @@ const mdStyle = css`
   line-height: 1.75;
   margin: ${rhythm(8 / 12)} 0 0;
   p {
-    margin-bottom: ${rhythm(9 / 12)};
+    margin: ${rhythm(9 / 12)} 0;
   }
   blockquote p {
     margin: 0;
@@ -95,7 +95,7 @@ const mdStyle = css`
   ${mq[1]} {
     font-size: ${rhythm(8 / 12)};
     p {
-      margin-bottom: ${rhythm(12 / 12)};
+      margin: ${rhythm(12 / 12)} 0;
     }
     ol,
     ul {
