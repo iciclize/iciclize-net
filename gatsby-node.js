@@ -4,55 +4,63 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const crypto = require('crypto');
-const path = require(`path`);
+const crypto = require("crypto")
+const path = require(`path`)
 
 exports.onCreateNode = async ({ node, actions }) => {
-  const { createNode } = actions;
-  if (node.internal.type === 'StrapiArticle') {
+  const { createNode } = actions
+  if (node.internal.type === "StrapiArticle") {
     createNode({
       ...node,
-      id: node.id + '-markdown',
+      id: node.id + "-markdown",
       parent: node.id,
       children: [],
       internal: {
-        type: 'Post',
-        mediaType: 'text/markdown',
+        type: "Post",
+        mediaType: "text/markdown",
         content: node.content,
         contentDigest: crypto
           .createHash(`md5`)
           .update(JSON.stringify(node))
-          .digest(`hex`)
-      }
-    });
-  }
-};
-
-
-const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
-  // Query for article nodes to use in creating pages.
-  resolve(
-    graphql(request).then(result => {
-      if (result.errors) {
-        reject(result.errors)
-      }
-
-      return result;
+          .digest(`hex`),
+      },
     })
-  )
-});
+  }
+}
 
+const makeRequest = (graphql, request) =>
+  new Promise((resolve, reject) => {
+    // Query for article nodes to use in creating pages.
+    resolve(
+      graphql(request).then(result => {
+        if (result.errors) {
+          reject(result.errors)
+        }
+
+        return result
+      })
+    )
+  })
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
 exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators;
+  const { createPage } = boundActionCreators
 
-  const getArticles = makeRequest(graphql, `
+    console.log(process.env.NODE_ENV)
+
+  const filterPublished =
+    process.env.NODE_ENV === "development"
+      ? `{ slug: { ne: "dummy-post" } }`
+      : `{ published: { eq: 1 }, slug: { ne: "dummy-post" } }`
+
+  const getArticles = makeRequest(
+    graphql,
+    `
     {
       allPost(
         sort: {fields: publish_date, order: ASC},
-        filter: {published: {eq: 1}, slug: {ne: "dummy-post"}}
+        filter: ${filterPublished}
       ) {
         edges {
           node {
@@ -65,17 +73,21 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         }
       }
     }  
-    `).then(result => {
+    `
+  ).then(result => {
     result.data.allPost.edges.forEach(({ node }, index, edges) => {
       function searchPrevNextId(start, dir, arr) {
-        if (!arr[start].node.tags ||
-            arr[start].node.tags.length == 0) return null
+        if (!arr[start].node.tags || arr[start].node.tags.length == 0)
+          return null
         const category = arr[start].node.tags[0].slug
         const num = dir ? arr.length - start - 1 : start
         for (let i = 1; i <= num; i++) {
           let cur = dir ? arr[start + i] : arr[start - i]
-          if (cur.node.tags && cur.node.tags.length > 0 &&
-              cur.node.tags[0].slug === category )
+          if (
+            cur.node.tags &&
+            cur.node.tags.length > 0 &&
+            cur.node.tags[0].slug === category
+          )
             return cur.node.id
         }
       }
@@ -89,9 +101,11 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         },
       })
     })
-  });
+  })
 
-  const getTags = makeRequest(graphql, `
+  const getTags = makeRequest(
+    graphql,
+    `
     {
       allStrapiTag(filter: {slug: {ne: "dummy-tag"}}) {
         nodes {
@@ -100,8 +114,9 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         }
       }
     }
-  `).then(result => {
-    result.data.allStrapiTag.nodes.forEach( tag => {
+  `
+  ).then(result => {
+    result.data.allStrapiTag.nodes.forEach(tag => {
       createPage({
         path: `/tag/${tag.slug}/`,
         component: path.resolve(`src/templates/tag.js`),
@@ -113,7 +128,9 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     })
   })
 
-  const getWorks = makeRequest(graphql, `
+  const getWorks = makeRequest(
+    graphql,
+    `
     {
       allMarkdownRemark(
         sort: {fields: frontmatter___date, order: DESC},
@@ -154,10 +171,11 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         }
       }
     }    
-  `).then(result => {
-    result.data.allMarkdownRemark.edges.forEach( ({ node }, i, arr) => {
-      const prev = (i < arr.length - 1) ? arr[i + 1].node : null
-      const next = (i > 0) ? arr[i - 1].node : null
+  `
+  ).then(result => {
+    result.data.allMarkdownRemark.edges.forEach(({ node }, i, arr) => {
+      const prev = i < arr.length - 1 ? arr[i + 1].node : null
+      const next = i > 0 ? arr[i - 1].node : null
       createPage({
         path: `/works/${node.frontmatter.slug}/`,
         component: path.resolve(`src/templates/work-detail.js`),
@@ -168,15 +186,11 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
           nextimg: next && next.frontmatter.imagename,
           prev: prev && prev.id,
           previmg: prev && prev.frontmatter.imagename,
-        }
+        },
       })
     })
   })
 
   // Queries for articles and authors nodes to use in creating pages.
-  return Promise.all([
-    getArticles,
-    getTags,
-    getWorks,
-  ])
-};
+  return Promise.all([getArticles, getTags, getWorks])
+}

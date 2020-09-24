@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
+import Iframely from "../components/Iframely"
 import ReactMarkdown from "react-markdown"
 import { rhythm } from "../utils/typography"
 import styled from "@emotion/styled"
@@ -27,7 +28,7 @@ const PostInner = styled.div`
       font-family: Consolas, "Courier New", Courier, Monaco, monospace,
         -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "游ゴシック体",
         "Yugothic", "游ゴシック", "Yu Gothic", "Verdana", "メイリオ", sans-serif;
-      font-size: ${rhythm(6 / 12)};
+      font-size: ${rhythm(7 / 12)};
     }
   }
   ${mq[1]} {
@@ -37,7 +38,6 @@ const PostInner = styled.div`
   }
 `
 const PostTitle = styled.h1`
-  font-weight: 450;
   font-size: ${rhythm(12 / 12)};
   letter-spacing: ${rhythm(1 / 24)};
   margin: 0 0 0;
@@ -78,19 +78,25 @@ const mdStyle = css`
   blockquote p {
     margin: 0;
     & + p {
-      margin: ${rhythm(3/12)} auto 0;
+      margin: ${rhythm(3 / 12)} auto 0;
     }
   }
   img {
-    margin: ${rhythm(4/12)} 0;
+    margin: ${rhythm(4 / 12)} 0;
   }
   h3 {
-    border-left: 5px solid hsl(204,100%,82%);
+    border-left: 5px solid hsl(204, 100%, 82%);
     padding-left: 0.8rem;
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
     font-weight: bold;
     margin: 1.5rem 0 1.25rem;
+  }
+  h4 {
+    font-weight: bold;
+    margin: ${rhythm(9 / 12)} 0;
+    padding: ${rhythm(6 / 12)} 0;
+    border-bottom: 2px solid rgb(183, 183, 183);
   }
   ${mq[1]} {
     font-size: ${rhythm(8 / 12)};
@@ -116,6 +122,7 @@ const ArticleTemplate = ({ data }) => {
         ogDescription={entry.summary || entry.childMarkdownRemark.excerpt}
         image={entry.image && entry.image.childImageSharp.fluid}
       />
+      <Iframely />
       {entry.image && (
         <Img
           fluid={entry.image.childImageSharp.fluid}

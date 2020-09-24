@@ -18,7 +18,8 @@ YSFH Accessは高校のインターネットのフィルタリング機能を回
 
 当時はYouTube, Twitter, Facebook, Google画像検索などを利用できました。
 
-2019年11月に再公開はじめました。 [https://acccess.iciclize.net/ysfhaccess/](https://access.iciclize.net/ysfhaccess/)
+<s>2019年11月に再公開はじめました。 [https://acccess.iciclize.net/ysfhaccess/](https://access.iciclize.net/ysfhaccess/)</s>
+(公開終了しました)
 
 ## 概要
 

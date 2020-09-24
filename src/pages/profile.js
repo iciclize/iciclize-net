@@ -31,6 +31,14 @@ const SecondPage = () => (
         自己紹介
       </h1>
       <PostInner>
+        <div
+          css={css`
+            text-align: right;
+            font-size: ${rhythm(6 / 12)};
+          `}
+        >
+          最終更新: 2020-09-23
+        </div>
         <ReactMarkdown
           escapeHtml={false}
           css={css`
@@ -38,7 +46,7 @@ const SecondPage = () => (
               line-height: 1.4rem;
             }
             h3 {
-              border-left: 5px solid hsl(204,100%,82%);
+              border-left: 5px solid hsl(204, 100%, 82%);
               padding-left: 0.8rem;
               padding-top: 0.6rem;
               padding-bottom: 0.6rem;
@@ -62,7 +70,7 @@ const SecondPage = () => (
   </div>
 </div>
 
-21歳、学生です。
+22歳、学生です。
 
 <p>
 出身: &ensp;神奈川県横浜市<br/>
@@ -70,9 +78,7 @@ const SecondPage = () => (
 趣味: &ensp;プログラミング/開発, 音楽/ピアノ/耳コピ<br/>
 </p>
 
-くだらないものを作るのが好きで、最近では画像を野獣先輩にすり替える悪いルーターを作りました。
-
-最近は電子工作/組み込み技術を勉強しています。
+最近は目力防犯ブザーを製作中なので初投稿です。
 
 <strong>以下2019年の若干古い情報です。そのうち更新します。</strong>
 
@@ -106,10 +112,6 @@ const SecondPage = () => (
 大学に入学するも、まるで高校数学を勉強していなかったので数学の単位を落としまくっています。ようやく高校数学を勉強し直して、巻き返せるように頑張っています。
 
 大学に入ってからは精神的に余裕がなくてあまり目立った活動はしていません。
-
-## 嫌いじゃないもの
-
-満員電車での移動
 
 ## 申し訳程度の受賞歴
 
