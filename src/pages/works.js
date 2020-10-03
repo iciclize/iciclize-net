@@ -137,7 +137,7 @@ const SecondPage = ({ data }) => {
             text-align: center;
           `}
         >
-          載せたいやつ載せてます
+          サムネイルが映えないのはご愛嬌
         </p>
         <WorksList>
           {data.allMarkdownRemark.edges.map(({ node }) => {
