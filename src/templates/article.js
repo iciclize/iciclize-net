@@ -18,28 +18,31 @@ const PostContainer = styled.div`
 const PostInner = styled.div`
   margin: 0 auto;
   padding: 0;
-  max-width: 620px;
+  max-width: 640px;
   & pre {
     margin-left: -${rhythm(8 / 12)};
     margin-right: -${rhythm(8 / 12)};
     padding-left: ${rhythm(8 / 12)};
     padding-right: ${rhythm(8 / 12)};
     & > code {
-      font-family: Consolas, "Courier New", Courier, Monaco, monospace,
+      font-family: Consolas, Monaco, monospace,
         -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "游ゴシック体",
         "Yugothic", "游ゴシック", "Yu Gothic", "Verdana", "メイリオ", sans-serif;
       font-size: ${rhythm(7 / 12)};
+      margin: 0;
+      padding: 0;
     }
   }
   ${mq[1]} {
     & pre > code {
-      font-size: ${rhythm(7 / 12)};
+      font-size: ${rhythm(7.5 / 12)};
     }
   }
 `
 const PostTitle = styled.h1`
   font-size: ${rhythm(12 / 12)};
   letter-spacing: ${rhythm(1 / 24)};
+  line-height: 1.25;
   margin: 0 0 0;
   ${mq[1]} {
     font-size: ${rhythm(13 / 12)};
@@ -90,13 +93,19 @@ const mdStyle = css`
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
     font-weight: bold;
-    margin: 1.5rem 0 1.25rem;
+    font-size: 1.25rem;
+    margin: 3rem 0 1.6rem;
+  }
+  h2 + h3 {
+    margin-top: 0;
   }
   h4 {
     font-weight: bold;
-    margin: ${rhythm(9 / 12)} 0;
-    padding: ${rhythm(6 / 12)} 0;
-    border-bottom: 2px solid rgb(183, 183, 183);
+    margin: 3rem 0 1.6rem;
+    font-size: 1.4rem;
+  }
+  h3 + h4 {
+    margin-top: 2rem;
   }
   ${mq[1]} {
     font-size: ${rhythm(8 / 12)};
@@ -127,7 +136,7 @@ const ArticleTemplate = ({ data }) => {
         <Img
           fluid={entry.image.childImageSharp.fluid}
           css={css`
-            max-width: 620px;
+            max-width: 640px;
             margin: 0 auto ${rhythm(10 / 12)};
           `}
         />
