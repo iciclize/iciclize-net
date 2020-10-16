@@ -76,6 +76,15 @@ module.exports = {
       }
     },
     {
+      resolve: 'gatsby-plugin-matomo',
+      options: {
+        siteId: '2',
+        matomoUrl: 'https://iciclize.net/anal/',
+        disableCookies: true,
+        siteUrl: 'https://iciclize.net',
+      }
+    },
+    {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         query: `
