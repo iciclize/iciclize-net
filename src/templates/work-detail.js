@@ -24,15 +24,17 @@ const PostInner = styled.div`
     padding-left: ${rhythm(8 / 12)};
     padding-right: ${rhythm(8 / 12)};
     & > code {
-      font-family: Consolas, "Courier New", Courier, Monaco, monospace,
+      font-family: Consolas, Monaco, monospace,
         -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "游ゴシック体",
         "Yugothic", "游ゴシック", "Yu Gothic", "Verdana", "メイリオ", sans-serif;
-      font-size: ${rhythm(6 / 12)};
+      font-size: ${rhythm(7 / 12)};
+      margin: 0;
+      padding: 0;
     }
   }
   ${mq[1]} {
     & pre > code {
-      font-size: ${rhythm(7 / 12)};
+      font-size: ${rhythm(7.5 / 12)};
     }
     & blockquote {
       padding-top: ${rhythm(3 / 12)};
