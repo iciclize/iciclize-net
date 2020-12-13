@@ -594,8 +594,8 @@ th:last-child,
 td:last-child {
   padding-right: 0;
 }
-tt,
-code {
+p tt,
+p code {
   background-color: hsl(0, 0%, 96%);
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
@@ -609,17 +609,17 @@ pre code {
   background: none;
   line-height: 1.42;
 }
-code:before,
-code:after,
-tt:before,
-tt:after {
+p code:before,
+p code:after,
+p tt:before,
+p tt:after {
   letter-spacing: -0.2em;
   content: "";
 }
-pre code:before,
-pre code:after,
-pre tt:before,
-pre tt:after {
+p pre code:before,
+p pre code:after,
+p pre tt:before,
+p pre tt:after {
   content: "";
 }
 @media only screen and (max-width: 480px) {
