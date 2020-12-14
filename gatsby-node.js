@@ -91,13 +91,15 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             return cur.node.id
         }
       }
+      const nextId = searchPrevNextId(index, true, edges)
+      const prevId = searchPrevNextId(index, false, edges)
       createPage({
         path: `/posts/${node.slug}/`,
         component: path.resolve(`src/templates/article.js`),
         context: {
           id: node.id,
-          nextId: searchPrevNextId(index, true, edges),
-          prevId: searchPrevNextId(index, false, edges),
+          nextId: nextId,
+          prevId: prevId
         },
       })
     })
