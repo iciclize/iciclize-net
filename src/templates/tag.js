@@ -93,7 +93,7 @@ export const pageQuery = graphql`
           id
           image {
             childImageSharp {
-              fluid(maxWidth: 700) {
+              fluid(maxWidth: 870, maxHeight: 180, cropFocus: CENTER) {
                 ...GatsbyImageSharpFluid
               }
             }

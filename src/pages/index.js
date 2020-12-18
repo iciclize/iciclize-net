@@ -361,13 +361,6 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          image {
-            childImageSharp {
-              fluid(maxWidth: 870, maxHeight: 180, cropFocus: CENTER) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
           title
           slug
         }
