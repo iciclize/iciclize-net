@@ -31,7 +31,7 @@ const SecondPage = () => (
         自己紹介
       </h1>
       <PostInner>
-        <p css={css`text-align:center;`}>インターネットで自分語り許可エリア</p>
+        <p css={css`text-align:center;`}>インターネット自分語り許可エリア</p>
         <div
           css={css`
             text-align: right;
