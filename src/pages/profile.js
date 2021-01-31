@@ -31,7 +31,7 @@ const SecondPage = () => (
         自己紹介
       </h1>
       <PostInner>
-        <p css={css`text-align:center;`}>インターネットで自分語りが許される数少ない空間</p>
+        <p css={css`text-align:center;`}>インターネットで自分語り許可エリア</p>
         <div
           css={css`
             text-align: right;
@@ -75,6 +75,8 @@ source={`
 </div>
 
 1998年生まれ。神奈川県横浜市出身。
+
+最近はミュークルドリーミーが生きがいなので初投稿です。
 
 趣味: プログラミング/開発、音楽/ピアノ/耳コピ<br/>
 資格: 3級アマチュア無線技士(コールサイン: <code>JJ1QJI</code>)<br />
