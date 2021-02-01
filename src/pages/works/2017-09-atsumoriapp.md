@@ -14,9 +14,9 @@ imagename: "work-atsumoriapp.jpg"
 
 [熱盛と出てしまうアプリ - Google Playのアプリ](https://play.google.com/store/apps/details?id=net.iciclize.atsumori)
 
-## うせやろ、ていうかなんや熱盛って
-
 Playストアで1位といってもミームに便乗したネタアプリなんですけどね。。
+
+## 熱盛とは
 
 2017年8月24日の報道ステーションで「熱盛」のテロップが出てしまう放送事故が発生。ネット上では「熱盛」がバズりました。
 
@@ -26,4 +26,4 @@ Playストアで1位といってもミームに便乗したネタアプリなん
 
 ![](../../images/work-atsumoriapp-installs.png)
 
-ダウンロード数が多くなると広告業者がオファーを送ってくるようになるんですね。
+ダウンロード数が多くなると広告業者がオファーを送ってくるようになるんすね〜〜

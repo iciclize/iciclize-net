@@ -10,7 +10,7 @@ imagename: "work-YSFH_Access.jpg"
 
 YSFH Accessは高校のインターネットのフィルタリング機能を回避するために作ったWebプロキシサイトです。
 
-高校3年生の時に、Proxysite.comの代替として開発しました。
+高3の時に、Proxysite.comの代わりとなるものを作りたくてNode.jsで開発しました。
 
 <p>
   <img alt="YSFH Access compatibility" src="../../images/work-YSFH_Access-sns.jpg" />
