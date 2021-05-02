@@ -112,10 +112,6 @@ const mdStyle = css`
     p {
       margin: ${rhythm(12 / 12)} 0;
     }
-    ol,
-    ul {
-      margin-bottom: ${rhythm(11 / 12)};
-    }
   }
 `
 const ArticleTemplate = ({ data }) => {
