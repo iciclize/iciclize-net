@@ -71,6 +71,20 @@ mark {
 small {
   font-size: 80%;
 }
+small.remark {
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding-bottom: 0.8rem;
+  padding-left: 0.8rem;
+  padding-right: 0.4rem;
+  padding-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-left: 3px solid hsl(204,100%,82%);
+  background: hsl(204,50%,97%);
+  color: hsl(0, 0%, 40%);
+}
 sub,
 sup {
   font-size: 75%;
@@ -447,7 +461,6 @@ blockquote {
   margin-bottom: 0.8rem;
   border-left: 3px solid hsl(204,100%,72%);
   background: hsl(204,50%,97%);
-  color: hsl(0, 0, 50%);
 }
 form {
   margin-left: 0;
@@ -577,6 +590,7 @@ td,
 th {
   text-align: left;
   border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
+  line-height: 1.4;
   font-feature-settings: "tnum";
   -moz-font-feature-settings: "tnum";
   -ms-font-feature-settings: "tnum";
@@ -595,7 +609,8 @@ td:last-child {
   padding-right: 0;
 }
 p tt,
-p code {
+p code,
+li code {
   background-color: hsl(0, 0%, 96%);
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
@@ -607,7 +622,8 @@ p code {
 }
 pre code {
   background: none;
-  line-height: 1.42;
+  font-size: 0.8rem;
+  line-height: 1;
 }
 p code:before,
 p code:after,
