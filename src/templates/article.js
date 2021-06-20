@@ -18,7 +18,7 @@ const PostContainer = styled.div`
 const PostInner = styled.div`
   margin: 0 auto;
   padding: 0;
-  max-width: 640px;
+  max-width: 700px;
   & pre {
     margin-left: -${rhythm(8 / 12)};
     margin-right: -${rhythm(8 / 12)};
@@ -28,14 +28,8 @@ const PostInner = styled.div`
       font-family: Consolas, Monaco, monospace,
         -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "游ゴシック体",
         "Yugothic", "游ゴシック", "Yu Gothic", "Verdana", "メイリオ", sans-serif;
-      font-size: ${rhythm(7 / 12)};
       margin: 0;
       padding: 0;
-    }
-  }
-  ${mq[1]} {
-    & pre > code {
-      font-size: ${rhythm(7.5 / 12)};
     }
   }
 `
@@ -93,7 +87,7 @@ const mdStyle = css`
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
     font-weight: bold;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     margin: 3rem 0 1.6rem;
   }
   h2 + h3 {
@@ -101,16 +95,54 @@ const mdStyle = css`
   }
   h4 {
     font-weight: bold;
-    margin: 3rem 0 1.6rem;
+    margin: 2rem 0 1.6rem;
+    line-height: 1.6rem;
+    font-size: 1.2rem;
+    display: flex;
+  }
+  h4::before {
+    content: "○";
     font-size: 1.4rem;
+    margin-right: 0.5rem;
+    color: hsl(204, 100%, 76%);
   }
   h3 + h4 {
     margin-top: 2rem;
   }
+  ul ul {
+    margin-left: 1.5rem;
+    margin-bottom: 0;
+  }
+  figure img {
+    margin: 0;
+    border: 1px solid hsl(0, 0%, 90%);
+  }
+  figure {
+    margin: 1rem 0;
+  }
+  figcaption {
+    margin-bottom: 2rem;
+    font-size: 80%;
+    border-left: 1px solid hsl(0, 0%, 70%);
+    border-right: 1px solid hsl(0, 0%, 70%);
+    padding: 0 1rem;
+    color: hsl(0, 0%, 40%);
+  }
+  pre code {
+    font-size: ${rhythm(7 / 12)};
+  }
+
   ${mq[1]} {
     font-size: ${rhythm(8 / 12)};
     p {
       margin: ${rhythm(12 / 12)} 0;
+    }
+    ol,
+    ul {
+      margin-bottom: ${rhythm(11 / 12)};
+    }
+    pre > code {
+      font-size: ${rhythm(7 / 12)};
     }
   }
 `
