@@ -12,13 +12,15 @@ import mq from "../utils/emotion"
 import NextPrevNav from "../components/NextPrevNav"
 import SEO from "../components/seo"
 
+const pageWidth = '700px'
+
 const PostContainer = styled.div`
   margin: 0 ${rhythm(8 / 12)} ${rhythm(8 / 12)};
 `
 const PostInner = styled.div`
   margin: 0 auto;
   padding: 0;
-  max-width: 700px;
+  max-width: ${pageWidth};
   & pre {
     margin-left: -${rhythm(8 / 12)};
     margin-right: -${rhythm(8 / 12)};
@@ -164,7 +166,7 @@ const ArticleTemplate = ({ data }) => {
         <Img
           fluid={entry.image.childImageSharp.fluid}
           css={css`
-            max-width: 640px;
+            max-width: ${pageWidth};
             margin: 0 auto ${rhythm(10 / 12)};
           `}
         />
