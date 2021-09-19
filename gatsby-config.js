@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `迫真の氷結晶`,
     phrase: `初投稿です。`,
-    description: `いの(@iciclize)による、技術・ポエムブログだったりポートフォリオサイトだったりします。`,
+    description: `いの(@iciclize)による、技術・ブログだったりポートフォリオサイトだったりします。`,
     author: `@iciclize`,
     siteUrl: `https://iciclize.net`,
   },
