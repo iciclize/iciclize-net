@@ -82,10 +82,7 @@ export default UserTemplate
 export const pageQuery = graphql`
   query Article($slug: String!) {
     allPost(
-      filter: {
-        published: { eq: 1 }
-        tags: { elemMatch: { slug: { in: [$slug] } } }
-      }
+      filter: { tags: { elemMatch: { slug: { in: [$slug] } } } }
       sort: { order: DESC, fields: publish_date }
     ) {
       edges {

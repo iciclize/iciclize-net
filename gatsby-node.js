@@ -49,18 +49,12 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
     console.log(process.env.NODE_ENV)
 
-  const filterPublished =
-    process.env.NODE_ENV === "development"
-      ? `{ slug: { ne: "dummy-post" } }`
-      : `{ published: { eq: 1 }, slug: { ne: "dummy-post" } }`
-
   const getArticles = makeRequest(
     graphql,
     `
     {
       allPost(
         sort: {fields: publish_date, order: ASC},
-        filter: ${filterPublished}
       ) {
         edges {
           node {

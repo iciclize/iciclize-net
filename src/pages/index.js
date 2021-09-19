@@ -201,11 +201,11 @@ const Features = ({ features }) => {
     <SideInner>
       <HeaderContainer>
         <Square />
-        <Header>ポエム系エントリ新着</Header>
+        <Header>生活系エントリ新着</Header>
       </HeaderContainer>
       <FeatureList>
-        {features.edges.map(({ node }) => (
-          <Item>
+        {features.edges.map(({ node }, index) => (
+          <Item key={index}>
             <Title>
               <Link to={`/posts/${node.slug}`}>{node.title}</Link>
             </Title>
@@ -244,8 +244,8 @@ const AllTag = ({ tags }) => {
     <SideInner>
       <Header>タグ一覧</Header>
       <TagList>
-        {tags.edges.map(({ node }) => (
-          <Tag>
+        {tags.edges.map(({ node }, index) => (
+          <Tag key={index}>
             <Link to={`/tag/${node.slug}`}>
               <span
                 css={css`
@@ -293,7 +293,10 @@ const TwoColumn = styled.div`
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO ogDescription={data.site.siteMetadata.description} />
+    <SEO
+      title={data.site.siteMetadata.title}
+      ogDescription={data.site.siteMetadata.description}
+    />
     <TwoColumn>
       <Posts>
         {data.allPost.edges.map(document => {
@@ -325,7 +328,7 @@ export const pageQuery = graphql`
       }
     }
     allPost(
-      filter: { published: { eq: 1 }, slug: { ne: "dummy-post" } }
+      filter: { slug: { ne: "dummy-post" } }
       sort: { order: DESC, fields: publish_date }
     ) {
       edges {
@@ -351,10 +354,7 @@ export const pageQuery = graphql`
       }
     }
     life: allPost(
-      filter: {
-        published: { eq: 1 }
-        tags: { elemMatch: { slug: { in: "life" } } }
-      }
+      filter: { tags: { elemMatch: { slug: { in: "life" } } } }
       sort: { order: DESC, fields: publish_date }
       limit: 6
     ) {

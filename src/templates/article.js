@@ -12,7 +12,7 @@ import mq from "../utils/emotion"
 import NextPrevNav from "../components/NextPrevNav"
 import SEO from "../components/seo"
 
-const pageWidth = '700px'
+const pageWidth = "700px"
 
 const PostContainer = styled.div`
   margin: 0 ${rhythm(8 / 12)} ${rhythm(8 / 12)};
@@ -27,9 +27,9 @@ const PostInner = styled.div`
     padding-left: ${rhythm(8 / 12)};
     padding-right: ${rhythm(8 / 12)};
     & > code {
-      font-family: Consolas, Monaco, monospace,
-        -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "游ゴシック体",
-        "Yugothic", "游ゴシック", "Yu Gothic", "Verdana", "メイリオ", sans-serif;
+      font-family: Consolas, Monaco, monospace, -apple-system,
+        "BlinkMacSystemFont", "Helvetica Neue", "游ゴシック体", "Yugothic",
+        "游ゴシック", "Yu Gothic", "Verdana", "メイリオ", sans-serif;
       margin: 0;
       padding: 0;
     }
@@ -152,6 +152,8 @@ const ArticleTemplate = ({ data }) => {
   const entry = data.post
   const next = data.next
   const prev = data.prev
+
+  console.log(entry.title)
 
   return (
     <Layout>

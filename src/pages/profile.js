@@ -31,7 +31,13 @@ const SecondPage = () => (
         自己紹介
       </h1>
       <PostInner>
-        <p css={css`text-align:center;`}>インターネット自分語り許可エリア</p>
+        <p
+          css={css`
+            text-align: center;
+          `}
+        >
+          インターネット自分語り許可エリア
+        </p>
         <div
           css={css`
             text-align: right;
@@ -60,7 +66,7 @@ const SecondPage = () => (
             h4 {
               font-weight: bold;
               margin: 1.6rem 0 0.6rem;
-              font-size: 1.0rem;
+              font-size: 1rem;
             }
             h3 + h4 {
               margin-top: 1rem;
@@ -72,7 +78,7 @@ const SecondPage = () => (
               font-size: ${rhythm(8 / 12)};
             }
           `}
-source={`
+          source={`
 <div style="display: table; margin: 1.5rem 0; ">
   <img style="margin: 0;" width="64px" src="https://www.gravatar.com/avatar/e5ef3698ccb90ecd2a50b1440dd7ee37?s=128" />
   <div style="display: table-cell; padding: 0 0.8rem; vertical-align: middle;">
