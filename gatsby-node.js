@@ -7,6 +7,20 @@
 const crypto = require("crypto")
 const path = require(`path`)
 
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        path: require.resolve("path-browserify"),
+        url: false,
+      },
+      fallback: {
+        fs: false,
+      }
+    }
+  })
+}
+
 exports.onCreateNode = async ({ node, actions }) => {
   const { createNode } = actions
   if (node.internal.type === "StrapiArticle") {
