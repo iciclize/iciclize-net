@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 import { rhythm } from "../utils/typography"
 import styled from "@emotion/styled"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import { css } from "@emotion/core"
 import mq from "../utils/emotion"
 
@@ -116,7 +116,7 @@ const SecondPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title="作品集"
         ogDescription={data.allMarkdownRemark.edges
           .map(({ node }) => node.frontmatter.title)

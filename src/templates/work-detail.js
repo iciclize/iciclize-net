@@ -7,7 +7,7 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import { mdStyle } from "./article"
 import mq from "../utils/emotion"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 import NextPrevNav from "../components/NextPrevNav"
 
@@ -76,7 +76,7 @@ const ArticleTemplate = ({ data }) => {
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title={title}
         metaDescription={description}
         ogDescription={description}

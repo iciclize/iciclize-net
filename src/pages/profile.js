@@ -3,7 +3,7 @@ import React from "react"
 import Layout from "../components/layout"
 import { rhythm } from "../utils/typography"
 import styled from "@emotion/styled"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import ReactMarkdown from "react-markdown"
 import { css } from "@emotion/core"
 import mq from "../utils/emotion"
@@ -19,7 +19,7 @@ const PostInner = styled.div`
 `
 const SecondPage = () => (
   <Layout>
-    <SEO title="自己紹介" ogDescription={`24歳、学生です。(大嘘)`} />
+    <Seo title="自己紹介" ogDescription={`24歳、学生です。(大嘘)`} />
     <PostContainer>
       <h1
         css={css`

@@ -7,7 +7,7 @@ import styled from "@emotion/styled"
 import { rhythm } from "../utils/typography"
 import mq from "../utils/emotion"
 import { css } from "@emotion/core"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 const QueryDescription = styled.div`
   font-size: ${rhythm(10 / 12)};
@@ -32,7 +32,7 @@ const UserTemplate = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title={`#${tagname}`}
         ogDescription={`#${tagname} のタグの付いた記事一覧`}
       />
@@ -89,9 +89,11 @@ export const pageQuery = graphql`
         node {
           id
           image {
-            childImageSharp {
-              fluid(maxWidth: 870, maxHeight: 180, cropFocus: CENTER) {
-                ...GatsbyImageSharpFluid
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 870, maxHeight: 180, cropFocus: CENTER) {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
           }

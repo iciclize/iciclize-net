@@ -10,7 +10,7 @@ import { css } from "@emotion/core"
 import mq from "../utils/emotion"
 
 import NextPrevNav from "../components/NextPrevNav"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 const pageWidth = "700px"
 
@@ -157,16 +157,16 @@ const ArticleTemplate = ({ data }) => {
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title={entry.title}
         metaDescription={entry.summary || ``}
         ogDescription={entry.summary || entry.childMarkdownRemark.excerpt}
-        image={entry.image && entry.image.childImageSharp.fluid}
+        image={entry.image && entry.image.localFile.childImageSharp.fluid}
       />
       <Iframely />
       {entry.image && (
         <Img
-          fluid={entry.image.childImageSharp.fluid}
+          fluid={entry.image.localFile.childImageSharp.fluid}
           css={css`
             max-width: ${pageWidth};
             margin: 0 auto ${rhythm(10 / 12)};
@@ -232,9 +232,11 @@ export const q = graphql`
         excerpt(format: PLAIN, pruneLength: 100, truncate: true)
       }
       image {
-        childImageSharp {
-          fluid(maxWidth: 840) {
-            ...GatsbyImageSharpFluid
+        localFile {
+          childImageSharp {
+            fluid(maxWidth: 840) {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
       }

@@ -7,7 +7,7 @@ import { rhythm } from "../utils/typography"
 import mq from "../utils/emotion"
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 const PostContainer = styled.li`
   flex: 0 1 100%;
@@ -72,7 +72,7 @@ const Post = ({ entry }) => {
       {entry.image && (
         <Link to={`/posts/${entry.slug}`}>
           <Img
-            fluid={entry.image.childImageSharp.fluid}
+            fluid={entry.image.localFile.childImageSharp.fluid}
             css={css`
               &.gatsby-image-wrapper {
                 margin-bottom: ${rhythm(6 / 12)};
@@ -293,7 +293,7 @@ const TwoColumn = styled.div`
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO
+    <Seo
       title={data.site.siteMetadata.title}
       ogDescription={data.site.siteMetadata.description}
     />
@@ -335,9 +335,11 @@ export const pageQuery = graphql`
         node {
           id
           image {
-            childImageSharp {
-              fluid(maxWidth: 870, maxHeight: 180, cropFocus: CENTER) {
-                ...GatsbyImageSharpFluid
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 870, maxHeight: 180, cropFocus: CENTER) {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
           }
