@@ -9,7 +9,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-const url = require("url")
 
 function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
   const { site, defaultImage } = useStaticQuery(
@@ -43,7 +42,7 @@ function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
         lang,
       }}
       title={title || site.siteMetadata.title}
-      titleTemplate={title && `%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
           name: `description`,
@@ -62,8 +61,8 @@ function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
         {
           name: `twitter:image`,
           content:
-            (image && url.resolve(site.siteMetadata.siteUrl, image.src)) ||
-            url.resolve(site.siteMetadata.siteUrl, defaultImage.fixed.src),
+            (image && `${site.siteMetadata.siteUrl}${image.src}`) ||
+            `${site.siteMetadata.siteUrl}${defaultImage.fixed.src}`,
         },
         {
           name: `twitter:creator`,
@@ -88,8 +87,8 @@ function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
         {
           property: `og:image`,
           content:
-            (image && url.resolve(site.siteMetadata.siteUrl, image.src)) ||
-            url.resolve(site.siteMetadata.siteUrl, defaultImage.fixed.src),
+            (image && `${site.siteMetadata.siteUrl}${image.src}`) ||
+            `${site.siteMetadata.siteUrl}${defaultImage.fixed.src}`,
         },
       ].filter(m => m.content)}
     />

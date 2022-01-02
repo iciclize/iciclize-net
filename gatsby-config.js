@@ -19,7 +19,7 @@ module.exports = {
       resolve: `gatsby-source-strapi`,
       options: {
         apiURL: `https://nnyapi.iciclize.net`,
-        contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
+        collectionTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           `article`,
           `user`,
           `tag`

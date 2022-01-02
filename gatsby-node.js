@@ -12,7 +12,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       alias: {
         path: require.resolve("path-browserify"),
-        url: false,
       },
       fallback: {
         fs: false,
