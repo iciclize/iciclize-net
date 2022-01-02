@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 
-import { Posts, Post } from "../pages/index"
+import { Posts, Post } from "../components/post"
 import styled from "@emotion/styled"
 import { rhythm } from "../utils/typography"
 import mq from "../utils/emotion"
