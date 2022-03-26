@@ -119,7 +119,7 @@ exports.createPages = ({ actions, graphql }) => {
   ).then(result => {
     result.data.allStrapiTag.nodes.forEach(tag => {
       createPage({
-        path: `/tag/${tag.slug}/`,
+        path: `/tags/${tag.slug}/`,
         component: path.resolve(`src/templates/tag.js`),
         context: {
           slug: tag.slug,

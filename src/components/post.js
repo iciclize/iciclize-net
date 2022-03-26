@@ -92,7 +92,7 @@ const Post = ({ link, title, tags, image, summary }) => {
         <PostTags>
           {tags.map(tag => (
             <PostTag key={tag.id}>
-              <Link to={`/tag/${tag.slug}`}>
+              <Link to={`/tags/${tag.slug}`}>
                 <span
                   css={css`
                     margin-right: 0.1rem;

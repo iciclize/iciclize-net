@@ -105,7 +105,7 @@ const ArticleTemplate = hoge => {
             <PostTags>
               {entry.tags.map(tag => (
                 <PostTag key={tag.id}>
-                  <Link to={`/tag/${tag.slug}`}>#{tag.tagname}</Link>
+                  <Link to={`/tags/${tag.slug}`}>#{tag.tagname}</Link>
                 </PostTag>
               ))}
             </PostTags>

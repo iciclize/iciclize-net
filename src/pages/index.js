@@ -153,7 +153,7 @@ const AllTag = ({ tags, tagPostCount }) => {
           const count = tagCountPair.totalCount || 0;
           return (
             <Tag key={index}>
-              <Link to={`/tag/${node.slug}`}>
+              <Link to={`/tags/${node.slug}`}>
                 <span
                   css={css`
                     margin-right: 0.2rem;

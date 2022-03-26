@@ -156,7 +156,7 @@ const Header = ({ siteTitle, phrase }) => (
         <Item text="HOME" link="/" />
         <Item text="自己紹介" link="/profile" />
         <Item text="作品集" link="/works" />
-        <Item text="生活系" link="/tag/life" />
+        <Item text="生活系" link="/tags/life" />
       </List>
     </div>
   </Container>
