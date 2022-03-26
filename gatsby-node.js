@@ -58,7 +58,8 @@ exports.createPages = ({ actions, graphql }) => {
     `
     {
       allStrapiArticle(
-        sort: {fields: publish_date, order: ASC},
+        sort: {fields: publish_date, order: ASC}
+        filter: {slug: {ne: "dummy-post"}}
       ) {
         edges {
           node {
