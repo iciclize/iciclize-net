@@ -59,29 +59,29 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [ ],
+        plugins: ["@weknow/gatsby-remark-twitter"],
       },
     },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-twitter`,
-    // {
-    //   resolve: `gatsby-plugin-manifest`,
-    //   options: {
-    //     name: `iciclize.net`,
-    //     short_name: `iciclize.net`,
-    //     start_url: `/`,
-    //     background_color: `#99d6ff`,
-    //     theme_color: `#99d6ff`,
-    //     display: `minimal-ui`,
-    //     icon: `src/images/IceCircle512x512.png`, // This path is relative to the root of the site.
-    //   },
-    // },
-    // {
-    //   resolve: 'gatsby-plugin-robots-txt',
-    //   options: {
-    //     policy: [{ userAgent: '*', disallow: ['/nicovideo'], allow: '*' }]
-    //   }
-    // },
+    // `gatsby-plugin-twitter`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `iciclize.net`,
+        short_name: `iciclize.net`,
+        start_url: `/`,
+        background_color: `#99d6ff`,
+        theme_color: `#99d6ff`,
+        display: `minimal-ui`,
+        icon: `src/images/IceCircle512x512.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', disallow: ['/nicovideo'], allow: '*' }]
+      }
+    },
     // {
     //   resolve: 'gatsby-plugin-matomo',
     //   options: {
@@ -91,42 +91,7 @@ module.exports = {
     //     siteUrl: 'https://iciclize.net',
     //   }
     // },
-    // {
-    //   resolve: `gatsby-plugin-sitemap`,
-    //   options: {
-    //     query: `
-    //     {
-    //       site {
-    //         siteMetadata {
-    //           siteUrl
-    //         }
-    //       }
-    //       allSitePage {
-    //         edges {
-    //           node {
-    //             path
-    //           }
-    //         }
-    //       }
-    //     }`,
-    //     serialize: ({site, allSitePage}) =>
-    //       allSitePage.edges.map(edge => {
-    //         return {
-    //           url: site.siteMetadata.siteUrl + edge.node.path,
-    //           changefreq: (/\/works\/.*/.test(edge.node.path))
-    //                       ? `yearly`
-    //                       : (/\/posts\/.*/.test(edge.node.path))
-    //                         ? `monthly`
-    //                         : `weekly`,
-    //           priority: (/(\/works\/.*|\/profile\/)/.test(edge.node.path))
-    //                       ? 0.7
-    //                       : (/\/posts\/.*/.test(edge.node.path))
-    //                         ? 1.0
-    //                         : 0.0,
-    //         }
-    //       })
-    //   },
-    // }
+    `gatsby-plugin-sitemap`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
