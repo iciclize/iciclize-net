@@ -73,7 +73,6 @@ exports.createPages = ({ actions, graphql }) => {
     }  
     `
   ).then(result => {
-    console.log(result);
     result.data.allStrapiArticle.edges.forEach(({ node }, index, edges) => {
       function searchPrevNextId(start, dir, arr) {
         if (!arr[start].node.tags || arr[start].node.tags.length == 0)

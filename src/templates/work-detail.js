@@ -38,7 +38,6 @@ const TimingOfWork = styled.div`
 `;
 
 const ArticleTemplate = hoge => {
-  console.log(hoge);
   const data = hoge.data;
   const markdown = data.mdx;
 
