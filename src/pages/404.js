@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import { Layout } from "../components/layout";
+import Seo from "../components/seo";
 
 const NotFoundPage = () => (
   <Layout>
@@ -11,6 +11,6 @@ const NotFoundPage = () => (
       <p>(そんなページは)ないです。</p>
     </center>
   </Layout>
-)
+);
 
-export default NotFoundPage
+export default NotFoundPage;

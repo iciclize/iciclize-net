@@ -1,21 +1,21 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
-import { rhythm } from "../utils/typography"
-import { css } from "@emotion/core"
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
+import React from "react";
+import { rhythm } from "../utils/typography";
+import { css } from "@emotion/react";
 
-import mq from "../utils/emotion"
-import { breakpoints } from "../utils/emotion"
-import styled from "@emotion/styled"
+import mq from "../utils/emotion";
+import { breakpoints } from "../utils/emotion";
+import styled from "@emotion/styled";
 
-import bgimage from "../images/crystal.gif"
+import bgimage from "../images/crystal.gif";
 
 const Container = styled.header`
   margin-bottom: ${rhythm(12 / 12)};
   ${mq[1]} {
     margin-bottom: ${rhythm(16 / 12)};
   }
-`
+`;
 const Inner = styled.div`
   margin: 0 auto;
   max-width: 920px;
@@ -26,10 +26,10 @@ const Inner = styled.div`
   ${mq[2]} {
     padding: ${rhythm(14 / 12)} ${rhythm(10 / 12)} ${rhythm(10 / 12)};
   }
-`
+`;
 const Title = styled.div`
   display: inline-flex;
-`
+`;
 const SiteTitle = styled.h1`
   font-weight: normal;
   font-size: ${rhythm(8 / 12)};
@@ -38,7 +38,7 @@ const SiteTitle = styled.h1`
   ${mq[0]} {
     font-size: ${rhythm(9 / 12)};
   }
-`
+`;
 const Subtitle = styled.p`
   margin: ${rhythm(1 / 12)} 0 0;
   font-size: ${rhythm(5 / 12)};
@@ -52,7 +52,7 @@ const Subtitle = styled.p`
   ${mq[0]} {
     font-size: ${rhythm(6 / 12)};
   }
-`
+`;
 const Background = styled.div`
   padding-bottom: 24%;
   background: url(${bgimage});
@@ -66,7 +66,7 @@ const Background = styled.div`
   ${mq[2]} {
     background-size: ${breakpoints[2]}px;
   }
-`
+`;
 const List = styled.ul`
   margin: 0 auto;
   padding: 0 ${rhythm(6 / 12)};
@@ -80,7 +80,7 @@ const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
   max-width: 920px;
-`
+`;
 const ListItem = styled.li`
   flex: 1 1 auto;
   text-align: center;
@@ -105,13 +105,13 @@ const ListItem = styled.li`
       padding: ${rhythm(6 / 12)} ${rhythm(4 / 12)};
     }
   }
-`
+`;
 
 const Item = ({ text, link }) => (
   <ListItem>
     <Link to={link}>{text}</Link>
   </ListItem>
-)
+);
 
 const Header = ({ siteTitle, phrase }) => (
   <Container>
@@ -160,16 +160,16 @@ const Header = ({ siteTitle, phrase }) => (
       </List>
     </div>
   </Container>
-)
+);
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-  phrase: PropTypes.string,
-}
+  phrase: PropTypes.string
+};
 
 Header.defaultProps = {
   siteTitle: ``,
-  phrase: ``,
-}
+  phrase: ``
+};
 
-export default Header
+export default Header;

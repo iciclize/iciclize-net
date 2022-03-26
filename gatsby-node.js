@@ -4,42 +4,33 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const crypto = require("crypto")
-const path = require(`path`)
+const path = require('path');
 
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    resolve: {
-      alias: {
-        path: require.resolve("path-browserify"),
-      },
-      fallback: {
-        fs: false,
-      }
+// from https://github.com/strapi/gatsby-source-strapi/issues/89
+const crypto = require(`crypto`);
+module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {
+    if (node.internal.type === "StrapiArticle") {
+        const newNode = {
+            id: createNodeId(`StrapiArticleContent-${node.id}`),
+            parent: node.id,
+            children: [],
+            internal: {
+                content: node.content || " ",
+                type: "StrapiArticleContent",
+                mediaType: "text/markdown",
+                contentDigest: crypto
+                    .createHash("md5")
+                    .update(node.content || " ")
+                    .digest("hex"),
+            },
+        };
+        actions.createNode(newNode);
+        actions.createParentChildLink({
+            parent: node,
+            child: newNode,
+        });
     }
-  })
-}
-
-exports.onCreateNode = async ({ node, actions }) => {
-  const { createNode } = actions
-  if (node.internal.type === "StrapiArticle") {
-    createNode({
-      ...node,
-      id: node.id + "-markdown",
-      parent: node.id,
-      children: [],
-      internal: {
-        type: "Post",
-        mediaType: "text/markdown",
-        content: node.content,
-        contentDigest: crypto
-          .createHash(`md5`)
-          .update(JSON.stringify(node))
-          .digest(`hex`),
-      },
-    })
-  }
-}
+};
 
 const makeRequest = (graphql, request) =>
   new Promise((resolve, reject) => {
@@ -66,7 +57,7 @@ exports.createPages = ({ actions, graphql }) => {
     graphql,
     `
     {
-      allPost(
+      allStrapiArticle(
         sort: {fields: publish_date, order: ASC},
       ) {
         edges {
@@ -82,7 +73,8 @@ exports.createPages = ({ actions, graphql }) => {
     }  
     `
   ).then(result => {
-    result.data.allPost.edges.forEach(({ node }, index, edges) => {
+    console.log(result);
+    result.data.allStrapiArticle.edges.forEach(({ node }, index, edges) => {
       function searchPrevNextId(start, dir, arr) {
         if (!arr[start].node.tags || arr[start].node.tags.length == 0)
           return null
@@ -141,48 +133,31 @@ exports.createPages = ({ actions, graphql }) => {
     graphql,
     `
     {
-      allMarkdownRemark(
+      allMdx(
         sort: {fields: frontmatter___date, order: DESC},
-        filter: {fileAbsolutePath: {regex: "/.*\/src\/pages\/works\/.*/"}}
+        filter: {fileAbsolutePath: {regex: "works/"}}
       ) {
         edges {
           node {
             frontmatter {
+              date(formatString: "YYYY-M")
               title
               slug
-              date(formatString: "YYYY年M月")
               description
-              imagename
-              
+              imagename {
+                childImageSharp {
+                  gatsbyImageData(width: 360, layout: CONSTRAINED)
+                }
+              }
             }
             id
-            rawMarkdownBody
-          }
-        }
-      }
-      allImageSharp(sort: {fields: fluid___originalName, order: ASC}) {
-        edges {
-          node {
-            id
-            fluid {
-              aspectRatio
-              src
-              srcSet
-              srcWebp
-              srcSetWebp
-              sizes
-              originalImg
-              originalName
-              presentationWidth
-              presentationHeight
-            }
           }
         }
       }
     }    
   `
   ).then(result => {
-    result.data.allMarkdownRemark.edges.forEach(({ node }, i, arr) => {
+    result.data.allMdx.edges.forEach(({ node }, i, arr) => {
       const prev = i < arr.length - 1 ? arr[i + 1].node : null
       const next = i > 0 ? arr[i - 1].node : null
       createPage({
@@ -190,11 +165,8 @@ exports.createPages = ({ actions, graphql }) => {
         component: path.resolve(`src/templates/work-detail.js`),
         context: {
           id: node.id,
-          imagename: node.frontmatter.imagename,
           next: next && next.id,
-          nextimg: next && next.frontmatter.imagename,
           prev: prev && prev.id,
-          previmg: prev && prev.frontmatter.imagename,
         },
       })
     })

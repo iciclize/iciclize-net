@@ -1,10 +1,10 @@
-import React from "react"
-import Helmet from "react-helmet"
+import React from "react";
+import Helmet from "react-helmet";
 
 export default class Iframely extends React.Component {
   componentDidMount() {
     if (window.iframely) {
-      window.iframely.load()
+      window.iframely.load();
     }
   }
 
@@ -17,6 +17,6 @@ export default class Iframely extends React.Component {
           charset="utf-8"
         />
       </Helmet>
-    )
+    );
   }
 }

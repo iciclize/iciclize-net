@@ -1,22 +1,14 @@
-import React from "react"
+import React from "react";
 
-import Layout from "../components/layout"
-import { rhythm } from "../utils/typography"
-import styled from "@emotion/styled"
-import Seo from "../components/seo"
-import ReactMarkdown from "react-markdown"
-import { css } from "@emotion/core"
-import mq from "../utils/emotion"
+import { Layout, PostContainer, PostInner } from "../components/layout";
+import { rhythm } from "../utils/typography";
+import Seo from "../components/seo";
+import ReactMarkdown from "react-markdown";
+import { css } from "@emotion/react";
+import mq from "../utils/emotion";
 
-const PostContainer = styled.div`
-  padding: 0 ${rhythm(8 / 12)} ${rhythm(8 / 12)};
-  min-height: 100%;
-`
-const PostInner = styled.div`
-  margin: 0 auto;
-  padding: 0;
-  max-width: 620px;
-`
+const pageWidth = "620px";
+
 const SecondPage = () => (
   <Layout>
     <Seo title="自己紹介" ogDescription={`24歳、学生です。(大嘘)`} />
@@ -30,7 +22,7 @@ const SecondPage = () => (
       >
         自己紹介
       </h1>
-      <PostInner>
+      <PostInner pageWidth={pageWidth}>
         <p
           css={css`
             text-align: center;
@@ -192,6 +184,6 @@ YouTube: [田所 - https://www.youtube.com/channel/UC6-gqITzzm_Eez5SXbQyJrg](htt
       </PostInner>
     </PostContainer>
   </Layout>
-)
+);
 
-export default SecondPage
+export default SecondPage;

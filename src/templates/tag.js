@@ -1,13 +1,13 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
+import React from "react";
+import { graphql } from "gatsby";
+import { Layout } from "../components/layout";
 
-import { Posts, Post } from "../components/post"
-import styled from "@emotion/styled"
-import { rhythm } from "../utils/typography"
-import mq from "../utils/emotion"
-import { css } from "@emotion/core"
-import Seo from "../components/seo"
+import { Posts, Post } from "../components/post";
+import styled from "@emotion/styled";
+import { rhythm } from "../utils/typography";
+import mq from "../utils/emotion";
+import { css } from "@emotion/react";
+import Seo from "../components/seo";
 
 const QueryDescription = styled.div`
   font-size: ${rhythm(10 / 12)};
@@ -24,11 +24,11 @@ const QueryDescription = styled.div`
     padding: ${rhythm(18 / 12)};
     font-size: ${rhythm(1)};
   }
-`
+`;
 
 const UserTemplate = ({ pageContext, data }) => {
-  const { tagname, slug } = pageContext
-  const articles = data.allPost
+  const { tagname, slug } = pageContext;
+  const articles = data.allStrapiArticle;
 
   return (
     <Layout>
@@ -59,9 +59,21 @@ const UserTemplate = ({ pageContext, data }) => {
         }
       >
         {articles.edges.length !== 0 &&
-          articles.edges.map(document => (
-            <Post entry={document.node} key={document.id} />
-          ))}
+          articles.edges.map(article => {
+            const entry = article.node;
+            return (
+              <Post
+                link={`/posts/${entry.slug}`}
+                title={entry.title}
+                tags={entry.tags}
+                summary={entry.summary}
+                image={
+                  entry.image?.localFile.childImageSharp.gatsbyImageData || null
+                }
+                key={entry.id}
+              />
+            );
+          })}
         {articles.edges.length === 0 && (
           <p
             css={css`
@@ -74,14 +86,14 @@ const UserTemplate = ({ pageContext, data }) => {
         )}
       </Posts>
     </Layout>
-  )
-}
+  );
+};
 
-export default UserTemplate
+export default UserTemplate;
 
 export const pageQuery = graphql`
   query Article($slug: String!) {
-    allPost(
+    allStrapiArticle(
       filter: { tags: { elemMatch: { slug: { in: [$slug] } } } }
       sort: { order: DESC, fields: publish_date }
     ) {
@@ -91,14 +103,16 @@ export const pageQuery = graphql`
           image {
             localFile {
               childImageSharp {
-                fluid(maxWidth: 870, maxHeight: 180, cropFocus: CENTER) {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(
+                  width: 870
+                  height: 240
+                  layout: CONSTRAINED
+                  transformOptions: { cropFocus: CENTER, fit: COVER }
+                )
               }
             }
           }
           title
-          content
           summary
           slug
           tags {
@@ -109,5 +123,8 @@ export const pageQuery = graphql`
         }
       }
     }
+    strapiTag(slug: { eq: $slug }) {
+      tagname
+    }
   }
-`
+`;

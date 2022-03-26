@@ -1,17 +1,17 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-import Img from "gatsby-image"
-import Layout from "../components/layout"
-import { rhythm } from "../utils/typography"
-import styled from "@emotion/styled"
-import Seo from "../components/seo"
-import { css } from "@emotion/core"
-import mq from "../utils/emotion"
+import * as React from "react";
+import { Link, graphql } from "gatsby";
+import { Layout } from "../components/layout";
+import { rhythm } from "../utils/typography";
+import styled from "@emotion/styled";
+import Seo from "../components/seo";
+import { css } from "@emotion/react";
+import mq from "../utils/emotion";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 const WorksContainer = styled.div`
   margin: 0 auto;
   max-width: 940px;
-`
+`;
 const WorksList = styled.ul`
   list-style: none;
   display: flex;
@@ -26,7 +26,7 @@ const WorksList = styled.ul`
   ${mq[0]} {
     margin: 0 ${rhythm(6 / 12)} 60px;
   }
-`
+`;
 const WorksListItem = ({ image, title, description, date, link }) => {
   const Item = styled.li`
     margin: 0;
@@ -46,11 +46,11 @@ const WorksListItem = ({ image, title, description, date, link }) => {
       flex-basis: 32%;
       margin: 0;
     }
-  `
+  `;
   const ImageArea = styled.div`
     background: transparent;
     padding-bottom: ${(100 * 16) / (16 + 10)}%; /* 16:10 */
-  `
+  `;
   const titleStyle = css`
     margin: ${rhythm(6 / 12)} 0 ${rhythm(2 / 12)};
     & h3 {
@@ -58,7 +58,7 @@ const WorksListItem = ({ image, title, description, date, link }) => {
       font-weight: bold;
       line-height: ${rhythm(22 / 24)};
     }
-  `
+  `;
   const Description = styled.div`
     font-size: ${rhythm(14 / 24)};
     line-height: ${rhythm(23 / 24)};
@@ -66,7 +66,7 @@ const WorksListItem = ({ image, title, description, date, link }) => {
       font-size: ${rhythm(14 / 24)};
       line-height: ${rhythm(23 / 24)};
     }
-  `
+  `;
   const Time = styled.div`
     font-size: ${rhythm(13 / 24)};
     padding: 0 0 ${rhythm(4 / 12)} 0;
@@ -75,9 +75,7 @@ const WorksListItem = ({ image, title, description, date, link }) => {
     ${mq[1]} {
       font-size: ${rhythm(13 / 24)};
     }
-  `
-
-  const inv = !image
+  `;
 
   return (
     <Item>
@@ -90,10 +88,10 @@ const WorksListItem = ({ image, title, description, date, link }) => {
             color: inherit;
           `}
         >
-          <Img fluid={image} />
+          <GatsbyImage image={image} alt={title} />
         </Link>
       )}
-      {inv && <ImageArea />}
+      {!image && <ImageArea />}
       <Link
         to={link}
         css={css(
@@ -108,17 +106,15 @@ const WorksListItem = ({ image, title, description, date, link }) => {
       </Link>
       <Description>{description}</Description>
     </Item>
-  )
-}
+  );
+};
 
-const SecondPage = ({ data }) => {
-  const images = data.allImageSharp.edges
-
+const WorksPage = ({ data }) => {
   return (
     <Layout>
       <Seo
         title="作品集"
-        ogDescription={data.allMarkdownRemark.edges
+        ogDescription={data.allMdx.edges
           .map(({ node }) => node.frontmatter.title)
           .join(` | `)}
       />
@@ -140,16 +136,9 @@ const SecondPage = ({ data }) => {
           サムネイルが映えないのはご愛嬌
         </p>
         <WorksList>
-          {data.allMarkdownRemark.edges.map(({ node }) => {
-            const image = (() => {
-              if (!node.frontmatter.imagename) return null
-
-              const im = images.find(
-                img =>
-                  img.node.fluid.originalName === node.frontmatter.imagename
-              )
-              return im ? im.node.fluid : null
-            })()
+          {data.allMdx.edges.map(({ node }) => {
+            const image =
+              node.frontmatter.imagename?.childImageSharp.gatsbyImageData;
 
             return (
               <WorksListItem
@@ -157,49 +146,40 @@ const SecondPage = ({ data }) => {
                 date={node.frontmatter.date}
                 image={image}
                 description={node.frontmatter.description}
-                link={`/works/${node.frontmatter.slug}`}
+                link={node.frontmatter.slug}
                 key={node.id}
               />
-            )
+            );
           })}
         </WorksList>
       </WorksContainer>
     </Layout>
-  )
-}
+  );
+};
 
-export default SecondPage
+export default WorksPage;
 
-export const pageQuery = graphql`
-  query WorksQuery {
-    allMarkdownRemark(
+export const query = graphql`
+  query {
+    allMdx(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { fileAbsolutePath: { regex: "/.*/pages/works/.*.md/" } }
+      filter: { fileAbsolutePath: { regex: "works/" } }
     ) {
       edges {
         node {
           frontmatter {
+            date(formatString: "YYYY-MM")
             title
             slug
-            date(formatString: "YYYY年M月")
-            description
-            imagename
+            imagename {
+              childImageSharp {
+                gatsbyImageData(width: 360, layout: CONSTRAINED)
+              }
+            }
           }
           id
-          rawMarkdownBody
-        }
-      }
-    }
-    allImageSharp(sort: { fields: fluid___originalName, order: ASC }) {
-      edges {
-        node {
-          id
-          fluid(maxWidth: 360) {
-            originalName
-            ...GatsbyImageSharpFluid
-          }
         }
       }
     }
   }
-`
+`;

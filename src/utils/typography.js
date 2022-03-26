@@ -1,4 +1,4 @@
-import Typography from "typography"
+import Typography from "typography";
 
 const typography = new Typography({
   baseFontSize: "16px",
@@ -13,7 +13,7 @@ const typography = new Typography({
     "Yu Gothic",
     "Verdana",
     "メイリオ",
-    "sans-serif",
+    "sans-serif"
   ],
   bodyFontFamily: [
     "-apple-system",
@@ -25,9 +25,9 @@ const typography = new Typography({
     "Yu Gothic",
     "Verdana",
     "メイリオ",
-    "sans-serif",
-  ],
-})
+    "sans-serif"
+  ]
+});
 
-export const { scale, rhythm, options } = typography
-export default typography
+export const { scale, rhythm, options } = typography;
+export default typography;

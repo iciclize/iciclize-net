@@ -1,47 +1,23 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Img from "gatsby-image"
-import Layout from "../components/layout"
-import { rhythm } from "../utils/typography"
-import styled from "@emotion/styled"
-import { css } from "@emotion/core"
-import { mdStyle } from "./article"
-import mq from "../utils/emotion"
-import Seo from "../components/seo"
+import React from "react";
+import { graphql } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
+import {
+  Layout,
+  mdStyle,
+  PostContainer,
+  PostInner
+} from "../components/layout";
+import { rhythm } from "../utils/typography";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+import mq from "../utils/emotion";
+import Seo from "../components/seo";
 
-import NextPrevNav from "../components/NextPrevNav"
+import NextPrevNav from "../components/NextPrevNav";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
-const PostContainer = styled.div`
-  margin: 0 ${rhythm(8 / 12)} ${rhythm(8 / 12)};
-`
-const PostInner = styled.div`
-  margin: 0 auto;
-  padding: 0;
-  max-width: 620px;
-  & pre {
-    margin-left: -${rhythm(8 / 12)};
-    margin-right: -${rhythm(8 / 12)};
-    padding-left: ${rhythm(8 / 12)};
-    padding-right: ${rhythm(8 / 12)};
-    & > code {
-      font-family: Consolas, Monaco, monospace, -apple-system,
-        "BlinkMacSystemFont", "Helvetica Neue", "游ゴシック体", "Yugothic",
-        "游ゴシック", "Yu Gothic", "Verdana", "メイリオ", sans-serif;
-      font-size: ${rhythm(7 / 12)};
-      margin: 0;
-      padding: 0;
-    }
-  }
-  ${mq[1]} {
-    & pre > code {
-      font-size: ${rhythm(7.5 / 12)};
-    }
-    & blockquote {
-      padding-top: ${rhythm(3 / 12)};
-      padding-bottom: ${rhythm(3 / 12)};
-    }
-  }
-`
+const pageWidth = "700px";
+
 const WorkTitle = styled.h1`
   font-weight: bold;
   font-size: ${rhythm(12 / 12)};
@@ -51,7 +27,7 @@ const WorkTitle = styled.h1`
   ${mq[1]} {
     font-size: ${rhythm(14 / 12)};
   }
-`
+`;
 const TimingOfWork = styled.div`
   font-size: ${rhythm(12 / 20)};
   text-align: center;
@@ -59,20 +35,29 @@ const TimingOfWork = styled.div`
   ${mq[1]} {
     font-size: ${rhythm(13 / 20)};
   }
-`
+`;
 
-const ArticleTemplate = ({ data }) => {
-  const markdown = data.markdownRemark
+const ArticleTemplate = hoge => {
+  console.log(hoge);
+  const data = hoge.data;
+  const markdown = data.mdx;
 
-  const content = markdown.html
-  const title = markdown.frontmatter.title
-  const description = markdown.frontmatter.description
-  const timing = markdown.frontmatter.date
-  const image = data.image.fluid
-  const next = data.next && data.next.frontmatter
-  const nextImage = data.nextImage && data.nextImage.fluid
-  const prev = data.prev && data.prev.frontmatter
-  const prevImage = data.prevImage && data.prevImage.fluid
+  const title = markdown.frontmatter.title;
+  const description = markdown.frontmatter.description;
+  const image = markdown.frontmatter.imagename.childImageSharp.gatsbyImageData;
+  const date = markdown.frontmatter.date;
+
+  const next = data.next;
+  const nextImage =
+    next && data.next.frontmatter.imagename.childImageSharp.gatsbyImageData;
+  const nextLink = next && `/works/${next.frontmatter.slug}`;
+  const nextTitle = next && next.frontmatter.title;
+
+  const prev = data.prev;
+  const prevImage =
+    prev && data.prev.frontmatter.imagename.childImageSharp.gatsbyImageData;
+  const prevLink = prev && `/works/${prev.frontmatter.slug}`;
+  const prevTitle = prev && prev.frontmatter.title;
 
   return (
     <Layout>
@@ -84,92 +69,84 @@ const ArticleTemplate = ({ data }) => {
         meta={[
           {
             name: `twitter:card`,
-            content: `summary_large_image`,
-          },
+            content: `summary_large_image`
+          }
         ]}
       />
       <PostContainer>
         <PostInner>
-          <TimingOfWork>{timing}</TimingOfWork>
+          <TimingOfWork>{date}</TimingOfWork>
           <WorkTitle>{title}</WorkTitle>
         </PostInner>
       </PostContainer>
       {image && (
-        <Img
-          fluid={image}
+        <div
           css={css`
-            max-width: 620px;
+            max-width: ${pageWidth};
             margin: 0 auto ${rhythm(8 / 12)};
           `}
-        />
+        >
+          <GatsbyImage image={image} alt={title} />
+        </div>
       )}
       <PostContainer>
-        <PostInner>
-          <div css={mdStyle} dangerouslySetInnerHTML={{ __html: content }} />
+        <PostInner pageWidth={pageWidth}>
+          <div css={mdStyle}>
+            <MDXRenderer>{markdown.body}</MDXRenderer>
+          </div>
           <NextPrevNav
-            basePath={`/works`}
             nextLabel={`次の作品`}
-            next={next}
+            nextLink={nextLink}
+            nextTitle={nextTitle}
             nextImage={nextImage}
             prevLabel={`過去の作品`}
-            prev={prev}
+            prevLink={prevLink}
+            prevTitle={prevTitle}
             prevImage={prevImage}
           />
         </PostInner>
       </PostContainer>
     </Layout>
-  )
-}
+  );
+};
 
-export default ArticleTemplate
+export default ArticleTemplate;
 
 export const pageQuery = graphql`
-  query WorkDetail(
-    $id: String!
-    $imagename: String
-    $next: String
-    $nextimg: String
-    $prev: String
-    $previmg: String
-  ) {
-    markdownRemark(id: { eq: $id }) {
-      html
+  query WorkDetail($id: String!, $next: String, $prev: String) {
+    mdx(id: { eq: $id }) {
+      frontmatter {
+        title
+        date(formatString: "YYYY-MM")
+        imagename {
+          childImageSharp {
+            gatsbyImageData(width: 1400, layout: CONSTRAINED)
+          }
+        }
+      }
+      body
+    }
+    next: mdx(id: { eq: $next }) {
       frontmatter {
         title
         slug
-        date(formatString: "YYYY年M月")
-        description
-        imagename
+        imagename {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
       }
     }
-    image: imageSharp(fluid: { originalName: { eq: $imagename } }) {
-      fluid(maxWidth: 1400) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-    next: markdownRemark(id: { eq: $next }) {
+    prev: mdx(id: { eq: $prev }) {
       frontmatter {
         title
         slug
-        imagename
-      }
-    }
-    nextImage: imageSharp(fluid: { originalName: { eq: $nextimg } }) {
-      fluid(maxWidth: 60) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-    prev: markdownRemark(id: { eq: $prev }) {
-      frontmatter {
-        title
-        slug
-        imagename
-      }
-    }
-    prevImage: imageSharp(fluid: { originalName: { eq: $previmg } }) {
-      fluid(maxWidth: 60) {
-        ...GatsbyImageSharpFluid
+        imagename {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
       }
     }
   }
-`
+`;

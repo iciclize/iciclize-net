@@ -1,11 +1,11 @@
-import React from "react"
-import { Link } from "gatsby"
-import Img from "gatsby-image"
+import React from "react";
+import { Link } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 
-import { rhythm } from "../utils/typography"
-import mq from "../utils/emotion"
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
+import { rhythm } from "../utils/typography";
+import mq from "../utils/emotion";
+import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 const PostContainer = styled.li`
   flex: 0 1 100%;
@@ -20,7 +20,7 @@ const PostContainer = styled.li`
       flex: 1 1 100%;
     }
   }
-`
+`;
 
 const PostTitle = styled.h1`
   font-weight: normal;
@@ -36,12 +36,12 @@ const PostTitle = styled.h1`
     font-size: ${rhythm(1)};
     line-height: ${rhythm(15 / 12)};
   }
-`
+`;
 
 const PostTags = styled.ul`
   list-style: none;
   margin: ${rhythm(-1 / 12)} 0 0;
-`
+`;
 
 const PostTag = styled.li`
   display: inline-block;
@@ -57,7 +57,7 @@ const PostTag = styled.li`
       font-size: ${rhythm(10 / 16)};
     }
   }
-`
+`;
 
 const postSummaryStyle = css`
   font-size: ${rhythm(9 / 16)};
@@ -67,15 +67,16 @@ const postSummaryStyle = css`
     font-size: ${rhythm(8 / 12)};
     line-height: ${rhythm(16 / 16)};
   }
-`
+`;
 
-const Post = ({ entry }) => {
+const Post = ({ link, title, tags, image, summary }) => {
   return (
     <PostContainer>
-      {entry.image && (
-        <Link to={`/posts/${entry.slug}`}>
-          <Img
-            fluid={entry.image.localFile.childImageSharp.fluid}
+      {image && (
+        <Link to={link}>
+          <GatsbyImage
+            image={image}
+            alt={title}
             css={css`
               &.gatsby-image-wrapper {
                 margin-bottom: ${rhythm(6 / 12)};
@@ -85,11 +86,11 @@ const Post = ({ entry }) => {
         </Link>
       )}
       <PostTitle>
-        <Link to={`/posts/${entry.slug}`}>{entry.title}</Link>
+        <Link to={link}>{title}</Link>
       </PostTitle>
-      {entry.tags && entry.tags.length > 0 && (
+      {tags && tags.length > 0 && (
         <PostTags>
-          {entry.tags.map(tag => (
+          {tags.map(tag => (
             <PostTag key={tag.id}>
               <Link to={`/tag/${tag.slug}`}>
                 <span
@@ -105,10 +106,10 @@ const Post = ({ entry }) => {
           ))}
         </PostTags>
       )}
-      {entry.summary && <div css={postSummaryStyle}>{entry.summary}</div>}
+      {summary && <div css={postSummaryStyle}>{summary}</div>}
     </PostContainer>
-  )
-}
+  );
+};
 
 const Posts = styled.ul`
   display: flex;
@@ -124,6 +125,6 @@ const Posts = styled.ul`
   ${mq[3]} {
     flex: 4 1 auto;
   }
-`
+`;
 
-export { Post, Posts }
+export { Post, Posts };

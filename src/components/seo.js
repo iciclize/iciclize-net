@@ -5,12 +5,12 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import React from "react";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
 
-function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
+function Seo({ metaDescription, ogDescription, lang, meta, title, image }) {
   const { site, defaultImage } = useStaticQuery(
     graphql`
       query {
@@ -31,81 +31,81 @@ function SEO({ metaDescription, ogDescription, lang, meta, title, image }) {
         }
       }
     `
-  )
+  );
 
-  const seoDescription = metaDescription || ``
-  const shareDescription = ogDescription
+  const seoDescription = metaDescription || ``;
+  const shareDescription = ogDescription;
 
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang
       }}
       title={title || site.siteMetadata.title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
           name: `description`,
-          content: seoDescription,
+          content: seoDescription
         },
         {
           name: `twitter:card`,
           content: meta.every(m => m.name !== `twitter:card`)
             ? `summary`
-            : meta.find(m => m.name === `twitter:card`).content,
+            : meta.find(m => m.name === `twitter:card`).content
         },
         {
           name: `twitter:title`,
-          content: title || site.siteMetadata.title,
+          content: title || site.siteMetadata.title
         },
         {
           name: `twitter:image`,
           content:
             (image && `${site.siteMetadata.siteUrl}${image.src}`) ||
-            `${site.siteMetadata.siteUrl}${defaultImage.fixed.src}`,
+            `${site.siteMetadata.siteUrl}${defaultImage.fixed.src}`
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: site.siteMetadata.author
         },
         {
           name: `twitter:description`,
-          content: shareDescription,
+          content: shareDescription
         },
         {
           property: `og:title`,
-          content: title || site.siteMetadata.title,
+          content: title || site.siteMetadata.title
         },
         {
           property: `og:description`,
-          content: shareDescription,
+          content: shareDescription
         },
         {
           property: `og:type`,
-          content: `website`,
+          content: `website`
         },
         {
           property: `og:image`,
           content:
             (image && `${site.siteMetadata.siteUrl}${image.src}`) ||
-            `${site.siteMetadata.siteUrl}${defaultImage.fixed.src}`,
-        },
+            `${site.siteMetadata.siteUrl}${defaultImage.fixed.src}`
+        }
       ].filter(m => m.content)}
     />
-  )
+  );
 }
 
-SEO.defaultProps = {
+Seo.defaultProps = {
   lang: `ja`,
   meta: [],
-  description: ``,
-}
+  description: ``
+};
 
-SEO.propTypes = {
+Seo.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
-}
+  title: PropTypes.string.isRequired
+};
 
-export default SEO
+export default Seo;
