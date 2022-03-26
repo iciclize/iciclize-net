@@ -6,12 +6,16 @@ import Seo from "../components/seo";
 import ReactMarkdown from "react-markdown";
 import { css } from "@emotion/react";
 import mq from "../utils/emotion";
+import rehypeRaw from "rehype-raw";
+import Iframely from "../components/Iframely";
+// import rehypeSanitize from "rehype-sanitize";
 
 const pageWidth = "620px";
 
-const SecondPage = () => (
+const ProfilePage = () => (
   <Layout>
     <Seo title="自己紹介" ogDescription={`24歳、学生です。(大嘘)`} />
+    <Iframely />
     <PostContainer>
       <h1
         css={css`
@@ -39,7 +43,7 @@ const SecondPage = () => (
           最終更新: 2021-01-31
         </div>
         <ReactMarkdown
-          escapeHtml={false}
+          rehypePlugins={[rehypeRaw, /* rehypeSanitize */]}
           css={css`
             td {
               line-height: 1.4rem;
@@ -70,7 +74,8 @@ const SecondPage = () => (
               font-size: ${rhythm(8 / 12)};
             }
           `}
-          source={`
+        >
+          {`
 <div style="display: table; margin: 1.5rem 0; ">
   <img style="margin: 0;" width="64px" src="https://www.gravatar.com/avatar/e5ef3698ccb90ecd2a50b1440dd7ee37?s=128" />
   <div style="display: table-cell; padding: 0 0.8rem; vertical-align: middle;">
@@ -145,7 +150,9 @@ DOOMとたまごっちが永遠のあこがれです。
 
 それから、好きな曲をピアノで弾くのが好きです。なんか弾いたり耳コピしたりしたらTwitterかYouTubeにあげてます。
 
-YouTube: [田所 - https://www.youtube.com/channel/UC6-gqITzzm_Eez5SXbQyJrg](https://www.youtube.com/channel/UC6-gqITzzm_Eez5SXbQyJrg)
+YouTube: 田所
+
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://www.youtube.com/channel/UC6-gqITzzm_Eez5SXbQyJrg" data-iframely-url="//iframely.net/RPAAjqy"></a></div></div>
 
 10年ちょっとピアノを習ってましたが、理論的な勉強とかはしたことないので、楽典・音楽理論の勉強してちゃんと和声とかを分析できるようになりたいですね。
 
@@ -180,10 +187,10 @@ YouTube: [田所 - https://www.youtube.com/channel/UC6-gqITzzm_Eez5SXbQyJrg](htt
 [YouTube - 田所](https://www.youtube.com/channel/UC6-gqITzzm_Eez5SXbQyJrg)
 
 `}
-        />
+        </ReactMarkdown>
       </PostInner>
     </PostContainer>
   </Layout>
 );
 
-export default SecondPage;
+export default ProfilePage;
