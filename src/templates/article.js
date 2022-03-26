@@ -71,7 +71,7 @@ const ArticleTemplate = hoge => {
       <Seo
         title={entry.title}
         metaDescription={entry.summary || ``}
-        ogDescription={entry.summary || entry.childMarkdownRemark.excerpt}
+        ogDescription={entry.summary || entry.childStrapiArticleContent.excerpt}
         image={
           entry.image && entry.image.localFile.childImageSharp.gatsbyImageData
         }
