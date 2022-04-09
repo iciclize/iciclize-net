@@ -89,6 +89,7 @@ exports.createPages = ({ actions, graphql }) => {
           )
             return cur.node.id
         }
+        return null
       }
       const nextId = searchPrevNextId(index, true, edges)
       const prevId = searchPrevNextId(index, false, edges)
