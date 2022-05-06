@@ -107,6 +107,21 @@ exports.createPages = ({ actions, graphql }) => {
         return [];
       }
 
+      const latter4Posts = getLatterOrPreviousNPostIds(
+        4,
+        index,
+        "Latter",
+        targetTag,
+        edges
+      );
+      const previous4Posts = getLatterOrPreviousNPostIds(
+        4,
+        index,
+        "Previous",
+        targetTag,
+        edges
+      );
+
       createPage({
         path: `/posts/${node.slug}/`,
         component: path.resolve(`src/templates/article.js`),
