@@ -21,30 +21,30 @@ const WorksList = styled.ul`
   margin: -${rhythm(6 / 12)} ${rhythm(3 / 12)} 60px;
   &::after {
     content: "";
-    flex: auto;
+    width: 34%;
   }
   ${mq[0]} {
     margin: 0 ${rhythm(6 / 12)} 60px;
   }
 `;
-const WorksListItem = ({ image, title, description, date, link }) => {
+const WorksListItem = ({ image, title, description, date, keywords, link }) => {
   const Item = styled.li`
-    margin: 0;
-    padding: ${rhythm(12 / 12)} 6% ${rhythm(8 / 12)};
-    flex: 0 1 100%;
+    margin: ${rhythm(4 / 12)} ${rhythm(4 / 12)};
+    flex: 1 1 45%;
     display: flex;
     flex-direction: column;
-    ${mq[0]} {
-      flex-basis: 50%;
+    ${mq[1]} {
+      flex-basis: 30%;
       padding: ${rhythm(8 / 12)} ${rhythm(6 / 12)} ${rhythm(8 / 12)};
     }
+  `;
+  const Time = styled.div`
+    font-size: ${rhythm(13 / 24)};
+    padding: 0 0 ${rhythm(4 / 12)} 0;
+    text-align: right;
+    position: relative;
     ${mq[1]} {
-      flex-basis: 33.3%;
-      padding-bottom: ${rhythm(16 / 12)};
-    }
-    ${mq[2]} {
-      flex-basis: 32%;
-      margin: 0;
+      font-size: ${rhythm(13 / 24)};
     }
   `;
   const ImageArea = styled.div`
@@ -59,21 +59,31 @@ const WorksListItem = ({ image, title, description, date, link }) => {
       line-height: ${rhythm(22 / 24)};
     }
   `;
-  const Description = styled.div`
-    font-size: ${rhythm(14 / 24)};
-    line-height: ${rhythm(23 / 24)};
+  const Keywords = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
     ${mq[1]} {
-      font-size: ${rhythm(14 / 24)};
-      line-height: ${rhythm(23 / 24)};
+      gap: 6px;
     }
   `;
-  const Time = styled.div`
-    font-size: ${rhythm(13 / 24)};
-    padding: 0 0 ${rhythm(4 / 12)} 0;
-    text-align: right;
-    position: relative;
+  const Keyword = styled.div`
+    font-size: ${rhythm(10 / 24)};
+    font-weight: 500;
+    padding: 1px 4px;
+    background-color: #999;
+    border-radius: 2px;
+    color: white;
     ${mq[1]} {
-      font-size: ${rhythm(13 / 24)};
+      font-size: ${rhythm(12 / 24)};
+    }
+  `;
+  const Description = styled.div`
+    margin-top: ${rhythm(2 / 24)};
+    font-size: ${rhythm(14 / 24)};
+    line-height: ${rhythm(22 / 24)};
+    ${mq[1]} {
+      margin-top: ${rhythm(4 / 24)};
     }
   `;
 
@@ -104,6 +114,9 @@ const WorksListItem = ({ image, title, description, date, link }) => {
       >
         <h3>{title}</h3>
       </Link>
+      <Keywords>
+        { keywords.map(keyword => <Keyword>{keyword}</Keyword>) }
+      </Keywords>
       <Description>{description}</Description>
     </Item>
   );
@@ -147,6 +160,7 @@ const WorksPage = ({ data }) => {
                 image={image}
                 description={node.frontmatter.description}
                 link={node.frontmatter.slug}
+                keywords={node.frontmatter.keywords}
                 key={node.id}
               />
             );
@@ -171,6 +185,8 @@ export const query = graphql`
             date(formatString: "YYYY-MM")
             title
             slug
+            description
+            keywords
             imagename {
               childImageSharp {
                 gatsbyImageData(width: 360, layout: CONSTRAINED)
