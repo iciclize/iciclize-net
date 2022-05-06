@@ -99,8 +99,8 @@ const Features = ({ features }) => {
     }
   `;
   const PublishDate = styled.div`
-  font-size: ${rhythm(8 / 16)};
-  margin: 0;
+    font-size: ${rhythm(8 / 16)};
+    margin: 0;
   `;
 
   return (
@@ -152,7 +152,7 @@ const AllTag = ({ tags, tagPostCount }) => {
       <Header>タグ一覧</Header>
       <TagList>
         {tags.edges.map(({ node }, index) => {
-          const tagCountPair = tagPostCount.group.find(elem => {
+          const tagCountPair = tagPostCount.group.find((elem) => {
             return elem.fieldValue === node.slug;
           });
           const count = tagCountPair.totalCount || 0;
@@ -199,24 +199,32 @@ const IndexPage = ({ data }) => {
         ogDescription={data.site.siteMetadata.description}
       />
       <TwoColumn>
-        <Posts>
-          {data.allStrapiArticle.edges.map(article => {
-            const entry = article.node;
-            return (
-              <Post
-                link={`/posts/${entry.slug}`}
-                title={entry.title}
-                publish_date={entry.publish_date}
-                tags={entry.tags}
-                summary={entry.summary}
-                image={
-                  entry.image?.localFile.childImageSharp.gatsbyImageData || null
-                }
-                key={entry.id}
-              />
-            );
-          })}
-        </Posts>
+        <div
+          css={css`
+            margin: 0 ${rhythm(5 / 12)} 1rem;
+          `}
+        >
+          <Posts>
+            {data.allStrapiArticle.edges.map((article) => {
+              const entry = article.node;
+              return (
+                <Post
+                  link={`/posts/${entry.slug}`}
+                  title={entry.title}
+                  publish_date={entry.publish_date}
+                  tags={entry.tags}
+                  summary={entry.summary}
+                  image={
+                    entry.image?.localFile.childImageSharp.gatsbyImageData ||
+                    null
+                  }
+                  key={entry.id}
+                  enlargeLatest={true}
+                />
+              );
+            })}
+          </Posts>
+        </div>
         <Side>
           <Features features={data.life} />
           <AllTag tags={data.allStrapiTag} tagPostCount={tagPostCount} />

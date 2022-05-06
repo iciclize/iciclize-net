@@ -5,7 +5,7 @@ import {
   Layout,
   mdStyle,
   PostContainer,
-  PostInner
+  PostInner,
 } from "../components/layout";
 import Iframely from "../components/Iframely";
 import styled from "@emotion/styled";
@@ -16,8 +16,8 @@ import { MyMDXRenderer } from "../components/mdx-renderer";
 // import ReactMarkdown from "react-markdown";
 // import rehypeRaw from "rehype-raw";
 
-import NextPrevNav from "../components/NextPrevNav";
 import Seo from "../components/seo";
+import { Posts, Post } from "../components/post";
 
 const pageWidth = "700px";
 
@@ -54,17 +54,11 @@ const PostTag = styled.li`
   }
 `;
 
-const ArticleTemplate = hoge => {
+const ArticleTemplate = (hoge) => {
   const data = hoge.data;
+
   const entry = data.strapiArticle;
-
-  const next = data.next;
-  const nextLink = next && `/posts/${next.slug}`;
-  const nextTitle = next && next.title;
-
-  const prev = data.prev;
-  const prevLink = prev && `/posts/${prev.slug}`;
-  const prevTitle = prev && prev.title;
+  const relatedPosts = data.relatedPosts;
 
   return (
     <Layout>
@@ -103,7 +97,7 @@ const ArticleTemplate = hoge => {
           )}
           {entry.tags.length > 0 && (
             <PostTags>
-              {entry.tags.map(tag => (
+              {entry.tags.map((tag) => (
                 <PostTag key={tag.id}>
                   <Link to={`/tags/${tag.slug}`}>#{tag.tagname}</Link>
                 </PostTag>
@@ -131,14 +125,39 @@ const ArticleTemplate = hoge => {
               </MyMDXRenderer>
             </div>
           )}
-          <NextPrevNav
-            nextLabel={next && `次 `.concat(next.publish_date)}
-            nextLink={nextLink}
-            nextTitle={nextTitle}
-            prevLabel={prev && `前 `.concat(prev.publish_date)}
-            prevLink={prevLink}
-            prevTitle={prevTitle}
-          />
+          {relatedPosts.edges.length > 0 ? (
+            <>
+              <hr />
+              <h3
+                css={css`
+                  margin: 1.4rem 0 1rem;
+                `}
+              >
+                ほかの記事
+              </h3>
+              <Posts>
+                {relatedPosts.edges.map((edge) => {
+                  const entry = edge.node;
+                  return (
+                    <Post
+                      link={`/posts/${entry.slug}`}
+                      title={entry.title}
+                      publish_date={entry.publish_date}
+                      tags={entry.tags}
+                      summary={entry.summary}
+                      image={
+                        entry.image?.localFile.childImageSharp
+                          .gatsbyImageData || null
+                      }
+                      key={entry.id}
+                    />
+                  );
+                })}
+              </Posts>
+            </>
+          ) : (
+            <></>
+          )}
         </PostInner>
       </PostContainer>
     </Layout>
@@ -148,7 +167,7 @@ const ArticleTemplate = hoge => {
 export default ArticleTemplate;
 
 export const q = graphql`
-  query ArticleTemplate($id: String!, $nextId: String, $prevId: String) {
+  query ArticleTemplate($id: String!, $relatedPostIds: [String!]) {
     strapiArticle(id: { eq: $id }) {
       title
       slug
@@ -177,15 +196,37 @@ export const q = graphql`
         tagname
       }
     }
-    next: strapiArticle(id: { eq: $nextId }) {
-      title
-      slug
-      publish_date(formatString: "YYYY-MM-DD")
-    }
-    prev: strapiArticle(id: { eq: $prevId }) {
-      title
-      slug
-      publish_date(formatString: "YYYY-MM-DD")
+
+    relatedPosts: allStrapiArticle(
+      sort: { order: DESC, fields: publish_date }
+      filter: { slug: { ne: "dummy-post" }, id: { in: $relatedPostIds } }
+    ) {
+      edges {
+        node {
+          id
+          image {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 870
+                  height: 240
+                  layout: CONSTRAINED
+                  transformOptions: { cropFocus: CENTER }
+                )
+              }
+            }
+          }
+          title
+          publish_date(formatString: "YYYY-MM-DD")
+          summary
+          slug
+          tags {
+            id
+            slug
+            tagname
+          }
+        }
+      }
     }
   }
 `;

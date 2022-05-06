@@ -47,44 +47,51 @@ const UserTemplate = ({ pageContext, data }) => {
       >
         #{tagname}
       </QueryDescription>
-      <Posts
-        css={
-          slug === `life`
-            ? css`
-                & > li {
-                  border-left-color: hsl(150, 65%, 79%);
-                }
-              `
-            : null
-        }
+      <div
+        css={css`
+          margin: 0 ${rhythm(5 / 12)} 1rem;
+        `}
       >
-        {articles.edges.length !== 0 &&
-          articles.edges.map(article => {
-            const entry = article.node;
-            return (
-              <Post
-                link={`/posts/${entry.slug}`}
-                title={entry.title}
-                tags={entry.tags}
-                summary={entry.summary}
-                image={
-                  entry.image?.localFile.childImageSharp.gatsbyImageData || null
-                }
-                key={entry.id}
-              />
-            );
-          })}
-        {articles.edges.length === 0 && (
-          <p
-            css={css`
-              text-align: center;
-              flex-basis: 100%;
-            `}
-          >
-            (該当する記事が)ないです。
-          </p>
-        )}
-      </Posts>
+        <Posts
+          css={
+            slug === `life`
+              ? css`
+                  & > li {
+                    border-left-color: hsl(150, 65%, 79%);
+                  }
+                `
+              : null
+          }
+        >
+          {articles.edges.length !== 0 &&
+            articles.edges.map((article) => {
+              const entry = article.node;
+              return (
+                <Post
+                  link={`/posts/${entry.slug}`}
+                  title={entry.title}
+                  tags={entry.tags}
+                  summary={entry.summary}
+                  image={
+                    entry.image?.localFile.childImageSharp.gatsbyImageData ||
+                    null
+                  }
+                  key={entry.id}
+                />
+              );
+            })}
+          {articles.edges.length === 0 && (
+            <p
+              css={css`
+                text-align: center;
+                flex-basis: 100%;
+              `}
+            >
+              (該当する記事が)ないです。
+            </p>
+          )}
+        </Posts>
+      </div>
     </Layout>
   );
 };

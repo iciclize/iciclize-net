@@ -4,54 +4,54 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const path = require('path');
+const path = require("path");
 
 // from https://github.com/strapi/gatsby-source-strapi/issues/89
 const crypto = require(`crypto`);
 module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {
-    if (node.internal.type === "StrapiArticle") {
-        const newNode = {
-            id: createNodeId(`StrapiArticleContent-${node.id}`),
-            parent: node.id,
-            children: [],
-            internal: {
-                content: node.content || " ",
-                type: "StrapiArticleContent",
-                mediaType: "text/markdown",
-                contentDigest: crypto
-                    .createHash("md5")
-                    .update(node.content || " ")
-                    .digest("hex"),
-            },
-        };
-        actions.createNode(newNode);
-        actions.createParentChildLink({
-            parent: node,
-            child: newNode,
-        });
-    }
+  if (node.internal.type === "StrapiArticle") {
+    const newNode = {
+      id: createNodeId(`StrapiArticleContent-${node.id}`),
+      parent: node.id,
+      children: [],
+      internal: {
+        content: node.content || " ",
+        type: "StrapiArticleContent",
+        mediaType: "text/markdown",
+        contentDigest: crypto
+          .createHash("md5")
+          .update(node.content || " ")
+          .digest("hex"),
+      },
+    };
+    actions.createNode(newNode);
+    actions.createParentChildLink({
+      parent: node,
+      child: newNode,
+    });
+  }
 };
 
 const makeRequest = (graphql, request) =>
   new Promise((resolve, reject) => {
     // Query for article nodes to use in creating pages.
     resolve(
-      graphql(request).then(result => {
+      graphql(request).then((result) => {
         if (result.errors) {
-          reject(result.errors)
+          reject(result.errors);
         }
 
-        return result
+        return result;
       })
-    )
-  })
+    );
+  });
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
 exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
 
-    console.log(process.env.NODE_ENV)
+  console.log(process.env.NODE_ENV);
 
   const getArticles = makeRequest(
     graphql,
@@ -73,37 +73,50 @@ exports.createPages = ({ actions, graphql }) => {
       }
     }  
     `
-  ).then(result => {
+  ).then((result) => {
     result.data.allStrapiArticle.edges.forEach(({ node }, index, edges) => {
-      function searchPrevNextId(start, dir, arr) {
-        if (!arr[start].node.tags || arr[start].node.tags.length == 0)
-          return null
-        const category = arr[start].node.tags[0].slug
-        const num = dir ? arr.length - start - 1 : start
-        for (let i = 1; i <= num; i++) {
-          let cur = dir ? arr[start + i] : arr[start - i]
-          if (
-            cur.node.tags &&
-            cur.node.tags.length > 0 &&
-            cur.node.tags[0].slug === category
-          )
-            return cur.node.id
+      const targetTag = node.tags[0]?.slug;
+
+      function getLatterOrPreviousNPostIds(
+        n,
+        startPos,
+        direction,
+        tag,
+        allPosts
+      ) {
+        let i = startPos;
+        while (true) {
+          if (direction == "Latter") {
+            i++;
+            if (i >= allPosts.length) break;
+          } else {
+            i--;
+            if (i < 0) break;
+          }
+
+          if (allPosts[i].node.tags.find((t) => t.slug == tag)) {
+            if (n == 1) {
+              return [allPosts[i].node.id];
+            } else {
+              return [allPosts[i].node.id].concat(
+                getLatterOrPreviousNPostIds(n - 1, i, direction, tag, allPosts)
+              );
+            }
+          }
         }
-        return null
+        return [];
       }
-      const nextId = searchPrevNextId(index, true, edges)
-      const prevId = searchPrevNextId(index, false, edges)
+
       createPage({
         path: `/posts/${node.slug}/`,
         component: path.resolve(`src/templates/article.js`),
         context: {
           id: node.id,
-          nextId: nextId,
-          prevId: prevId
+          relatedPostIds: latter4Posts.reverse().concat(previous4Posts),
         },
-      })
-    })
-  })
+      });
+    });
+  });
 
   const getTags = makeRequest(
     graphql,
@@ -117,8 +130,8 @@ exports.createPages = ({ actions, graphql }) => {
       }
     }
   `
-  ).then(result => {
-    result.data.allStrapiTag.nodes.forEach(tag => {
+  ).then((result) => {
+    result.data.allStrapiTag.nodes.forEach((tag) => {
       createPage({
         path: `/tags/${tag.slug}/`,
         component: path.resolve(`src/templates/tag.js`),
@@ -126,9 +139,9 @@ exports.createPages = ({ actions, graphql }) => {
           slug: tag.slug,
           tagname: tag.tagname,
         },
-      })
-    })
-  })
+      });
+    });
+  });
 
   const getWorks = makeRequest(
     graphql,
@@ -157,10 +170,10 @@ exports.createPages = ({ actions, graphql }) => {
       }
     }    
   `
-  ).then(result => {
+  ).then((result) => {
     result.data.allMdx.edges.forEach(({ node }, i, arr) => {
-      const prev = i < arr.length - 1 ? arr[i + 1].node : null
-      const next = i > 0 ? arr[i - 1].node : null
+      const prev = i < arr.length - 1 ? arr[i + 1].node : null;
+      const next = i > 0 ? arr[i - 1].node : null;
       createPage({
         path: `/works/${node.frontmatter.slug}/`,
         component: path.resolve(`src/templates/work-detail.js`),
@@ -169,10 +182,10 @@ exports.createPages = ({ actions, graphql }) => {
           next: next && next.id,
           prev: prev && prev.id,
         },
-      })
-    })
-  })
+      });
+    });
+  });
 
   // Queries for articles and authors nodes to use in creating pages.
-  return Promise.all([getArticles, getTags, getWorks])
-}
+  return Promise.all([getArticles, getTags, getWorks]);
+};

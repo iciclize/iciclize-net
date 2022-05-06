@@ -7,22 +7,6 @@ import mq from "../utils/emotion";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-const PostContainer = styled.li`
-  flex: 1 1 45%;
-  margin: 0 ${rhythm(3 / 12)} ${rhythm(8 / 12)};
-  border-left: 3px solid hsl(204, 100%, 79%);
-  padding: 0 0 0 ${rhythm(3 / 12)};
-  min-width: 30%;
-  ${mq[1]} {
-    margin: 0 ${rhythm(8 / 12)} ${rhythm(10 / 12)};
-    padding: 0 0 0 ${rhythm(4 / 12)};
-    flex: 1 1 30%;
-    &:first-of-type {
-      flex: 1 1 100%;
-    }
-  }
-`;
-
 const PostTitle = styled.h1`
   font-weight: normal;
   font-size: ${rhythm(7 / 12)};
@@ -40,11 +24,11 @@ const PostTitle = styled.h1`
 `;
 
 const PublishDate = styled.div`
-font-size: ${rhythm(8 / 16)};
-margin: 0;
-${mq[1]} {
-  font-size: ${rhythm(9 / 16)};
-}
+  font-size: ${rhythm(8 / 16)};
+  margin: 0;
+  ${mq[1]} {
+    font-size: ${rhythm(9 / 16)};
+  }
 `;
 
 const PostTags = styled.ul`
@@ -81,9 +65,40 @@ const postSummaryStyle = css`
   }
 `;
 
-const Post = ({ link, title, publish_date, tags, image, summary }) => {
+const PostContainer = styled.li`
+  flex: 1 1 45%;
+  border-left: 3px solid
+    ${(props) =>
+      props.isLifeTag ? `hsl(150, 65%, 79%)` : `hsl(204, 100%, 79%)`};
+  padding: 0 0 0 ${rhythm(3 / 12)};
+  min-width: 30%;
+  ${mq[1]} {
+    padding: 0 0 0 ${rhythm(4 / 12)};
+    flex: 1 1 32%;
+    ${(props) =>
+      props.enlargeLatest
+        ? `
+      &:first-of-type {
+        flex: 1 1 100%;
+      }`
+        : ``}
+  }
+`;
+
+const Post = ({
+  link,
+  title,
+  publish_date,
+  tags,
+  image,
+  summary,
+  enlargeLatest,
+}) => {
   return (
-    <PostContainer>
+    <PostContainer
+      enlargeLatest={enlargeLatest ?? null}
+      isLifeTag={tags[0]?.slug === "life"}
+    >
       {image && (
         <Link to={link}>
           <GatsbyImage
@@ -103,7 +118,7 @@ const Post = ({ link, title, publish_date, tags, image, summary }) => {
       <PublishDate>{publish_date}</PublishDate>
       {tags && tags.length > 0 && (
         <PostTags>
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <PostTag key={tag.id}>
               <Link to={`/tags/${tag.slug}`}>
                 <span
@@ -131,9 +146,11 @@ const Posts = styled.ul`
   justify-content: space-between;
   list-style: none;
   margin: 0;
+  gap: ${rhythm(8 / 12)};
   max-width: 740px;
   ${mq[1]} {
     margin: 0 auto;
+    gap: ${rhythm(8 / 12)};
   }
   ${mq[3]} {
     flex: 4 1 auto;
