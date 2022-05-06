@@ -43,7 +43,7 @@ const ProfilePage = () => (
           最終更新: 2021-01-31
         </div>
         <ReactMarkdown
-          rehypePlugins={[rehypeRaw, /* rehypeSanitize */]}
+          rehypePlugins={[rehypeRaw /* rehypeSanitize */]}
           css={css`
             td {
               line-height: 1.4rem;

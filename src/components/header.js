@@ -90,7 +90,7 @@ const ListItem = styled.li`
     margin: ${rhythm(1 / 12)};
     padding: ${rhythm(6 / 12)} ${rhythm(4 / 12)};
     text-decoration: none;
-    font-size: ${rhythm(7 / 12)};
+    font-size: ${rhythm(13 / 24)};
     color: #454545;
   }
   & > a:hover {

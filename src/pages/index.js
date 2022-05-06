@@ -55,8 +55,8 @@ const Features = ({ features }) => {
   `;
   const FeatureList = styled.ul`
     list-style: none;
-    padding-top: ${rhythm(12 / 12)};
-    margin: 0 ${rhythm(-8 / 12)};
+    padding-top: ${rhythm(8 / 12)};
+    margin: 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -67,10 +67,10 @@ const Features = ({ features }) => {
     }
   `;
   const Item = styled.li`
-    flex: 0 1 auto;
-    margin: 0 ${rhythm(8 / 12)} ${rhythm(12 / 12)};
+    flex: 1 1 45%;
+    margin: 0 0 ${rhythm(8 / 12)};
     border-left: 3px solid hsl(150, 65%, 79%);
-    padding: 0 0 0 ${rhythm(8 / 12)};
+    padding: 0 0 0 ${rhythm(4 / 12)};
     min-width: 30%;
     /*
     ${mq[1]} {
@@ -81,22 +81,26 @@ const Features = ({ features }) => {
   `;
   const Title = styled.h1`
     font-weight: normal;
-    font-size: ${rhythm(9 / 12)};
-    line-height: ${rhythm(12 / 12)};
-    letter-spacing: ${rhythm(1 / 24)};
-    margin: 0 0 ${rhythm(3 / 12)};
+    font-size: ${rhythm(8 / 12)};
+    line-height: ${rhythm(10 / 12)};
+    letter-spacing: 0;
+    margin: 0;
     & > a {
       text-decoration: none;
       color: #191919;
     }
     ${mq[1]} {
-      font-size: ${rhythm(10 / 12)};
+      font-size: ${rhythm(8 / 12)};
       line-height: ${rhythm(14 / 12)};
     }
     ${mq[3]} {
-      font-size: ${rhythm(9 / 12)};
+      font-size: ${rhythm(8 / 12)};
       line-height: ${rhythm(12 / 12)};
     }
+  `;
+  const PublishDate = styled.div`
+  font-size: ${rhythm(8 / 16)};
+  margin: 0;
   `;
 
   return (
@@ -111,6 +115,7 @@ const Features = ({ features }) => {
             <Title>
               <Link to={`/posts/${node.slug}`}>{node.title}</Link>
             </Title>
+            <PublishDate>{node.publish_date}</PublishDate>
           </Item>
         ))}
       </FeatureList>
@@ -133,7 +138,7 @@ const AllTag = ({ tags, tagPostCount }) => {
   `;
   const Tag = styled.li`
     font-weight: normal;
-    font-size: ${rhythm(8 / 12)};
+    font-size: ${rhythm(7 / 12)};
     line-height: ${rhythm(10 / 12)};
     letter-spacing: ${rhythm(1 / 24)};
     margin: 0 0 ${rhythm(3 / 12)};
@@ -201,6 +206,7 @@ const IndexPage = ({ data }) => {
               <Post
                 link={`/posts/${entry.slug}`}
                 title={entry.title}
+                publish_date={entry.publish_date}
                 tags={entry.tags}
                 summary={entry.summary}
                 image={
@@ -253,6 +259,7 @@ export const pageQuery = graphql`
             }
           }
           title
+          publish_date(formatString: "YYYY-MM-DD")
           content
           summary
           slug
@@ -267,12 +274,13 @@ export const pageQuery = graphql`
     life: allStrapiArticle(
       filter: { tags: { elemMatch: { slug: { in: "life" } } } }
       sort: { order: DESC, fields: publish_date }
-      limit: 6
+      limit: 12
     ) {
       edges {
         node {
           id
           title
+          publish_date(formatString: "YYYY-MM-DD")
           slug
         }
       }
