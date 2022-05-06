@@ -21,6 +21,18 @@ module.exports = {
               sizeByPixelDensity: true,
             },
           },
+          {
+            resolve: `gatsby-remark-table-of-contents`,
+            options: {
+              exclude: '目次',
+              tight: true,
+              ordered: false,
+              fromHeading: 2,
+              toHeading: 4,
+            },
+          },
+          `@weknow/gatsby-remark-twitter`,
+          `gatsby-remark-autolink-headers`,
         ],
       },
     },
@@ -56,14 +68,13 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: ["@weknow/gatsby-remark-twitter"],
-      },
-    },
+    // {
+    //   resolve: `gatsby-transformer-remark`,
+    //   options: {
+    //     plugins: [],
+    //   },
+    // },
     `gatsby-transformer-sharp`,
-    // `gatsby-plugin-twitter`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -77,10 +88,10 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: "gatsby-plugin-robots-txt",
       options: {
-        policy: [{ userAgent: '*', disallow: ['/nicovideo'], allow: '*' }]
-      }
+        policy: [{ userAgent: "*", disallow: ["/nicovideo"], allow: "*" }],
+      },
     },
     // {
     //   resolve: 'gatsby-plugin-matomo',
@@ -96,4 +107,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};

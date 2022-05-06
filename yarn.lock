@@ -6999,6 +6999,17 @@ gatsby-react-router-scroll@^5.10.0:
     "@babel/runtime" "^7.15.4"
     prop-types "^15.7.2"
 
+gatsby-remark-autolink-headers@^5.13.0:
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-autolink-headers/-/gatsby-remark-autolink-headers-5.13.0.tgz#8d101392a22d3d44c0cc5e4a01b1196f492d01d8"
+  integrity sha512-/3e4TCDT8KxCJOa0IwdbOLIlT7lN30kigw1hrLgqsCmCtkn1R54ntOcCYcPWDU3Hg8GKmQE+2xdHtoblORv6ow==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    github-slugger "^1.3.0"
+    lodash "^4.17.21"
+    mdast-util-to-string "^2.0.0"
+    unist-util-visit "^2.0.3"
+
 gatsby-remark-images@^6.10.2:
   version "6.10.2"
   resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-6.10.2.tgz#2192fc641d52208512912ce6f0e85013942fdf3c"
@@ -7015,6 +7026,14 @@ gatsby-remark-images@^6.10.2:
     query-string "^6.14.1"
     unist-util-select "^3.0.4"
     unist-util-visit-parents "^3.1.1"
+
+gatsby-remark-table-of-contents@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-table-of-contents/-/gatsby-remark-table-of-contents-2.0.0.tgz#9df384c5915a6b038deedcf831a1997fbb830974"
+  integrity sha512-Hl/zfvwX0FWMjaurzOTLpHNQ4rOd4AXnNrRsqJLwZPecZBc42UDX/JFL4hYS/NfrPd/svtwipkBXGo51CaKFXw==
+  dependencies:
+    js-yaml "^3.14.1"
+    mdast-util-toc "^5.1.0"
 
 gatsby-sharp@^0.4.0:
   version "0.4.0"
@@ -7410,6 +7429,11 @@ github-slugger@^1.2.1:
   integrity sha512-gwJScWVNhFYSRDvURk/8yhcFBee6aFjye2a7Lhb2bUyRulpIoek9p0I9Kt7PT67d/nUlZbFu8L9RLiA0woQN8Q==
   dependencies:
     emoji-regex ">=6.0.0 <=6.1.1"
+
+github-slugger@^1.3.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/github-slugger/-/github-slugger-1.4.0.tgz#206eb96cdb22ee56fdc53a28d5a302338463444e"
+  integrity sha512-w0dzqw/nt51xMVmlaV1+JRzN+oCa1KfcgGEWhxUG16wbdA+Xnt/yoFO8Z8x/V82ZcZ0wy6ln9QDup5avbhiDhQ==
 
 glob-parent@^5.1.2, glob-parent@~5.1.2:
   version "5.1.2"
@@ -8792,7 +8816,7 @@ jpeg-js@^0.4.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@^3.13.1:
+js-yaml@^3.13.1, js-yaml@^3.14.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
   integrity sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
@@ -12568,16 +12592,7 @@ simple-concat@^1.0.0:
   resolved "https://registry.yarnpkg.com/simple-concat/-/simple-concat-1.0.1.tgz#f46976082ba35c2263f1c8ab5edfe26c41c9552f"
   integrity sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==
 
-simple-get@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/simple-get/-/simple-get-4.0.1.tgz#4a39db549287c979d352112fa03fd99fd6bc3543"
-  integrity sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==
-  dependencies:
-    decompress-response "^6.0.0"
-    once "^1.3.1"
-    simple-concat "^1.0.0"
-
-simple-get@^4.0.1:
+simple-get@^4.0.0, simple-get@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/simple-get/-/simple-get-4.0.1.tgz#4a39db549287c979d352112fa03fd99fd6bc3543"
   integrity sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==
