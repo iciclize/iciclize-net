@@ -68,14 +68,13 @@ const postSummaryStyle = css`
 const PostContainer = styled.li`
   flex: 1 1 45%;
   border-left: 3px solid
-    ${(props) =>
-      props.isLifeTag ? `hsl(150, 65%, 79%)` : `hsl(204, 100%, 79%)`};
+    ${props => (props.isLifeTag ? `hsl(150, 65%, 79%)` : `hsl(204, 100%, 79%)`)};
   padding: 0 0 0 ${rhythm(3 / 12)};
   min-width: 30%;
   ${mq[1]} {
     padding: 0 0 0 ${rhythm(4 / 12)};
     flex: 1 1 32%;
-    ${(props) =>
+    ${props =>
       props.enlargeLatest
         ? `
       &:first-of-type {
@@ -92,7 +91,7 @@ const Post = ({
   tags,
   image,
   summary,
-  enlargeLatest,
+  enlargeLatest
 }) => {
   return (
     <PostContainer
@@ -118,7 +117,7 @@ const Post = ({
       <PublishDate>{publish_date}</PublishDate>
       {tags && tags.length > 0 && (
         <PostTags>
-          {tags.map((tag) => (
+          {tags.map(tag => (
             <PostTag key={tag.id}>
               <Link to={`/tags/${tag.slug}`}>
                 <span

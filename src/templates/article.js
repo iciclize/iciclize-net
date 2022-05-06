@@ -5,7 +5,7 @@ import {
   Layout,
   mdStyle,
   PostContainer,
-  PostInner,
+  PostInner
 } from "../components/layout";
 import Iframely from "../components/Iframely";
 import styled from "@emotion/styled";
@@ -54,7 +54,7 @@ const PostTag = styled.li`
   }
 `;
 
-const ArticleTemplate = (hoge) => {
+const ArticleTemplate = hoge => {
   const data = hoge.data;
 
   const entry = data.strapiArticle;
@@ -97,7 +97,7 @@ const ArticleTemplate = (hoge) => {
           )}
           {entry.tags.length > 0 && (
             <PostTags>
-              {entry.tags.map((tag) => (
+              {entry.tags.map(tag => (
                 <PostTag key={tag.id}>
                   <Link to={`/tags/${tag.slug}`}>#{tag.tagname}</Link>
                 </PostTag>
@@ -136,7 +136,7 @@ const ArticleTemplate = (hoge) => {
                 ほかの記事
               </h3>
               <Posts>
-                {relatedPosts.edges.map((edge) => {
+                {relatedPosts.edges.map(edge => {
                   const entry = edge.node;
                   return (
                     <Post

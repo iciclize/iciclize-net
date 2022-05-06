@@ -152,7 +152,7 @@ const AllTag = ({ tags, tagPostCount }) => {
       <Header>タグ一覧</Header>
       <TagList>
         {tags.edges.map(({ node }, index) => {
-          const tagCountPair = tagPostCount.group.find((elem) => {
+          const tagCountPair = tagPostCount.group.find(elem => {
             return elem.fieldValue === node.slug;
           });
           const count = tagCountPair.totalCount || 0;
@@ -205,7 +205,7 @@ const IndexPage = ({ data }) => {
           `}
         >
           <Posts>
-            {data.allStrapiArticle.edges.map((article) => {
+            {data.allStrapiArticle.edges.map(article => {
               const entry = article.node;
               return (
                 <Post

@@ -115,7 +115,9 @@ const WorksListItem = ({ image, title, description, date, keywords, link }) => {
         <h3>{title}</h3>
       </Link>
       <Keywords>
-        { keywords.map(keyword => <Keyword>{keyword}</Keyword>) }
+        {keywords.map(keyword => (
+          <Keyword>{keyword}</Keyword>
+        ))}
       </Keywords>
       <Description>{description}</Description>
     </Item>

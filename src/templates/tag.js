@@ -64,7 +64,7 @@ const UserTemplate = ({ pageContext, data }) => {
           }
         >
           {articles.edges.length !== 0 &&
-            articles.edges.map((article) => {
+            articles.edges.map(article => {
               const entry = article.node;
               return (
                 <Post
