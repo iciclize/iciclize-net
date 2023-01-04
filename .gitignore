@@ -54,6 +54,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# nvmrc
+.nvmrc
+
 # gatsby files
 .cache/
 public

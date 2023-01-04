@@ -60,12 +60,14 @@ const ArticleTemplate = (hoge) => {
   const entry = data.strapiArticle;
   const relatedPosts = data.relatedPosts;
 
+  const childMdx = entry.content.data.childMdx;
+
   return (
     <Layout>
       <Seo
         title={entry.title}
         metaDescription={entry.summary || ``}
-        ogDescription={entry.summary || entry.childStrapiArticleContent.excerpt}
+        ogDescription={entry.summary || childMdx.excerpt}
         image={
           entry.image && entry.image.localFile.childImageSharp.gatsbyImageData
         }
@@ -118,10 +120,10 @@ const ArticleTemplate = (hoge) => {
             //   {entry.content}
             // </ReactMarkdown>
           }
-          {entry.childStrapiArticleContent.childMdx && (
+          {childMdx && (
             <div css={mdStyle}>
               <MyMDXRenderer>
-                {entry.childStrapiArticleContent.childMdx.body}
+                {childMdx.body}
               </MyMDXRenderer>
             </div>
           )}
@@ -175,10 +177,12 @@ export const q = graphql`
     strapiArticle(id: { eq: $id }) {
       title
       slug
-      childStrapiArticleContent {
-        childMdx {
-          body
-          excerpt(pruneLength: 100, truncate: true)
+      content {
+        data {
+          childMdx {
+            body
+            excerpt(pruneLength: 100, truncate: true)
+          }
         }
       }
       publish_date(formatString: "YYYY-MM-DD")

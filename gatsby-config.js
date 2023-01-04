@@ -57,7 +57,9 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `https://nnyapi.iciclize.net`,
+        // TODO: read dotenv
+        // apiURL: `https://nnyapi.iciclize.net`,
+        apiURL: `http://localhost:1337`,
         collectionTypes: [`article`, `user`, `tag`],
         queryLimit: 1000,
       },

@@ -268,7 +268,11 @@ export const pageQuery = graphql`
           }
           title
           publish_date(formatString: "YYYY-MM-DD")
-          content
+          content {
+            data {
+              content
+            }
+          }
           summary
           slug
           tags {
