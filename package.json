@@ -29,7 +29,7 @@
     "gatsby-remark-images": "^4.0.0",
     "gatsby-source-filesystem": "^3.0.0",
     "gatsby-source-strapi": "^1.0.2",
-    "gatsby-transformer-remark": "^3.0.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^3.0.0",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.7.2",
