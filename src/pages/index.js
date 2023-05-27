@@ -14,6 +14,7 @@ const Side = styled.div`
   margin: ${rhythm(10 / 12)} 0 0;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   ${mq[1]} {
     flex-direction: row;
     margin: ${rhythm(10 / 12)} auto 0;
@@ -25,13 +26,56 @@ const Side = styled.div`
   }
 `;
 const SideInner = styled.div`
-  flex: 1 1 auto;
+  flex: 1 1 40%;
   min-width: 25%;
   margin: 0 ${rhythm(8 / 12)} ${rhythm(12 / 12)};
-  ${mq[3]} {
-    flex: 0 1 auto;
-  }
 `;
+
+const Feed = () => {
+  const HeaderContainer = styled.div`
+    display: flex;
+    padding-bottom: ${rhythm(6 / 12)};
+    border-bottom: 1px solid #ddd;
+  `;
+  const Square = styled.div`
+    &::before {
+      content: "";
+      vertical-align: middle;
+      display: inline-block;
+      padding: ${rhythm(4 / 12)};
+      border: 4px solid hsl(194, 90%, 85%);
+      margin-right: ${rhythm(8 / 12)};
+    }
+  `;
+  const Header = styled.h1`
+    margin: 0;
+    font-size: ${rhythm(17 / 24)};
+    line-height: calc(${rhythm(4*2 / 12)} + 8px);
+  `;
+
+  const FeedWrapper = styled.div`
+    padding-top: ${rhythm(8 / 12)};
+  `;
+
+  const FeedIframe = styled.iframe`
+    width: 100%;
+    min-height: 30rem;
+    border: none;
+  `;
+
+  return (
+    <SideInner>
+      <HeaderContainer>
+        <Square />
+        <Header>つぶやき <a href={process.env.FEED_IFRAME_URL}>🔗</a></Header>
+      </HeaderContainer>
+      <FeedWrapper>
+        <FeedIframe title={'Feeds'} src={process.env.FEED_IFRAME_URL} />
+      </FeedWrapper>
+    </SideInner>
+  );
+};
+
 const Features = ({ features }) => {
   const HeaderContainer = styled.div`
     display: flex;
@@ -51,7 +95,7 @@ const Features = ({ features }) => {
   const Header = styled.h1`
     margin: 0;
     font-size: ${rhythm(17 / 24)};
-    line-height: calc(1.5rem + 4px);
+    line-height: calc(${rhythm(4*2 / 12)} + 8px);
   `;
   const FeatureList = styled.ul`
     list-style: none;
@@ -147,6 +191,7 @@ const AllTag = ({ tags, tagPostCount }) => {
       color: hsl(208, 100%, 66%);
     }
   `;
+
   return (
     <SideInner>
       <Header>タグ一覧</Header>
@@ -182,7 +227,7 @@ const TwoColumn = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
-  max-width: 1080px;
+  max-width: 1100px;
   ${mq[3]} {
     flex-direction: row;
     align-items: start;
@@ -226,6 +271,7 @@ const IndexPage = ({ data }) => {
           </Posts>
         </div>
         <Side>
+          <Feed />
           <Features features={data.life} />
           <AllTag tags={data.allStrapiTag} tagPostCount={tagPostCount} />
         </Side>

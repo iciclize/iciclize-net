@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `迫真の氷結晶`,
@@ -57,9 +61,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        // TODO: read dotenv
-        // apiURL: `https://nnyapi.iciclize.net`,
-        apiURL: `http://localhost:1337`,
+        apiURL: process.env.STRAPI_URL,
         collectionTypes: [`article`, `user`, `tag`],
         queryLimit: 1000,
       },
