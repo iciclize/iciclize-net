@@ -25,6 +25,7 @@ const PostTitle = styled.h1`
 
 const PublishDate = styled.div`
   font-size: ${rhythm(8 / 16)};
+  color: hsl(0, 0%, 40%);
   margin: 0;
   ${mq[1]} {
     font-size: ${rhythm(9 / 16)};
@@ -57,7 +58,7 @@ const PostTag = styled.li`
 
 const postSummaryStyle = css`
   font-weight: 400;
-  color: hsl(0, 0%, 44%);
+  color: hsl(0, 0%, 40%);
   font-size: ${rhythm(8 / 16)};
   margin: ${rhythm(1 / 12)} 0 ${rhythm(2 / 12)};
   line-height: ${rhythm(12 / 16)};

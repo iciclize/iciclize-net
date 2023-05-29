@@ -102,8 +102,7 @@ const Features = ({ features }) => {
     padding-top: ${rhythm(8 / 12)};
     margin: 0;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
     max-width: 740px;
     ${mq[3]} {
@@ -111,7 +110,6 @@ const Features = ({ features }) => {
     }
   `;
   const Item = styled.li`
-    flex: 1 1 45%;
     margin: 0 0 ${rhythm(8 / 12)};
     border-left: 3px solid hsl(150, 65%, 79%);
     padding: 0 0 0 ${rhythm(4 / 12)};
@@ -125,8 +123,8 @@ const Features = ({ features }) => {
   `;
   const Title = styled.h1`
     font-weight: normal;
-    font-size: ${rhythm(8 / 12)};
-    line-height: ${rhythm(10 / 12)};
+    font-size: ${rhythm(7 / 12)};
+    line-height: ${rhythm(11 / 12)};
     letter-spacing: 0;
     margin: 0;
     & > a {
@@ -144,7 +142,11 @@ const Features = ({ features }) => {
   `;
   const PublishDate = styled.div`
     font-size: ${rhythm(8 / 16)};
+    color: hsl(0, 0%, 40%);
     margin: 0;
+    ${mq[1]} {
+      font-size: ${rhythm(9 / 16)};
+    }
   `;
 
   return (
