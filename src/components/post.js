@@ -8,17 +8,17 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const PostTitle = styled.h1`
-  font-weight: normal;
+  font-weight: 500;
   font-size: ${rhythm(7 / 12)};
-  line-height: ${rhythm(10 / 12)};
+  line-height: ${rhythm(11 / 12)};
   letter-spacing: 0;
-  margin: 0;
+  margin: 0 0 ${rhythm(1 / 12)};
   & > a {
     text-decoration: none;
     color: #191919;
   }
   ${mq[1]} {
-    font-size: ${rhythm(10 / 12)};
+    font-size: ${rhythm(9 / 12)};
     line-height: ${rhythm(13 / 12)};
   }
 `;
@@ -56,6 +56,8 @@ const PostTag = styled.li`
 `;
 
 const postSummaryStyle = css`
+  font-weight: 400;
+  color: hsl(0, 0%, 44%);
   font-size: ${rhythm(8 / 16)};
   margin: ${rhythm(1 / 12)} 0 ${rhythm(2 / 12)};
   line-height: ${rhythm(12 / 16)};
@@ -66,7 +68,7 @@ const postSummaryStyle = css`
 `;
 
 const PostContainer = styled.li`
-  flex: 1 1 45%;
+  flex: 1 1 auto;
   border-left: 3px solid
     ${props => (props.isLifeTag ? `hsl(150, 65%, 79%)` : `hsl(204, 100%, 79%)`)};
   padding: 0 0 0 ${rhythm(3 / 12)};
@@ -84,6 +86,19 @@ const PostContainer = styled.li`
   }
 `;
 
+const PostHead = styled.div``;
+const PostImage = styled.div`
+  float: right;
+  max-width: 44%;
+  margin: 0 0 0.4rem 0.4rem;
+
+  ${mq[1]} {
+    float: none;
+    max-width: none;
+    margin: 0 0 ${rhythm(4 / 12)} 0;
+  }
+`;
+
 const Post = ({
   link,
   title,
@@ -98,41 +113,38 @@ const Post = ({
       enlargeLatest={enlargeLatest ?? null}
       isLifeTag={tags[0]?.slug === "life"}
     >
-      {image && (
-        <Link to={link}>
-          <GatsbyImage
-            image={image}
-            alt={title}
-            css={css`
-              &.gatsby-image-wrapper {
-                margin-bottom: ${rhythm(6 / 12)};
-              }
-            `}
-          />
-        </Link>
-      )}
-      <PostTitle>
-        <Link to={link}>{title}</Link>
-      </PostTitle>
-      <PublishDate>{publish_date}</PublishDate>
-      {tags && tags.length > 0 && (
-        <PostTags>
-          {tags.map(tag => (
-            <PostTag key={tag.id}>
-              <Link to={`/tags/${tag.slug}`}>
-                <span
-                  css={css`
+      <PostHead>
+        {image && (
+          <PostImage>
+            <Link to={link}>
+              <GatsbyImage
+                image={image}
+                alt={title}
+              />
+            </Link>
+          </PostImage>
+        )}
+        <PostTitle>{title}</PostTitle>
+        <PublishDate>{publish_date}</PublishDate>
+        {tags && tags.length > 0 && (
+          <PostTags>
+            {tags.map(tag => (
+              <PostTag key={tag.id}>
+                <Link to={`/tags/${tag.slug}`}>
+                  <span
+                    css={css`
                     margin-right: 0.1rem;
                   `}
-                >
-                  #
-                </span>
-                {tag.tagname}
-              </Link>
-            </PostTag>
-          ))}
-        </PostTags>
-      )}
+                  >
+                    #
+                  </span>
+                  {tag.tagname}
+                </Link>
+              </PostTag>
+            ))}
+          </PostTags>
+        )}
+      </PostHead>
       {summary && <div css={postSummaryStyle}>{summary}</div>}
     </PostContainer>
   );
