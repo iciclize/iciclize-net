@@ -70,6 +70,7 @@ const UserTemplate = ({ pageContext, data }) => {
                 <Post
                   link={`/posts/${entry.slug}`}
                   title={entry.title}
+                  publish_date={entry.publish_date}
                   tags={entry.tags}
                   summary={entry.summary}
                   image={
@@ -120,6 +121,7 @@ export const pageQuery = graphql`
             }
           }
           title
+          publish_date(formatString: "YYYY-MM-DD")
           summary
           slug
           tags {
