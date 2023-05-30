@@ -74,7 +74,7 @@ const PostContainer = styled.li`
     ${props => (props.isLifeTag ? `hsl(150, 65%, 79%)` : `hsl(204, 100%, 79%)`)};
   padding: 0 0 0 ${rhythm(3 / 12)};
   min-width: 30%;
-  ${mq[1]} {
+  ${mq[0]} {
     padding: 0 0 0 ${rhythm(4 / 12)};
     flex: 1 1 32%;
     ${props =>
@@ -90,13 +90,17 @@ const PostContainer = styled.li`
 const PostHead = styled.div``;
 const PostImage = styled.div`
   float: right;
-  max-width: 44%;
   margin: 0 0 0.4rem 0.4rem;
+  width: 50%;
+  max-width: 11rem;
+  max-height: 6rem;
 
-  ${mq[1]} {
+  ${mq[0]} {
     float: none;
-    max-width: none;
     margin: 0 0 ${rhythm(4 / 12)} 0;
+    width: unset;
+    max-width: none;
+    max-height: none;
   }
 `;
 
