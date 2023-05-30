@@ -144,7 +144,7 @@ const Post = ({
             </Link>
           </PostImage>
         )}
-        <PostTitle>{title}</PostTitle>
+        <PostTitle><Link to={link}>{title}</Link></PostTitle>
         <PublishDate>{publish_date}</PublishDate>
         {tags && tags.length > 0 && (
           <PostTags>
