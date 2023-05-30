@@ -69,23 +69,38 @@ const postSummaryStyle = css`
 `;
 
 const PostContainer = styled.li`
-  flex: 1 1 auto;
   border-left: 3px solid
     ${props => (props.isLifeTag ? `hsl(150, 65%, 79%)` : `hsl(204, 100%, 79%)`)};
   padding: 0 0 0 ${rhythm(3 / 12)};
   min-width: 30%;
+  margin: 0;
   ${mq[0]} {
     padding: 0 0 0 ${rhythm(4 / 12)};
-    flex: 1 1 32%;
     ${props =>
       props.enlargeLatest
         ? `
       &:first-of-type {
-        flex: 1 1 100%;
+        grid-column: 1 / 3;
       }`
         : ``}
   }
 `;
+
+const Posts = styled.ul`
+  list-style: none;
+  margin: 0;
+  display: grid;
+  gap: ${rhythm(8 / 12)};
+  max-width: 740px;
+  ${mq[0]} {
+    grid-template-columns: 1fr 1fr;
+  }
+  ${mq[1]} {
+    margin: 0 auto;
+    gap: ${rhythm(10 / 12)};
+  }
+`;
+
 
 const PostHead = styled.div``;
 const PostImage = styled.div`
@@ -154,23 +169,5 @@ const Post = ({
     </PostContainer>
   );
 };
-
-const Posts = styled.ul`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  list-style: none;
-  margin: 0;
-  gap: ${rhythm(8 / 12)};
-  max-width: 740px;
-  ${mq[1]} {
-    margin: 0 auto;
-    gap: ${rhythm(8 / 12)};
-  }
-  ${mq[3]} {
-    flex: 4 1 auto;
-  }
-`;
 
 export { Post, Posts };

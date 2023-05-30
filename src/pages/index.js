@@ -98,28 +98,24 @@ const Features = ({ features }) => {
     line-height: calc(${rhythm(4*2 / 12)} + 8px);
   `;
   const FeatureList = styled.ul`
+    display: grid;
+    gap: ${rhythm(8 / 12)};
     list-style: none;
     padding-top: ${rhythm(8 / 12)};
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     max-width: 740px;
-    ${mq[3]} {
-      flex-direction: column;
+    ${mq[0]} {
+      grid-template-columns: 1fr 1fr;
+    }
+    ${mq[1]} {
+      grid-template-columns: 1fr;
     }
   `;
   const Item = styled.li`
-    margin: 0 0 ${rhythm(8 / 12)};
+    margin: 0;
     border-left: 3px solid hsl(150, 65%, 79%);
     padding: 0 0 0 ${rhythm(4 / 12)};
     min-width: 30%;
-    /*
-    ${mq[1]} {
-      margin: 0 ${rhythm(8 / 12)} ${rhythm(14 / 12)};
-      flex: 1 1 30%;
-    }
-    */
   `;
   const Title = styled.h1`
     font-weight: normal;

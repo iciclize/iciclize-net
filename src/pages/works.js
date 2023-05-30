@@ -62,10 +62,6 @@ const WorksListItem = ({ image, title, description, date, keywords, link }) => {
   const Keywords = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    ${mq[1]} {
-      gap: 6px;
-    }
   `;
   const Keyword = styled.div`
     font-size: ${rhythm(10 / 24)};
@@ -74,6 +70,7 @@ const WorksListItem = ({ image, title, description, date, keywords, link }) => {
     background-color: #999;
     border-radius: 2px;
     color: white;
+    margin-right: ${rhythm(3 / 12)};
     ${mq[1]} {
       font-size: ${rhythm(12 / 24)};
     }
