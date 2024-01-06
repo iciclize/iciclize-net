@@ -55,24 +55,19 @@ exports.createPages = ({ actions, graphql }) => {
 
   const getArticles = makeRequest(
     graphql,
-    `
-    {
-      allStrapiArticle(
-        sort: {fields: publish_date, order: ASC}
-        filter: {slug: {ne: "dummy-post"}}
-      ) {
-        edges {
-          node {
-            id
-            slug
-            tags {
-              slug
-            }
-          }
+    `{
+  allStrapiArticle(sort: {publish_date: ASC}, filter: {slug: {ne: "dummy-post"}}) {
+    edges {
+      node {
+        id
+        slug
+        tags {
+          slug
         }
       }
-    }  
-    `
+    }
+  }
+}`
   ).then((result) => {
     result.data.allStrapiArticle.edges.forEach(({ node }, index, edges) => {
       const targetTag = node.tags[0]?.slug;
@@ -160,33 +155,31 @@ exports.createPages = ({ actions, graphql }) => {
 
   const getWorks = makeRequest(
     graphql,
-    `
-    {
-      allMdx(
-        sort: {fields: frontmatter___date, order: DESC},
-        filter: {fileAbsolutePath: {regex: "works/"}}
-      ) {
-        edges {
-          node {
-            frontmatter {
-              date(formatString: "YYYY-M")
-              title
-              slug
-              description
-              imagename {
-                childImageSharp {
-                  gatsbyImageData(width: 360, layout: CONSTRAINED)
-                }
-              }
+    `{
+  allMarkdownRemark(
+    sort: {frontmatter: {date: DESC}}
+    filter: {fileAbsolutePath: {regex: "works/"}}
+  ) {
+    edges {
+      node {
+        frontmatter {
+          date(formatString: "YYYY-M")
+          title
+          slug
+          description
+          imagename {
+            childImageSharp {
+              gatsbyImageData(width: 360, layout: CONSTRAINED)
             }
-            id
           }
         }
+        id
       }
-    }    
-  `
+    }
+  }
+}`
   ).then((result) => {
-    result.data.allMdx.edges.forEach(({ node }, i, arr) => {
+    result.data.allMarkdownRemark.edges.forEach(({ node }, i, arr) => {
       const prev = i < arr.length - 1 ? arr[i + 1].node : null;
       const next = i > 0 ? arr[i - 1].node : null;
       createPage({

@@ -14,7 +14,6 @@ import mq from "../utils/emotion";
 import Seo from "../components/seo";
 
 import NextPrevNav from "../components/NextPrevNav";
-import { MDXRenderer } from "gatsby-plugin-mdx";
 
 const pageWidth = "700px";
 
@@ -39,12 +38,13 @@ const TimingOfWork = styled.div`
 
 const ArticleTemplate = hoge => {
   const data = hoge.data;
-  const markdown = data.mdx;
+  const markdown = data.markdownRemark;
 
   const title = markdown.frontmatter.title;
   const description = markdown.frontmatter.description;
   const image = markdown.frontmatter.imagename.childImageSharp.gatsbyImageData;
   const date = markdown.frontmatter.date;
+  const markdownHtml = markdown.html;
 
   const next = data.next;
   const nextImage =
@@ -90,9 +90,10 @@ const ArticleTemplate = hoge => {
       )}
       <PostContainer>
         <PostInner pageWidth={pageWidth}>
-          <div css={mdStyle}>
-            <MDXRenderer>{markdown.body}</MDXRenderer>
-          </div>
+          <div
+            css={mdStyle}
+            dangerouslySetInnerHTML={{ __html: markdownHtml }}
+          />
           <NextPrevNav
             nextLabel={`次の作品`}
             nextLink={nextLink}
@@ -113,19 +114,20 @@ export default ArticleTemplate;
 
 export const pageQuery = graphql`
   query WorkDetail($id: String!, $next: String, $prev: String) {
-    mdx(id: { eq: $id }) {
+    markdownRemark(id: { eq: $id }) {
+      html
       frontmatter {
         title
         date(formatString: "YYYY-MM")
+        description
         imagename {
           childImageSharp {
             gatsbyImageData(width: 1400, layout: CONSTRAINED)
           }
         }
       }
-      body
     }
-    next: mdx(id: { eq: $next }) {
+    next: markdownRemark(id: { eq: $next }) {
       frontmatter {
         title
         slug
@@ -136,7 +138,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    prev: mdx(id: { eq: $prev }) {
+    prev: markdownRemark(id: { eq: $prev }) {
       frontmatter {
         title
         slug

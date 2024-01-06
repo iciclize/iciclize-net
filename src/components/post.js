@@ -101,7 +101,6 @@ const Posts = styled.ul`
   }
 `;
 
-
 const PostHead = styled.div``;
 const PostImage = styled.div`
   float: right;
@@ -137,14 +136,13 @@ const Post = ({
         {image && (
           <PostImage>
             <Link to={link}>
-              <GatsbyImage
-                image={image}
-                alt={title}
-              />
+              <GatsbyImage image={image} alt={title} />
             </Link>
           </PostImage>
         )}
-        <PostTitle><Link to={link}>{title}</Link></PostTitle>
+        <PostTitle>
+          <Link to={link}>{title}</Link>
+        </PostTitle>
         <PublishDate>{publish_date}</PublishDate>
         {tags && tags.length > 0 && (
           <PostTags>
@@ -153,8 +151,8 @@ const Post = ({
                 <Link to={`/tags/${tag.slug}`}>
                   <span
                     css={css`
-                    margin-right: 0.1rem;
-                  `}
+                      margin-right: 0.1rem;
+                    `}
                   >
                     #
                   </span>

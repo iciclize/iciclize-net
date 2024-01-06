@@ -126,7 +126,7 @@ const WorksPage = ({ data }) => {
     <Layout>
       <Seo
         title="作品集"
-        ogDescription={data.allMdx.edges
+        ogDescription={data.allMarkdownRemark.edges
           .map(({ node }) => node.frontmatter.title)
           .join(` | `)}
       />
@@ -148,7 +148,7 @@ const WorksPage = ({ data }) => {
           サムネイルが映えないのはご愛嬌
         </p>
         <WorksList>
-          {data.allMdx.edges.map(({ node }) => {
+          {data.allMarkdownRemark.edges.map(({ node }) => {
             const image =
               node.frontmatter.imagename?.childImageSharp.gatsbyImageData;
 
@@ -173,9 +173,9 @@ const WorksPage = ({ data }) => {
 export default WorksPage;
 
 export const query = graphql`
-  query {
-    allMdx(
-      sort: { fields: frontmatter___date, order: DESC }
+  {
+    allMarkdownRemark(
+      sort: { frontmatter: { date: DESC } }
       filter: { fileAbsolutePath: { regex: "works/" } }
     ) {
       edges {

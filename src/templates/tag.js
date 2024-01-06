@@ -103,7 +103,7 @@ export const pageQuery = graphql`
   query Article($slug: String!) {
     allStrapiArticle(
       filter: { tags: { elemMatch: { slug: { in: [$slug] } } } }
-      sort: { order: DESC, fields: publish_date }
+      sort: { publish_date: DESC }
     ) {
       edges {
         node {

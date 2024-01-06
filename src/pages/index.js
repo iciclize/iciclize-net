@@ -50,7 +50,7 @@ const Feed = () => {
   const Header = styled.h1`
     margin: 0;
     font-size: ${rhythm(17 / 24)};
-    line-height: calc(${rhythm(4*2 / 12)} + 8px);
+    line-height: calc(${rhythm((4 * 2) / 12)} + 8px);
   `;
 
   const FeedWrapper = styled.div`
@@ -67,10 +67,12 @@ const Feed = () => {
     <SideInner>
       <HeaderContainer>
         <Square />
-        <Header>つぶやき <a href={process.env.FEED_IFRAME_URL}>🔗</a></Header>
+        <Header>
+          つぶやき <a href={process.env.FEED_IFRAME_URL}>🔗</a>
+        </Header>
       </HeaderContainer>
       <FeedWrapper>
-        <FeedIframe title={'Feeds'} src={process.env.FEED_IFRAME_URL} />
+        <FeedIframe title={"Feeds"} src={process.env.FEED_IFRAME_URL} />
       </FeedWrapper>
     </SideInner>
   );
@@ -95,7 +97,7 @@ const Features = ({ features }) => {
   const Header = styled.h1`
     margin: 0;
     font-size: ${rhythm(17 / 24)};
-    line-height: calc(${rhythm(4*2 / 12)} + 8px);
+    line-height: calc(${rhythm((4 * 2) / 12)} + 8px);
   `;
   const FeatureList = styled.ul`
     display: grid;
@@ -293,7 +295,7 @@ export const pageQuery = graphql`
         slug: { ne: "dummy-post" }
         tags: { elemMatch: { slug: { ne: "life" } } }
       }
-      sort: { order: DESC, fields: publish_date }
+      sort: { publish_date: DESC }
     ) {
       edges {
         node {
@@ -329,7 +331,7 @@ export const pageQuery = graphql`
     }
     life: allStrapiArticle(
       filter: { tags: { elemMatch: { slug: { in: "life" } } } }
-      sort: { order: DESC, fields: publish_date }
+      sort: { publish_date: DESC }
       limit: 12
     ) {
       edges {
@@ -352,7 +354,7 @@ export const pageQuery = graphql`
     tagPostCount: allStrapiArticle(
       filter: { tags: { elemMatch: { slug: { nin: "dummy-tag" } } } }
     ) {
-      group(field: tags___slug) {
+      group(field: { tags: { slug: SELECT } }) {
         fieldValue
         totalCount
       }

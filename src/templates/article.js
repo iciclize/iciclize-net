@@ -5,16 +5,15 @@ import {
   Layout,
   mdStyle,
   PostContainer,
-  PostInner,
+  PostInner
 } from "../components/layout";
 import Iframely from "../components/Iframely";
 import styled from "@emotion/styled";
 import { rhythm } from "../utils/typography";
 import { css } from "@emotion/react";
 import mq from "../utils/emotion";
-import { MyMDXRenderer } from "../components/mdx-renderer";
-// import ReactMarkdown from "react-markdown";
-// import rehypeRaw from "rehype-raw";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 
 import Seo from "../components/seo";
 import { Posts, Post } from "../components/post";
@@ -54,20 +53,20 @@ const PostTag = styled.li`
   }
 `;
 
-const ArticleTemplate = (hoge) => {
+const ArticleTemplate = hoge => {
   const data = hoge.data;
 
   const entry = data.strapiArticle;
   const relatedPosts = data.relatedPosts;
-
-  const childMdx = entry.content.data.childMdx;
 
   return (
     <Layout>
       <Seo
         title={entry.title}
         metaDescription={entry.summary || ``}
-        ogDescription={entry.summary || childMdx.excerpt}
+        ogDescription={
+          entry.summary || entry.content.data.childMarkdownRemark.excerpt
+        }
         image={
           entry.image && entry.image.localFile.childImageSharp.gatsbyImageData
         }
@@ -99,7 +98,7 @@ const ArticleTemplate = (hoge) => {
           )}
           {entry.tags.length > 0 && (
             <PostTags>
-              {entry.tags.map((tag) => (
+              {entry.tags.map(tag => (
                 <PostTag key={tag.id}>
                   <Link to={`/tags/${tag.slug}`}>#{tag.tagname}</Link>
                 </PostTag>
@@ -107,26 +106,19 @@ const ArticleTemplate = (hoge) => {
             </PostTags>
           )}
           {
-            //
-            // <ReactMarkdown
-            //   css={mdStyle}
-            //   rehypePlugins={[rehypeRaw /* rehypeSanitize */]}
-            //   transformImageUri={(uri) =>
-            //     uri.startsWith("http")
-            //       ? uri
-            //       : `${process.env.IMAGE_BASE_URL}${uri}`
-            //   }
-            // >
-            //   {entry.content}
-            // </ReactMarkdown>
+            <ReactMarkdown
+              css={mdStyle}
+              rehypePlugins={[rehypeRaw /* rehypeSanitize */]}
+              /* TODO: Replace this with urlTransform in v9 */
+              transformImageUri={uri =>
+                uri.startsWith("http")
+                  ? uri
+                  : `${process.env.IMAGE_BASE_URL}${uri}`
+              }
+            >
+              {entry.content.data.content}
+            </ReactMarkdown>
           }
-          {childMdx && (
-            <div css={mdStyle}>
-              <MyMDXRenderer>
-                {childMdx.body}
-              </MyMDXRenderer>
-            </div>
-          )}
           <hr
             css={css`
               margin: 1.4rem 0 1rem;
@@ -142,7 +134,7 @@ const ArticleTemplate = (hoge) => {
                 ほかの記事
               </h3>
               <Posts>
-                {relatedPosts.edges.map((edge) => {
+                {relatedPosts.edges.map(edge => {
                   const entry = edge.node;
                   return (
                     <Post
@@ -179,9 +171,9 @@ export const q = graphql`
       slug
       content {
         data {
-          childMdx {
-            body
-            excerpt(pruneLength: 100, truncate: true)
+          content
+          childMarkdownRemark {
+            excerpt(format: PLAIN, pruneLength: 100, truncate: true)
           }
         }
       }
@@ -204,9 +196,8 @@ export const q = graphql`
         tagname
       }
     }
-
     relatedPosts: allStrapiArticle(
-      sort: { order: DESC, fields: publish_date }
+      sort: { publish_date: DESC }
       filter: { slug: { ne: "dummy-post" }, id: { in: $relatedPostIds } }
     ) {
       edges {
