@@ -53,8 +53,8 @@ const PostTag = styled.li`
   }
 `;
 
-const ArticleTemplate = hoge => {
-  const data = hoge.data;
+const ArticleTemplate = props => {
+  const data = props.data;
 
   const entry = data.strapiArticle;
   const relatedPosts = data.relatedPosts;
@@ -115,6 +115,20 @@ const ArticleTemplate = hoge => {
                   ? uri
                   : `${process.env.IMAGE_BASE_URL}${uri}`
               }
+              components={{
+                img: ({node, ...imgProps}) => {
+                  // console.log(imgProps);
+                  // console.log(entry.content.medias);
+                  const fileIndex = entry.content.medias.findIndex(file => file.url === imgProps.src);
+                  // console.log("fileIndex=", fileIndex);
+                  if (fileIndex >= 0) {
+                    const medium = entry.content.medias[fileIndex];
+                    return (<GatsbyImage image={medium.localFile.childImageSharp.gatsbyImageData} alt={medium.alternativeText} />);
+                  }
+                  // console.log(node);
+                  return <img alt="this is a fallback text" {...imgProps} />;
+                }
+              }}
             >
               {entry.content.data.content}
             </ReactMarkdown>
@@ -175,6 +189,16 @@ export const q = graphql`
           childMarkdownRemark {
             excerpt(format: PLAIN, pruneLength: 100, truncate: true)
           }
+        }
+        medias {
+          src
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            } 
+          }
+          url
+          alternativeText
         }
       }
       publish_date(formatString: "YYYY-MM-DD")
