@@ -1,0 +1,41 @@
+diff --git a/node_modules/gatsby-source-strapi/dist/download-media-files.js b/node_modules/gatsby-source-strapi/dist/download-media-files.js
+index 7ce3d91..4a3ee7b 100644
+--- a/node_modules/gatsby-source-strapi/dist/download-media-files.js
++++ b/node_modules/gatsby-source-strapi/dist/download-media-files.js
+@@ -1,5 +1,7 @@
+ "use strict";
+ 
++var cheerio = require("cheerio");
++
+ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+ exports.__esModule = true;
+ exports.downloadMediaFiles = exports.downloadFile = void 0;
+@@ -41,6 +43,28 @@ const extractFiles = (text, apiURL) => {
+         });
+       }
+     }
++
++    if (event.entering && node.type === "html_block") {
++      const $ = cheerio.load(node.literal);
++      $("img").each((i, el) => {
++        let destination;
++        const alternativeText = $(el).attr("alt");
++        const src = $(el).attr("src");
++        if (/^\//.test(src)) {
++          destination = `${apiURL}${src}`;
++        } else if (/^http/i.test(src)) {
++          destination = src;
++        }
++        if (destination) {
++          files.push({
++            url: destination,
++            src,
++            alternativeText
++          });
++        }
++      });
++    }
++
+   }
+   return files.filter(Boolean);
+ };
