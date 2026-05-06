@@ -110,7 +110,7 @@ const ArticleTemplate = props => {
               css={mdStyle}
               rehypePlugins={[rehypeRaw /* rehypeSanitize */]}
               /* TODO: Replace this with urlTransform in v9 */
-              transformImageUri={uri =>
+              urlTransform={uri =>
                 uri.startsWith("http")
                   ? uri
                   : `${process.env.IMAGE_BASE_URL}${uri}`

@@ -184,10 +184,6 @@ const mdStyle = css`
   h3 + h4 {
     margin-top: 2rem;
   }
-  ul ul {
-    margin-left: 1.5rem;
-    margin-bottom: 0;
-  }
   figure img {
     margin: 0;
     border: 1px solid hsl(0, 0%, 90%);
@@ -211,10 +207,6 @@ const mdStyle = css`
     font-size: ${rhythm(8 / 12)};
     p {
       margin: ${rhythm(12 / 12)} 0;
-    }
-    ol,
-    ul {
-      margin-bottom: ${rhythm(11 / 12)};
     }
     pre > code {
       font-size: ${rhythm(7 / 12)};
