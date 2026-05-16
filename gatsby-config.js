@@ -62,7 +62,9 @@ module.exports = {
       resolve: `gatsby-source-strapi`,
       options: {
         apiURL: process.env.STRAPI_URL,
+        accessToken: process.env.STRAPI_TOKEN,
         collectionTypes: [`article`, `user`, `tag`],
+        singleTypes: [`profile`],
         queryLimit: 1000,
       },
     },
