@@ -12,6 +12,7 @@ import mq from "../utils/emotion";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import Iframely from "../components/Iframely";
+import { transformMarkdownUrl } from "../utils/markdown-url-transform";
 // import rehypeSanitize from "rehype-sanitize";
 
 const pageWidth = "620px";
@@ -190,12 +191,7 @@ const ProfilePage = ({ data }) => {
           <ReactMarkdown
             rehypePlugins={[rehypeRaw, rehypeSlug /* rehypeSanitize */]}
             css={markdownStyle}
-            /* TODO: Replace this with urlTransform in v9 */
-            urlTransform={(uri) =>
-              uri.startsWith("http")
-                ? uri
-                : `${process.env.IMAGE_BASE_URL}${uri}`
-            }
+            urlTransform={transformMarkdownUrl}
           >
             {profileMarkdown}
           </ReactMarkdown>

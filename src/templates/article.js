@@ -14,6 +14,7 @@ import { css } from "@emotion/react";
 import mq from "../utils/emotion";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import { transformMarkdownUrl } from "../utils/markdown-url-transform";
 
 import Seo from "../components/seo";
 import { Posts, Post } from "../components/post";
@@ -109,12 +110,7 @@ const ArticleTemplate = props => {
             <ReactMarkdown
               css={mdStyle}
               rehypePlugins={[rehypeRaw /* rehypeSanitize */]}
-              /* TODO: Replace this with urlTransform in v9 */
-              urlTransform={uri =>
-                uri.startsWith("http")
-                  ? uri
-                  : `${process.env.IMAGE_BASE_URL}${uri}`
-              }
+              urlTransform={transformMarkdownUrl}
               components={{
                 img: ({node, ...imgProps}) => {
                   // console.log(imgProps);
